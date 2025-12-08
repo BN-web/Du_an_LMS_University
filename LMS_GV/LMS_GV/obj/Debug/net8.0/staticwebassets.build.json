@@ -1,12 +1,20 @@
 {
   "Version": 1,
-  "Hash": "e8UOeHOfFn9Qo5irxG3W+GsrTtHFYY0NTDbLGAdn0Og=",
+  "Hash": "qc9KHco7tC9vz+bvWubdlyocol9AzI4rRZ3naGKxpfI=",
   "Source": "LMS_GV",
   "BasePath": "_content/LMS_GV",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "LMS_GV\\wwwroot",
+      "Source": "LMS_GV",
+      "ContentRoot": "D:\\Thực tập\\Dự án 3\\Backend\\LMS_GV\\LMS_GV\\wwwroot\\",
+      "BasePath": "_content/LMS_GV",
+      "Pattern": "**"
+    }
+  ],
   "Assets": [
     {
       "Identity": "C:\\Users\\ACER\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.22\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",

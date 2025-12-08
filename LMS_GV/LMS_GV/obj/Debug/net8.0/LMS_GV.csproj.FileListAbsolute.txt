@@ -310,3 +310,5 @@ D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\bin\Debug\net8.0\Google.Apis.Au
 D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\bin\Debug\net8.0\Google.Apis.Core.dll
 D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\bin\Debug\net8.0\System.Management.dll
 D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Management.dll
+D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\obj\Debug\net8.0\LMS_GV.RazorAssemblyInfo.cache
+D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\obj\Debug\net8.0\LMS_GV.RazorAssemblyInfo.cs

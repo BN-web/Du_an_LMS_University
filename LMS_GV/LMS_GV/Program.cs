@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.Text;
-/*using LMS_GV.Models.Data;*/ // import namespace DbContext 
+using LMS_GV.Models.Data; // import namespace DbContext 
 using Microsoft.EntityFrameworkCore; // để sử dụng UseSqlServer
 
 
@@ -14,8 +14,8 @@ if (string.IsNullOrEmpty(keyString) || Encoding.UTF8.GetBytes(keyString).Length 
 builder.Services.AddControllers();
 
 //Đăng ký DbContext để dependency injection hoạt động
-//builder.Services.AddDbContext<AppDbContext>(options =>
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Cấu hình JWT Authentication
 builder.Services.AddAuthentication("Bearer") // nhớ sau này phải dùng app.UseAuthentication()
@@ -58,7 +58,7 @@ builder.Services.AddSwaggerGen(c =>
 
 
 ////đăng ký service JwtService vào DI container: AddScoped nghĩa là mỗi request HTTP sẽ có một instance riêng. AddSingleton nghĩa là toàn bộ ứng dụng dùng chung 1 instance.
-//builder.Services.AddScoped<JwtService>();
+builder.Services.AddScoped<JwtService>();
 
 var app = builder.Build();
 
