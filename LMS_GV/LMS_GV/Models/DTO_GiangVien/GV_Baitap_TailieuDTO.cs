@@ -8,8 +8,8 @@
         public string TenMon { get; set; }
         public string MaLop { get; set; }
 
-        public DateTime NgayTao { get; set; }
-        public DateTime? HanNop { get; set; }
+        public string NgayTao { get; set; }  // Thay DateTime thành string
+        public string HanNop { get; set; }   // Thay DateTime? thành string
         public string Loai { get; set; } // Bài tập / Bài kiểm tra / Bài thi
 
         // Tính toán
@@ -26,7 +26,9 @@
     {
         public string TieuDe { get; set; }
         public string Loai { get; set; } // Bài tập / Bài kiểm tra / Bài thi
-        public DateTime? HanNop { get; set; }
+
+        // Thay DateTime? thành string để parse định dạng dd/MM/yyyy HH:mm
+        public string HanNop { get; set; }
         public int? SoLanLamToiDa { get; set; }
         public int? ThoiGianLamBai { get; set; } // phút
 
@@ -47,6 +49,21 @@
     public class DapAnTaoDto
     {
         public string NoiDung { get; set; }
+        public int ThuTu { get; set; }
+    }
+
+
+    // DTO thay đổi thứ tự dáp án trong câu hỏi
+    public class ThayDoiThuTuDapAnDto
+    {
+        public int CauHoiId { get; set; }
+        public List<DapAnThuTuDto> ThuTus { get; set; }
+    }
+
+    public class DapAnThuTuDto
+    {
+        public int TuyChonCauHoiId { get; set; }
+        public int ThuTuMoi { get; set; }
     }
 
 
@@ -139,6 +156,8 @@
         public int TongTaiLieuLop { get; set; }
         public string TenBaiHoc { get; set; }
         public string LoaiBaiHoc { get; set; }
+        public string TenFile { get; set; }
+        public string DuongDan { get; set; }
         public string NgayUpload { get; set; } // dd/MM/yyyy
         public long KichThuoc { get; set; } // byte
     }
@@ -150,6 +169,11 @@
         public int LopHocId { get; set; }
         public string MoTaBaiHoc { get; set; }
         public IFormFile File { get; set; } // upload file từ client
+    }
+
+    public class TaiFileRequestDto
+    {
+        public int FileId { get; set; }
     }
 
 }

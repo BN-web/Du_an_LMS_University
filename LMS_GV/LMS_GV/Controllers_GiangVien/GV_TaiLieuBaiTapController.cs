@@ -9,6 +9,7 @@ using LMS_GV.Models.DTO_GiangVien;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Globalization;
 
 
 namespace LMS_GV.Controllers_GiangVien
@@ -46,9 +47,12 @@ namespace LMS_GV.Controllers_GiangVien
                     BaiKiemTraId = b.BaiKiemTraId,
                     TieuDe = b.TieuDe,
 
-                    NgayTao = b.CreatedAt ?? DateTime.MinValue,
-
-                    HanNop = b.NgayKetThuc,
+                    NgayTao = b.CreatedAt.HasValue
+                    ? b.CreatedAt.Value.ToString("dd/MM/yyyy HH:mm")
+                    : "",
+                    HanNop = b.NgayKetThuc.HasValue
+                    ? b.NgayKetThuc.Value.ToString("dd/MM/yyyy HH:mm")
+                    : "",
                     Loai = b.Loai,
 
                     TenMon = b.MonHoc != null ? b.MonHoc.TenMon : "",
@@ -106,8 +110,12 @@ namespace LMS_GV.Controllers_GiangVien
                 {
                     BaiKiemTraId = bt.BaiKiemTraId,
                     TieuDe = bt.TieuDe,
-                    NgayTao = bt.CreatedAt ?? DateTime.MinValue,
-                    HanNop = bt.NgayKetThuc,
+                    NgayTao = bt.CreatedAt.HasValue
+                    ? bt.CreatedAt.Value.ToString("dd/MM/yyyy HH:mm")
+                    : "",
+                    HanNop = bt.NgayKetThuc.HasValue
+                    ? bt.NgayKetThuc.Value.ToString("dd/MM/yyyy HH:mm")
+                    : "",
                     Loai = bt.Loai,
                     TenMon = bt.MonHoc.TenMon,
                     MaLop = bt.LopHoc.MaLop,
@@ -139,24 +147,23 @@ namespace LMS_GV.Controllers_GiangVien
             if (!int.TryParse(claim, out int giangVienId))
                 return Unauthorized("GiangVien_id không hợp lệ");
 
-            var lopHoc = await _context.LopHocs
-                .FirstOrDefaultAsync(x => x.LopHocId == dto.LopHocId);
-
-            if (lopHoc == null)
-                return BadRequest("Lớp không tồn tại");
+            var hanNopDate = !string.IsNullOrEmpty(dto.HanNop)
+     ? DateTime.ParseExact(dto.HanNop, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture)
+     : (DateTime?)null;
 
             var bai = new BaiKiemTra
             {
                 TieuDe = dto.TieuDe,
                 Loai = dto.Loai,
                 NgayBatDau = DateTime.Now,
-                NgayKetThuc = dto.HanNop,
+                NgayKetThuc = hanNopDate,
                 SoLanLamToiDa = dto.SoLanLamToiDa,
                 ThoiGianLamBai = dto.ThoiGianLamBai,
                 GiangVienId = giangVienId,
                 LopHocId = dto.LopHocId,
                 CreatedAt = DateTime.Now
             };
+
 
             _context.BaiKiemTras.Add(bai);
             await _context.SaveChangesAsync();
@@ -175,13 +182,13 @@ namespace LMS_GV.Controllers_GiangVien
                 for (int i = 0; i < ch.DapAns.Count; i++)
                 {
                     var da = ch.DapAns[i];
-
                     _context.TuyChonCauHois.Add(new TuyChonCauHoi
                     {
                         CauHoiId = cauHoi.CauHoiId,
                         MaLuaChon = ((char)('A' + i)).ToString(),
                         NoiDung = da.NoiDung,
-                        LaDapAn = (i == ch.DapAnDung)
+                        LaDapAn = (i == ch.DapAnDung),
+                        ThuTu = da.ThuTu
                     });
                 }
             }
@@ -194,6 +201,41 @@ namespace LMS_GV.Controllers_GiangVien
                 BaiKiemTraId = bai.BaiKiemTraId
             });
         }
+
+
+        // API: thay đổi thứ tự dáp án trong câu hỏi
+        [Authorize(Roles = "Giảng Viên")]
+        [HttpPut("giang-vien/cau-hoi/thay-doi-thu-tu")]
+        public async Task<ActionResult> ThayDoiThuTuDapAn([FromBody] ThayDoiThuTuDapAnDto dto)
+        {
+            var claim = User.FindFirst("GiangVien_id")?.Value;
+            if (!int.TryParse(claim, out int giangVienId))
+                return Unauthorized("GiangVien_id không hợp lệ");
+
+            // Kiểm tra câu hỏi có thuộc giảng viên
+            var cauHoi = await _context.CauHois
+                .Include(ch => ch.BaiKiemTra)
+                .FirstOrDefaultAsync(ch => ch.CauHoiId == dto.CauHoiId
+                                           && ch.BaiKiemTra.GiangVienId == giangVienId);
+
+            if (cauHoi == null)
+                return NotFound("Câu hỏi không tồn tại hoặc không thuộc giảng viên.");
+
+            foreach (var item in dto.ThuTus)
+            {
+                var dapAn = await _context.TuyChonCauHois
+                    .FirstOrDefaultAsync(t => t.TuyChonCauHoiId == item.TuyChonCauHoiId && t.CauHoiId == dto.CauHoiId);
+
+                if (dapAn != null)
+                {
+                    dapAn.ThuTu = item.ThuTuMoi;
+                }
+            }
+
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "Cập nhật thứ tự đáp án thành công" });
+        }
+
 
         ///------------Xem chi tiết bài tập/bài kiểm tra/bài thi-----------------///
 
@@ -337,6 +379,7 @@ namespace LMS_GV.Controllers_GiangVien
             return Ok(ds);
         }
 
+        //Get: hiện các câu hỏi của bài kiểm tra
         [Authorize(Roles = "Giảng Viên")]
         [HttpGet("giang-vien/bai-kiem-tra/{baiKiemTraId}/cau-hoi")]
         public async Task<ActionResult<BaiKiemTraCauHoiDto>> GetCauHoiBaiKiemTra(int baiKiemTraId)
@@ -494,6 +537,7 @@ namespace LMS_GV.Controllers_GiangVien
 
         ///------------Tải tài liệu-----------------///
 
+        //Api: Upload file 
         [Authorize(Roles = "Giảng Viên")]
         [HttpPost("giang-vien/tai-lieu/upload")]
         public async Task<IActionResult> UploadTaiLieu([FromForm] UploadTaiLieuDto dto)
@@ -502,11 +546,13 @@ namespace LMS_GV.Controllers_GiangVien
             if (!int.TryParse(claim, out int giangVienId))
                 return Unauthorized("GiangVien_id không hợp lệ");
 
+            // Kiểm tra lớp thuộc giảng viên
             var lopHoc = await _context.LopHocs
                 .FirstOrDefaultAsync(l => l.LopHocId == dto.LopHocId && l.GiangVienId == giangVienId);
             if (lopHoc == null)
-                return Unauthorized("Bạn không có quyền upload tài liệu cho lớp này.");
+                return Unauthorized("Bạn không có quyền đăng tài liệu cho lớp này.");
 
+            // Kiểm tra bài học
             var baiHoc = await _context.BaiHocs.FirstOrDefaultAsync(b => b.BaiHocId == dto.BaiHocId);
             if (baiHoc == null)
                 return NotFound("Bài học không tồn tại.");
@@ -522,11 +568,11 @@ namespace LMS_GV.Controllers_GiangVien
                 await dto.File.CopyToAsync(stream);
             }
 
-            var fileEntity = new Models.File
+            var fileEntity = new LMS_GV.Models.File
             {
                 BaiHocId = dto.BaiHocId,
                 TenFile = dto.File.FileName,
-                DuongDan = $"/uploads/files{fileName}",
+                DuongDan = $"/uploads/files/{fileName}",
                 KichThuoc = dto.File.Length,
                 CreatedAt = DateTime.Now
             };
@@ -534,7 +580,36 @@ namespace LMS_GV.Controllers_GiangVien
             _context.Files.Add(fileEntity);
             await _context.SaveChangesAsync();
 
-            return Ok(new { Message = "Upload thành công", DuongDan = fileEntity.DuongDan });
+            return Ok(new
+            {
+                message = "Upload thành công",
+                DuongDan = fileEntity.DuongDan
+            });
+        }
+
+
+
+        //API Tải tài liệu dựa theo thuộc tính trong danh sách tài liệu 
+        [Authorize(Roles = "Giảng Viên")]
+        [HttpPost("giang-vien/tai-lieu/tai-ve")]
+        public async Task<IActionResult> TaiTaiLieuVe([FromBody] TaiFileRequestDto dto)
+        {
+            var file = await _context.Files.FirstOrDefaultAsync(f => f.FilesId == dto.FileId);
+            if (file == null)
+                return NotFound("File không tồn tại");
+
+            var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", file.DuongDan.TrimStart('/'));
+            if (!System.IO.File.Exists(fullPath))
+                return NotFound("File không tồn tại trên server");
+
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(fullPath, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+
+            return File(memory, "application/octet-stream", file.TenFile);
         }
 
 
