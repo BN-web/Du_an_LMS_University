@@ -195,6 +195,7 @@ namespace LMS_GV.Controllers_GiangVien
             if (!int.TryParse(giangVienClaim, out int giangVienId))
                 return Unauthorized("GiangVien_id không hợp lệ");
 
+            // Lọc dữ liệu theo giảng viên
             var query = _context.BuoiThis
                 .Where(b => b.GiamThiId == giangVienId);
 
@@ -203,28 +204,32 @@ namespace LMS_GV.Controllers_GiangVien
             if (endDate.HasValue)
                 query = query.Where(b => b.NgayThi.Date <= endDate.Value.Date);
 
+            // Chuyển sang AsEnumerable() để thực hiện ToString trên client
             var lichThi = query
-                .Select(b => new LichThiDto
-                {
-                    BuoiThiId = b.BuoiThiId,
-                    MonHoc = b.LopHoc.MonHoc.TenMon,
-                    Lop = b.LopHoc.MaLop,
-                    NgayThi = b.NgayThi.ToString("dddd/dd/MM/yyyy"), // Thứ/ngày/tháng/năm
-                    GioBatDau = b.GioBatDau.HasValue ? b.GioBatDau.Value.ToString(@"hh\:mm") : "",
-                    GioKetThuc = b.GioKetThuc.HasValue ? b.GioKetThuc.Value.ToString(@"hh\:mm") : "",
-                    GiangVien = b.GiamThi.NguoiDung.HoTen,
-                    Loai = b.HinhThuc ?? "offline",
-                    TongSinhVien = b.LopHoc.SinhVienLops.Count(), // đúng theo DB hiện tại
-                    DiaDiem = b.PhongHoc != null
-                              ? $"{b.PhongHoc.DiaChi} - {b.PhongHoc.TenPhong}"
-                              : "Online"
-                })
-                .OrderBy(b => b.NgayThi)
-                .ThenBy(b => b.GioBatDau)
-                .ToList();
+    .AsEnumerable()
+    .Select(b => new LichThiDto
+    {
+        BuoiThiId = b.BuoiThiId,
+        MonHoc = b.LopHoc?.MonHoc?.TenMon ?? "N/A", // kiểm tra null
+        Lop = b.LopHoc?.MaLop ?? "N/A",
+        NgayThi = b.NgayThi.ToString("dddd/dd/MM/yyyy"),
+        GioBatDau = b.GioBatDau.HasValue ? b.GioBatDau.Value.ToString(@"hh\:mm") : "",
+        GioKetThuc = b.GioKetThuc.HasValue ? b.GioKetThuc.Value.ToString(@"hh\:mm") : "",
+        GiangVien = b.GiamThi?.NguoiDung?.HoTen ?? "N/A", // kiểm tra null
+        Loai = b.HinhThuc ?? "offline",
+        TongSinhVien = b.LopHoc?.SinhVienLops?.Count() ?? 0, // kiểm tra null
+        DiaDiem = b.PhongHoc != null
+                  ? $"{b.PhongHoc.DiaChi} - {b.PhongHoc.TenPhong}"
+                  : "Online"
+    })
+    .OrderBy(b => b.NgayThi)
+    .ThenBy(b => b.GioBatDau)
+    .ToList();
+
 
             return Ok(lichThi);
         }
-    }
 
     }
+
+}

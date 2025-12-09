@@ -336,25 +336,32 @@ namespace LMS_GV.Controllers_GiangVien
             if (lop == null)
                 return Unauthorized("Bạn không có quyền xem lớp này.");
 
-            // Lấy danh sách buổi + trạng thái điểm danh
-            var result = _context.BuoiHocs
+            // Lấy tất cả điểm danh của sinh viên kèm DiemDanh
+            var diemDanhChiTiets = _context.DiemDanhChiTiets
+                .Include(ct => ct.DiemDanh)
+                .Where(ct => ct.SinhVienId == sinhVienId)
+                .ToList();
+
+            // Lấy danh sách buổi học và kết hợp với điểm danh
+            var buoiHocs = _context.BuoiHocs
                 .Where(b => b.LopHocId == lopHocId)
+                .OrderBy(b => b.SoBuoi)
+                .AsEnumerable()
                 .Select(b => new SinhVienDiemDanhItemDTO
                 {
                     Buoi = $"Buổi {b.SoBuoi}",
                     Ngay = b.ThoiGianBatDau.ToString("dd/MM/yyyy"),
-
-                    TrangThai = _context.DiemDanhChiTiets
-                        .Where(ct => ct.SinhVienId == sinhVienId
-                                  && ct.DiemDanh.BuoiHocId == b.BuoiHocId)
-                        .Select(ct => ct.TrangThai)
-                        .FirstOrDefault() ?? "Chưa điểm danh"
+                    TrangThai = diemDanhChiTiets
+                                .FirstOrDefault(ct => ct.DiemDanh != null && ct.DiemDanh.BuoiHocId == b.BuoiHocId)
+                                ?.TrangThai ?? "Chưa điểm danh"
                 })
-                .OrderBy(x => x.Buoi)
                 .ToList();
 
-            return Ok(result);
+            return Ok(buoiHocs);
         }
+
+
+
 
         /// <summary>
         /// Lấy thông tin chi tiết sinh viên, bao gồm hồ sơ + điểm tất cả các môn.

@@ -11,7 +11,21 @@ if (string.IsNullOrEmpty(keyString) || Encoding.UTF8.GetBytes(keyString).Length 
     throw new Exception("JWT Key không hợp lệ hoặc quá ngắn!");
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins(
+                "http://localhost:3000",
+                "https://localhost:3000",
+                "http://localhost:3001",
+                "https://localhost:3001")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
 
 //Đăng ký DbContext để dependency injection hoạt động
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -68,11 +82,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
 
+// CORS phải được gọi trước Authentication và Authorization
+app.UseCors("AllowFrontend");
+
 //Authentication phải gọi trước Authorization
-app.UseAuthentication(); 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

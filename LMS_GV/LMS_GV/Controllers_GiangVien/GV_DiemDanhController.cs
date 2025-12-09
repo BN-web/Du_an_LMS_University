@@ -8,6 +8,7 @@ using LMS_GV.Models.Data;
 using LMS_GV.Models.DTO_GiangVien;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 
 
 namespace LMS_GV.Controllers_GiangVien
@@ -29,70 +30,80 @@ namespace LMS_GV.Controllers_GiangVien
         // 1.API Get danh sách buổi học theo lớp của giảng viên
         [Authorize(Roles = "Giảng Viên")]
         [HttpGet("giangvien/buoihoc")]
-        public async Task<IActionResult> GetBuoiHocCuaGiangVien()
+        public async Task<IActionResult> GetBuoiHocCuaGiangVien_SQL()
         {
             var giangVienClaim = User.FindFirst("GiangVien_id")?.Value;
             if (!int.TryParse(giangVienClaim, out int giangVienId))
                 return Unauthorized("GiangVien_id không hợp lệ");
 
-            var lopHocs = await _context.LopHocs
-                .Where(l => l.GiangVienId == giangVienId)
-                .Select(l => new
-                {
-                    l.LopHocId,
-                    MaLop = l.MaLop,
-                    TenMon = l.MonHoc.TenMon,
-                    TenGiangVien = l.GiangVien.NguoiDung.HoTen
-                })
-                .ToListAsync();
+            var sql = @"
+SELECT
+    lh.LopHoc_id,
+    lh.MaLop,
+    mh.TenMon,
+    nd.HoTen AS TenGiangVien,
 
-            if (!lopHocs.Any())
-                return NotFound("Giảng viên chưa có lớp nào!");
+    bh.BuoiHoc_id,
+    bh.SoBuoi,
+    bh.Thứ AS Thu,
+    bh.ThoiGianBatDau,
+    bh.ThoiGianKetThuc,
+    bh.LoaiBuoiHoc,
+    bh.TrangThai,
 
-            var lopIds = lopHocs.Select(l => l.LopHocId).ToList();
+    ISNULL(ph.TenPhong, 'Online') AS TenPhong,
+    ISNULL(ph.DiaChi, 'Online') AS DiaChi
 
-            var buoiHocsRaw = await _context.BuoiHocs
-                .Where(b => lopIds.Contains(b.LopHocId))
-                .OrderBy(b => b.LopHocId)
-                .ThenBy(b => b.ThoiGianBatDau)
-                .ToListAsync();
+FROM BuoiHoc bh
+INNER JOIN LopHoc lh ON lh.LopHoc_id = bh.LopHoc_id
+INNER JOIN MonHoc mh ON mh.MonHoc_id = lh.MonHoc_id
+INNER JOIN GiangVien gv ON gv.GiangVien_id = lh.GiangVien_id
+INNER JOIN NguoiDung nd ON nd.NguoiDung_id = gv.GiangVien_id
+LEFT JOIN PhongHoc ph ON ph.PhongHoc_id = bh.PhongHoc_id
 
-            var buoiHocs = new List<BuoiHocDTO>();
-            foreach (var lop in lopHocs)
+WHERE lh.GiangVien_id = @GiangVienId
+ORDER BY lh.LopHoc_id, bh.ThoiGianBatDau;
+";
+
+            using var connection = _context.Database.GetDbConnection();
+            await connection.OpenAsync();
+
+            using var command = connection.CreateCommand();
+            command.CommandText = sql;
+            command.Parameters.Add(new SqlParameter("@GiangVienId", giangVienId));
+
+            using var reader = await command.ExecuteReaderAsync();
+
+            var list = new List<object>();
+
+            while (await reader.ReadAsync())
             {
-                var buoiTrongLop = buoiHocsRaw
-     .Where(b => b.LopHocId == lop.LopHocId)
-     .Select((b, i) => new BuoiHocDTO
-     {
-         BuoiHoc_id = b.BuoiHocId,
-         LopHoc_id = b.LopHocId,
-         MaLop = lop.MaLop,
-         SoBuoi = $"Buổi {i + 1}",
-         ThoiGianBatDau = b.ThoiGianBatDau,
-         ThoiGianKetThuc = b.ThoiGianKetThuc,
-         LoaiBuoiHoc = b.LoaiBuoiHoc,
-         TrangThai = b.TrangThai,
-         PhongHoc = b.PhongHoc != null ? b.PhongHoc.TenPhong : "Online",
-         DiaChi = b.PhongHoc != null ? b.PhongHoc.DiaChi : "Online",
-         Thu = b.Thứ // hoặc dùng DayOfWeek nếu muốn tự tính
-     })
-     .ToList();
+                list.Add(new
+                {
+                    LopHoc_id = reader["LopHoc_id"],
+                    MaLop = reader["MaLop"].ToString(),
+                    TenMonHoc = reader["TenMon"].ToString(),
+                    TenGiangVien = reader["TenGiangVien"].ToString(),
 
+                    BuoiHoc_id = reader["BuoiHoc_id"],
+                    SoBuoi = "Buổi " + reader["SoBuoi"].ToString(),
+                    Thu = reader["Thu"].ToString(),
 
-                buoiHocs.AddRange(buoiTrongLop);
+                    ThoiGianBatDau = Convert.ToDateTime(reader["ThoiGianBatDau"]).ToString("dd/MM/yyyy HH:mm"),
+                    ThoiGianKetThuc = Convert.ToDateTime(reader["ThoiGianKetThuc"]).ToString("dd/MM/yyyy HH:mm"),
+
+                    LoaiBuoiHoc = reader["LoaiBuoiHoc"].ToString(),
+                    TrangThai = reader["TrangThai"],
+
+                    PhongHoc = reader["TenPhong"].ToString(),
+                    DiaChi = reader["DiaChi"].ToString()
+                });
             }
 
-            var response = lopHocs.Select(l => new DanhSachBuoiHocResponse
-            {
-                LopHoc_id = l.LopHocId,
-                MaLop = l.MaLop,
-                TenMonHoc = l.TenMon,
-                TenGiangVien = l.TenGiangVien,
-                BuoiHoc = buoiHocs.Where(b => b.LopHoc_id == l.LopHocId).ToList()
-            }).ToList();
-
-            return Ok(response);
+            return Ok(list);
         }
+
+
 
         //Trang 3: Click nút "Điểm danh" trong danh sách buổi học (trang 2) -> Hiện thông tin buổi học và điểm danh sinh viên
         //-> Click nút"Lưu điểm danh" -> Khóa không cho đổi trạng thái điểm danh 
@@ -150,7 +161,7 @@ namespace LMS_GV.Controllers_GiangVien
                 return NotFound("Buổi học không tồn tại");
 
             if (buoiHoc.LopHoc.GiangVienId != giangVienId)
-                return Forbid("Bạn không có quyền xem buổi học này");
+                return Unauthorized("Bạn không có quyền xem buổi học này");
 
             // Lấy dữ liệu điểm danh
             var diemDanh = await _context.DiemDanhs
@@ -186,9 +197,8 @@ namespace LMS_GV.Controllers_GiangVien
             });
         }
 
-
-
         //API: Tìm kiếm sinh viên theo keyword
+        // API: Tìm kiếm sinh viên theo keyword (chỉ MSSV, HoTen, Email)
         [HttpGet("giangvien/buoihoc/{buoiHocId}/sinhvien/search")]
         public async Task<IActionResult> SearchSinhVienDiemDanh(int buoiHocId, [FromQuery] string keyword)
         {
@@ -197,53 +207,65 @@ namespace LMS_GV.Controllers_GiangVien
             if (!int.TryParse(giangVienClaim, out int giangVienId))
                 return Unauthorized("GiangVien_id không hợp lệ");
 
-            // Nếu keyword trống thì trả về danh sách rỗng
+            // Nếu không nhập từ khóa → trả về danh sách rỗng
             if (string.IsNullOrWhiteSpace(keyword))
-                return Ok(new List<SinhVienDiemDanhDTO>());
+                return Ok(new DanhSachSinhVienResponseFromLesson
+                {
+                    BuoiHoc_id = buoiHocId,
+                    SinhVien = new List<SinhVienDiemDanhDTO>()
+                });
 
-            keyword = keyword.Trim();
+            keyword = keyword.Trim().ToLower(); // Chuẩn hóa
 
-            // Lấy dữ liệu điểm danh của buổi
+            // Kiểm tra buổi học có thuộc giảng viên hay không
+            var buoiHoc = await _context.BuoiHocs
+                .Include(b => b.LopHoc)
+                .FirstOrDefaultAsync(b => b.BuoiHocId == buoiHocId);
+
+            if (buoiHoc == null)
+                return NotFound("Buổi học không tồn tại");
+
+            if (buoiHoc.LopHoc.GiangVienId != giangVienId)
+                return Unauthorized("Bạn không có quyền xem buổi học này");
+
+            // Lấy dữ liệu điểm danh
             var diemDanh = await _context.DiemDanhs
                 .FirstOrDefaultAsync(d => d.BuoiHocId == buoiHocId);
 
             if (diemDanh == null)
                 return NotFound("Chưa có dữ liệu điểm danh");
 
-            // Truy vấn danh sách sinh viên kèm trạng thái
-            var sinhVienList = await _context.DiemDanhChiTiets
+            // Truy vấn sinh viên + trạng thái
+            var list = await _context.DiemDanhChiTiets
                 .Where(c => c.DiemDanhId == diemDanh.DiemDanhId)
-                .Join(
-                    _context.HoSoSinhViens,
-                    c => c.SinhVienId,
-                    s => s.SinhVienId,
-                    (c, s) => new { c, s }
+                .Join(_context.HoSoSinhViens,
+                      c => c.SinhVienId,
+                      s => s.SinhVienId,
+                      (c, s) => new { c, s })
+                .Join(_context.NguoiDungs,
+                      cs => cs.s.NguoiDungId,
+                      nd => nd.NguoiDungId,
+                      (cs, nd) => new SinhVienDiemDanhDTO
+                      {
+                          MSSV = cs.s.Mssv,
+                          HoTen = nd.HoTen,
+                          Email = nd.Email,
+                          TrangThai = cs.c.TrangThai
+                      })
+                .Where(s =>
+                    s.MSSV.ToLower().Contains(keyword) ||
+                    s.HoTen.ToLower().Contains(keyword) ||
+                    s.Email.ToLower().Contains(keyword)
                 )
-                .Join(
-                    _context.NguoiDungs,
-                    cs => cs.s.NguoiDungId,
-                    nd => nd.NguoiDungId,
-                    (cs, nd) => new SinhVienDiemDanhDTO
-                    {
-                        SinhVien_id = cs.s.SinhVienId,
-                        MSSV = nd.TenDangNhap,  // Bạn có thể đổi thành SinhVienId nếu muốn
-                        HoTen = nd.HoTen,
-                        Email = nd.Email,
-                        TrangThai = cs.c.TrangThai
-                    }
-                )
-                .Where(s => s.HoTen.Contains(keyword) || s.MSSV.Contains(keyword) || s.Email.Contains(keyword))
                 .OrderBy(s => s.HoTen)
-                .ToListAsync();  // <-- await lấy List thực tế
+                .ToListAsync();
 
-            // Trả kết quả
             return Ok(new DanhSachSinhVienResponseFromLesson
             {
                 BuoiHoc_id = buoiHocId,
-                SinhVien = sinhVienList
+                SinhVien = list
             });
         }
 
-        
     }
 }
