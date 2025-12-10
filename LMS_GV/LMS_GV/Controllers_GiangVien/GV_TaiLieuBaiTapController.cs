@@ -612,6 +612,58 @@ namespace LMS_GV.Controllers_GiangVien
             return File(memory, "application/octet-stream", file.TenFile);
         }
 
+        //Xóa file tài liệu 
+        [Authorize(Roles = "Giảng Viên")]
+        [HttpDelete("giang-vien/tai-lieu/xoa")]
+        public async Task<IActionResult> XoaTaiLieu([FromBody] XoaTaiLieuDto dto)
+        {
+            // Lấy id giảng viên từ token
+            var claim = User.FindFirst("GiangVien_id")?.Value;
+            if (!int.TryParse(claim, out int giangVienId))
+                return Unauthorized("GiangVien_id không hợp lệ");
+
+            // Kiểm tra lớp có thuộc giảng viên hay không
+            var lopHoc = await _context.LopHocs
+                .FirstOrDefaultAsync(l => l.LopHocId == dto.LopHocId && l.GiangVienId == giangVienId);
+
+            if (lopHoc == null)
+                return Unauthorized("Bạn không có quyền xoá tài liệu của lớp này.");
+
+            // Lấy file
+            var fileEntity = await _context.Files
+                .FirstOrDefaultAsync(f => f.FilesId == dto.FilesId);
+
+            if (fileEntity == null)
+                return NotFound("Tài liệu không tồn tại.");
+
+            // Kiểm tra BaiHoc thuộc LopHoc qua bảng BaiHocLop
+            bool baiHocThuocLop = await _context.BaiHocLops
+                .AnyAsync(bhl => bhl.BaiHocId == fileEntity.BaiHocId && bhl.LopHocId == dto.LopHocId);
+
+            if (!baiHocThuocLop)
+                return Unauthorized("Tài liệu này không thuộc lớp của bạn.");
+
+            // Xoá file vật lý khỏi wwwroot
+            var physicalPath = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot",
+                fileEntity.DuongDan?.TrimStart('/') ?? ""
+            );
+
+            if (System.IO.File.Exists(physicalPath))
+                System.IO.File.Delete(physicalPath);
+
+            // Xoá record DB
+            _context.Files.Remove(fileEntity);
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                message = "Xoá tài liệu thành công",
+                FilesId = dto.FilesId
+            });
+        }
+
 
     }
 }

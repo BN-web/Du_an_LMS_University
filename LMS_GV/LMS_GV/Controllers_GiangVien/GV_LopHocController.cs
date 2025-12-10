@@ -37,41 +37,59 @@ namespace LMS_GV.Controllers_GiangVien
             if (!int.TryParse(giangVienClaim, out int giangVienId))
                 return Unauthorized("GiangVien_id không hợp lệ");
 
-            var query = _context.LopHocs
-                .Where(l => l.GiangVienId == giangVienId)
-                .Select(l => new LopHocGiangVienDto
+            var rawData = await _context.LopHocs
+             .Where(l => l.GiangVienId == giangVienId)
+             .Select(l => new
+             {
+                 l.LopHocId,
+                 l.MaLop,
+                 TenMon = l.MonHoc.TenMon,
+                 l.SiSoToiDa,
+
+                 Thu = l.BuoiHocs
+                     .OrderBy(b => b.ThoiGianBatDau)
+                     .Select(b => b.Thứ)
+                     .FirstOrDefault(),
+
+                 GioBatDau = l.BuoiHocs
+                     .OrderBy(b => b.ThoiGianBatDau)
+                     .Select(b => (DateTime?)b.ThoiGianBatDau)   
+                     .FirstOrDefault(),
+
+                 GioKetThuc = l.BuoiHocs
+                     .OrderBy(b => b.ThoiGianKetThuc)
+                     .Select(b => (DateTime?)b.ThoiGianKetThuc)  
+                     .FirstOrDefault(),
+
+                 MaPhong = l.BuoiHocs
+                     .Select(b => b.PhongHoc.MaPhong)
+                     .FirstOrDefault()
+             })
+             .ToListAsync();
+
+
+            // Xử lý tách số MÃ PHÒNG (PH101 -> 101)
+            var result = rawData
+                .Select(x => new LopHocGiangVienDto
                 {
-                    LopHocId = l.LopHocId,
-                    MaLop = l.MaLop,
-                    TenMon = l.MonHoc.TenMon,
-                    SiSoToiDa = l.SiSoToiDa,
+                    LopHocId = x.LopHocId,
+                    MaLop = x.MaLop,
+                    TenMon = x.TenMon,
+                    SiSoToiDa = x.SiSoToiDa,
+                    Thu = x.Thu,
+                    GioBatDau = x.GioBatDau?.ToString("HH:mm"),
+                    GioKetThuc = x.GioKetThuc?.ToString("HH:mm"),
 
-                    //SiSoHienTai = l.SinhVienLops.Count(),
+                    // LẤY CHỈ SỐ
+                    MaPhong = x.MaPhong != null
+                        ? new string(x.MaPhong.Where(char.IsDigit).ToArray()) // <-- quan trọng
+                        : null
+                })
+                .ToList();
 
-                    Thu = l.BuoiHocs
-    .OrderBy(b => b.ThoiGianBatDau)
-    .Select(b => b.Thứ)
-    .FirstOrDefault(),
-
-
-                    GioBatDau = l.BuoiHocs
-                        .OrderBy(b => b.ThoiGianBatDau)
-                        .Select(b => b.ThoiGianBatDau.ToString("HH:mm"))
-                        .FirstOrDefault(),
-
-                    GioKetThuc = l.BuoiHocs
-                        .OrderBy(b => b.ThoiGianKetThuc)
-                        .Select(b => b.ThoiGianKetThuc.ToString("HH:mm"))
-                        .FirstOrDefault(),
-
-                    TenPhong = l.BuoiHocs
-                        .Select(b => b.PhongHoc.TenPhong)
-                        .FirstOrDefault()
-                });
-
-            var result = await query.ToListAsync();
             return Ok(result);
         }
+
 
         /// <summary>
         /// API 2: Tìm kiếm lớp học theo mã lớp hoặc tên môn
@@ -91,44 +109,66 @@ namespace LMS_GV.Controllers_GiangVien
 
             keyword = keyword.Trim();
 
-            var query = _context.LopHocs
-                .Where(l => l.GiangVienId == giangVienId)
-                .Where(l =>
-                    l.MaLop.StartsWith(keyword) ||
-                    l.MonHoc.TenMon.StartsWith(keyword)
-                )
-                .Select(l => new LopHocGiangVienDto
-                {
-                    LopHocId = l.LopHocId,
-                    MaLop = l.MaLop,
-                    TenMon = l.MonHoc.TenMon,
-                    SiSoToiDa = l.SiSoToiDa,
+            // Lấy raw data trước
+            var rawData = await _context.LopHocs
+        .Where(l => l.GiangVienId == giangVienId)
+        .Where(l =>
+            l.MaLop.StartsWith(keyword) ||
+            l.MonHoc.TenMon.StartsWith(keyword)
+        )
+        .Select(l => new
+        {
+            l.LopHocId,
+            l.MaLop,
+            TenMon = l.MonHoc.TenMon,
+            l.SiSoToiDa,
 
-                    //SiSoHienTai = l.SinhVienLops.Count(),
+            Thu = l.BuoiHocs
+                .OrderBy(b => b.ThoiGianBatDau)
+                .Select(b => b.Thứ)
+                .FirstOrDefault(),
 
-                    Thu = l.BuoiHocs
-                        .OrderBy(b => b.ThoiGianBatDau)
-                        .Select(b => b.ThoiGianBatDau.DayOfWeek.ToString())
-                        .FirstOrDefault(),
+            GioBatDau = l.BuoiHocs
+                .OrderBy(b => b.ThoiGianBatDau)
+                .Select(b => (DateTime?)b.ThoiGianBatDau)
+                .FirstOrDefault(),
 
-                    GioBatDau = l.BuoiHocs
-                        .OrderBy(b => b.ThoiGianBatDau)
-                        .Select(b => b.ThoiGianBatDau.ToString("HH:mm"))
-                        .FirstOrDefault(),
+            GioKetThuc = l.BuoiHocs
+                .OrderBy(b => b.ThoiGianKetThuc)
+                .Select(b => (DateTime?)b.ThoiGianKetThuc)
+                .FirstOrDefault(),
 
-                    GioKetThuc = l.BuoiHocs
-                        .OrderBy(b => b.ThoiGianKetThuc)
-                        .Select(b => b.ThoiGianKetThuc.ToString("HH:mm"))
-                        .FirstOrDefault(),
+            MaPhong = l.BuoiHocs
+                .Select(b => b.PhongHoc.MaPhong)
+                .FirstOrDefault()
+        })
+        .ToListAsync();
 
-                    TenPhong = l.BuoiHocs
-                        .Select(b => b.PhongHoc.TenPhong)
-                        .FirstOrDefault()
-                });
 
-            var result = await query.ToListAsync();
+            // Chuyển raw data sang DTO
+            var result = rawData.Select(x => new LopHocGiangVienDto
+            {
+                LopHocId = x.LopHocId,
+                MaLop = x.MaLop,
+                TenMon = x.TenMon,
+                SiSoToiDa = x.SiSoToiDa,
+
+                Thu = x.Thu,
+
+                GioBatDau = x.GioBatDau?.ToString("HH:mm"),
+                GioKetThuc = x.GioKetThuc?.ToString("HH:mm"),
+
+                // Lấy 3 số cuối của mã phòng
+                MaPhong = string.IsNullOrEmpty(x.MaPhong)
+                  ? null
+                  : x.MaPhong.Substring(x.MaPhong.Length - 3)
+            })
+  .ToList();
+
+
             return Ok(result);
         }
+
 
         //----Trang 4: Click nút "Xem điểm danh" (trang 2) -> Hiện bảng thông tin buổi học đã lưu (Không thể chỉnh sửa)----//
         // --- 1. Lấy tổng quan các lớp của giảng viên ---

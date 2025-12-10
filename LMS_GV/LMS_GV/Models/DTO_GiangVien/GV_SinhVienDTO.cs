@@ -58,6 +58,8 @@
         public string DiemChu { get; set; }
         public float GPA_Mon { get; set; }
         public int? SoTinChi { get; set; }
+        public int? diemDTO { get; set; }
+        public int? lophocId { get; set; }
     }
 
 

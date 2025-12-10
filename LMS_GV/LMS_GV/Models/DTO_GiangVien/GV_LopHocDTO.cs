@@ -11,11 +11,14 @@
         public string TenMon { get; set; }
         public int? SiSoHienTai { get; set; }
         public int? SiSoToiDa { get; set; }
-        public string? Thu { get; set; } 
+        public string? Thu { get; set; }
         public string? GioBatDau { get; set; }
         public string? GioKetThuc { get; set; }
-        public string? TenPhong { get; set; }
+
+        // CHỈ LẤY SỐ TRONG MÃ PHÒNG
+        public string? MaPhong { get; set; }
     }
+
 
 
     // ----Trang 4 ----//

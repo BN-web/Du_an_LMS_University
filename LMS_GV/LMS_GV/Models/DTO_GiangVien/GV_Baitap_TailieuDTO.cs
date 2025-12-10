@@ -176,4 +176,10 @@
         public int FileId { get; set; }
     }
 
+    public class XoaTaiLieuDto
+    {
+        public int FilesId { get; set; }
+        public int LopHocId { get; set; }
+    }
+
 }
