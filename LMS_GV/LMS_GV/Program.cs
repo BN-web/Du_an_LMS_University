@@ -1,8 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using LMS_GV.Models.Data; // import namespace DbContext 
-using Microsoft.EntityFrameworkCore; // để sử dụng UseSqlServer
-
+using LMS_GV.Models.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +9,9 @@ var keyString = builder.Configuration["Jwt:Key"];
 if (string.IsNullOrEmpty(keyString) || Encoding.UTF8.GetBytes(keyString).Length < 32)
     throw new Exception("JWT Key không hợp lệ hoặc quá ngắn!");
 
-// Add services to the container.
+// 1. Add services
+builder.Services.AddControllers(); // ✅ Bắt buộc để MapControllers hoạt động
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
@@ -26,13 +27,12 @@ builder.Services.AddCors(options =>
     });
 });
 
-
-//Đăng ký DbContext để dependency injection hoạt động
+// 2. DbContext
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Cấu hình JWT Authentication
-builder.Services.AddAuthentication("Bearer") // nhớ sau này phải dùng app.UseAuthentication()
+// 3. JWT Authentication
+builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new()
@@ -41,16 +41,18 @@ builder.Services.AddAuthentication("Bearer") // nhớ sau này phải dùng app.
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],   // config trong appsettings.json
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
         };
     });
 
-// Swagger/OpenAPI
+// 4. Authorization
+builder.Services.AddAuthorization();
+
+// 5. Swagger
 builder.Services.AddEndpointsApiExplorer();
-//cấu hình Swagger để nhập Bearer token
 builder.Services.AddSwaggerGen(c =>
 {
     c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
@@ -63,34 +65,41 @@ builder.Services.AddSwaggerGen(c =>
     });
     c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement{
         {
-            new Microsoft.OpenApi.Models.OpenApiSecurityScheme{ Reference = new Microsoft.OpenApi.Models.OpenApiReference{
-                Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme, Id = "Bearer"
-            }}, new string[]{}
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme{
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference{
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            }, new string[]{}
         }
     });
 });
 
-
-////đăng ký service JwtService vào DI container: AddScoped nghĩa là mỗi request HTTP sẽ có một instance riêng. AddSingleton nghĩa là toàn bộ ứng dụng dùng chung 1 instance.
+// 6. JWT Service
 builder.Services.AddScoped<JwtService>();
 
 var app = builder.Build();
 
-// Middleware
+// Middleware pipeline
+// Chỉ bật Swagger trong môi trường Development
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+        c.RoutePrefix = string.Empty; // Swagger UI xuất hiện trực tiếp tại /
+    });
 }
+
 app.UseHttpsRedirection();
 
-// CORS phải được gọi trước Authentication và Authorization
+// CORS trước Authentication & Authorization
 app.UseCors("AllowFrontend");
 
-//Authentication phải gọi trước Authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers(); // Bắt buộc nếu dùng [ApiController]
 
 app.Run();
