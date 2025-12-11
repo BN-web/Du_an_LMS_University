@@ -165,10 +165,10 @@
     // DTO tải tài liệu
     public class UploadTaiLieuDto
     {
-        public int BaiHocId { get; set; }
         public int LopHocId { get; set; }
         public string MoTaBaiHoc { get; set; }
         public IFormFile File { get; set; } // upload file từ client
+        public string? TenFileTuyChon { get; set; }
     }
 
     public class TaiFileRequestDto
@@ -179,7 +179,8 @@
     public class XoaTaiLieuDto
     {
         public int FilesId { get; set; }
-        public int LopHocId { get; set; }
+        public int BaiHocId { get; set; }  
     }
+
 
 }

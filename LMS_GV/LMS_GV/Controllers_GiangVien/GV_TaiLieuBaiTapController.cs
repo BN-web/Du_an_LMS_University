@@ -546,33 +546,57 @@ namespace LMS_GV.Controllers_GiangVien
             if (!int.TryParse(claim, out int giangVienId))
                 return Unauthorized("GiangVien_id không hợp lệ");
 
-            // Kiểm tra lớp thuộc giảng viên
+            // kiểm tra lớp thuộc giảng viên
             var lopHoc = await _context.LopHocs
                 .FirstOrDefaultAsync(l => l.LopHocId == dto.LopHocId && l.GiangVienId == giangVienId);
+
             if (lopHoc == null)
                 return Unauthorized("Bạn không có quyền đăng tài liệu cho lớp này.");
 
-            // Kiểm tra bài học
-            var baiHoc = await _context.BaiHocs.FirstOrDefaultAsync(b => b.BaiHocId == dto.BaiHocId);
-            if (baiHoc == null)
-                return NotFound("Bài học không tồn tại.");
+            // ⬇️ Tạo bài học mới
+            var baiHocMoi = new BaiHoc
+            {
+                TieuDe = dto.TenFileTuyChon ?? "Bài học mới",
+                CreatedAt = DateTime.Now
+            };
 
+            _context.BaiHocs.Add(baiHocMoi);
+            await _context.SaveChangesAsync(); // <-- BaiHocId được tạo ở đây
+
+            // Tạo liên kết BaiHoc – LopHoc (nếu bạn dùng bảng trung gian BaiHocLop)
+            var link = new BaiHocLop
+            {
+                BaiHocId = baiHocMoi.BaiHocId,
+                LopHocId = dto.LopHocId
+            };
+
+            _context.BaiHocLops.Add(link);
+            await _context.SaveChangesAsync();
+
+            // Folder upload
             var uploadFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "files");
             if (!Directory.Exists(uploadFolder)) Directory.CreateDirectory(uploadFolder);
 
-            var fileName = $"{Guid.NewGuid()}_{dto.File.FileName}";
-            var filePath = Path.Combine(uploadFolder, fileName);
+            // tên file vật lý
+            var fileNamePhysical = $"{Guid.NewGuid()}_{dto.File.FileName}";
+            var filePath = Path.Combine(uploadFolder, fileNamePhysical);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await dto.File.CopyToAsync(stream);
             }
 
+            // Tên file hiển thị
+            string tenFileHienThi = !string.IsNullOrWhiteSpace(dto.TenFileTuyChon)
+                ? dto.TenFileTuyChon
+                : dto.File.FileName;
+
+            // Lưu file
             var fileEntity = new LMS_GV.Models.File
             {
-                BaiHocId = dto.BaiHocId,
-                TenFile = dto.File.FileName,
-                DuongDan = $"/uploads/files/{fileName}",
+                BaiHocId = baiHocMoi.BaiHocId,
+                TenFile = tenFileHienThi,
+                DuongDan = $"/uploads/files/{fileNamePhysical}",
                 KichThuoc = dto.File.Length,
                 CreatedAt = DateTime.Now
             };
@@ -583,11 +607,12 @@ namespace LMS_GV.Controllers_GiangVien
             return Ok(new
             {
                 message = "Upload thành công",
+                BaiHocId = baiHocMoi.BaiHocId,
+                FilesId = fileEntity.FilesId,
+                TenFile = fileEntity.TenFile,
                 DuongDan = fileEntity.DuongDan
             });
         }
-
-
 
         //API Tải tài liệu dựa theo thuộc tính trong danh sách tài liệu 
         [Authorize(Roles = "Giảng Viên")]
@@ -622,26 +647,31 @@ namespace LMS_GV.Controllers_GiangVien
             if (!int.TryParse(claim, out int giangVienId))
                 return Unauthorized("GiangVien_id không hợp lệ");
 
-            // Kiểm tra lớp có thuộc giảng viên hay không
-            var lopHoc = await _context.LopHocs
-                .FirstOrDefaultAsync(l => l.LopHocId == dto.LopHocId && l.GiangVienId == giangVienId);
-
-            if (lopHoc == null)
-                return Unauthorized("Bạn không có quyền xoá tài liệu của lớp này.");
-
-            // Lấy file
+            // Lấy file theo id
             var fileEntity = await _context.Files
                 .FirstOrDefaultAsync(f => f.FilesId == dto.FilesId);
 
             if (fileEntity == null)
                 return NotFound("Tài liệu không tồn tại.");
 
-            // Kiểm tra BaiHoc thuộc LopHoc qua bảng BaiHocLop
-            bool baiHocThuocLop = await _context.BaiHocLops
-                .AnyAsync(bhl => bhl.BaiHocId == fileEntity.BaiHocId && bhl.LopHocId == dto.LopHocId);
+            // Lấy ra BaiHocId của tài liệu
+            int? baiHocId = fileEntity.BaiHocId;
+            if (baiHocId == null)
+                return BadRequest("Tài liệu không gắn với bài học nào.");
 
-            if (!baiHocThuocLop)
-                return Unauthorized("Tài liệu này không thuộc lớp của bạn.");
+            // Kiểm tra bài học này thuộc lớp nào
+            var baiHocLop = await _context.BaiHocLops
+                .FirstOrDefaultAsync(bhl => bhl.BaiHocId == baiHocId);
+
+            if (baiHocLop == null)
+                return Unauthorized("Bài học không thuộc lớp nào.");
+
+            // Kiểm tra lớp có thuộc quyền giảng viên không
+            var lopHoc = await _context.LopHocs
+                .FirstOrDefaultAsync(l => l.LopHocId == baiHocLop.LopHocId && l.GiangVienId == giangVienId);
+
+            if (lopHoc == null)
+                return Unauthorized("Bạn không có quyền xoá tài liệu của bài học này.");
 
             // Xoá file vật lý khỏi wwwroot
             var physicalPath = Path.Combine(
@@ -653,7 +683,7 @@ namespace LMS_GV.Controllers_GiangVien
             if (System.IO.File.Exists(physicalPath))
                 System.IO.File.Delete(physicalPath);
 
-            // Xoá record DB
+            // Xóa record DB
             _context.Files.Remove(fileEntity);
             await _context.SaveChangesAsync();
 
@@ -663,6 +693,7 @@ namespace LMS_GV.Controllers_GiangVien
                 FilesId = dto.FilesId
             });
         }
+
 
 
     }

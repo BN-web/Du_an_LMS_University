@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Thực tập\\Dự án 3\\Backend\\LMS_GV\\LMS_GV\\wwwroot\\uploads\\files\\8af6fdf2-d14b-430e-af3b-77fbb84b7135_1quanlikhoahoc.docx",
+      "PackagePath": "staticwebassets\\uploads\\files\\8af6fdf2-d14b-430e-af3b-77fbb84b7135_1quanlikhoahoc.docx"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.LMS_GV.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.LMS_GV.props",
+      "PackagePath": "build\\LMS_GV.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.LMS_GV.props",
+      "PackagePath": "buildMultiTargeting\\LMS_GV.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.LMS_GV.props",
+      "PackagePath": "buildTransitive\\LMS_GV.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
