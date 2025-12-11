@@ -479,10 +479,15 @@ namespace LMS_GV.Controllers_GiangVien
                 .Where(bhl => bhl.LopHoc.GiangVienId == giangVienId)
                 .SelectMany(bhl => bhl.BaiHoc.Files, (bhl, f) => new TaiLieuDto
                 {
+                    FileId = f.FilesId,            // thêm
+                    BaiHocId = f.BaiHocId ?? 0,    // thêm
+
                     TenMonHoc = bhl.LopHoc.MonHoc.TenMon,
                     TongTaiLieuLop = bhl.BaiHoc.Files.Count(),
                     TenBaiHoc = bhl.BaiHoc.TieuDe,
                     LoaiBaiHoc = bhl.BaiHoc.LoaiBaiHoc,
+                    TenFile = f.TenFile,
+                    DuongDan = f.DuongDan,
                     NgayUpload = f.CreatedAt.HasValue ? f.CreatedAt.Value.ToString("dd/MM/yyyy") : "",
                     KichThuoc = f.KichThuoc ?? 0
                 })
@@ -490,6 +495,7 @@ namespace LMS_GV.Controllers_GiangVien
 
             return Ok(ds);
         }
+
 
         /// <summary> 
         /// API search tìm kiếm tài liệu theo: tên môn, tên tài liệu

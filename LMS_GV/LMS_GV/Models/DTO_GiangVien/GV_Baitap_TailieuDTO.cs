@@ -152,6 +152,8 @@
     // DTO danh sách tài liệu của giảng viên
     public class TaiLieuDto
     {
+        public int FileId { get; set; }      
+        public int BaiHocId { get; set; }    
         public string TenMonHoc { get; set; }
         public int TongTaiLieuLop { get; set; }
         public string TenBaiHoc { get; set; }
