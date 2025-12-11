@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LMS_GV")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5642319fc972a232172ab3c74cfe38108852d56")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f54e4af75d127a134a26cf3d727554da3558b98b")]
 [assembly: System.Reflection.AssemblyProductAttribute("LMS_GV")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LMS_GV")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -187,47 +187,64 @@ namespace LMS_GV.Controllers_GiangVien
         //----------------------//
 
         //danh sách các buổi thi
+        [Authorize(Roles = "Giảng Viên")]
         [HttpGet("danh-sach-cac-buoi-thi")]
         public IActionResult GetLichThi(DateTime? startDate, DateTime? endDate)
         {
-            // Lấy GiangVien_id từ token
             var giangVienClaim = User.FindFirst("GiangVien_id")?.Value;
             if (!int.TryParse(giangVienClaim, out int giangVienId))
                 return Unauthorized("GiangVien_id không hợp lệ");
 
-            // Lọc dữ liệu theo giảng viên
+            // Query cơ bản
             var query = _context.BuoiThis
                 .Where(b => b.GiamThiId == giangVienId);
 
+            // Lọc ngày thi
             if (startDate.HasValue)
                 query = query.Where(b => b.NgayThi.Date >= startDate.Value.Date);
+
             if (endDate.HasValue)
                 query = query.Where(b => b.NgayThi.Date <= endDate.Value.Date);
 
-            // Chuyển sang AsEnumerable() để thực hiện ToString trên client
-            var lichThi = query
-    .AsEnumerable()
-    .Select(b => new LichThiDto
-    {
-        BuoiThiId = b.BuoiThiId,
-        MonHoc = b.LopHoc?.MonHoc?.TenMon ?? "N/A", // kiểm tra null
-        Lop = b.LopHoc?.MaLop ?? "N/A",
-        NgayThi = b.NgayThi.ToString("dddd/dd/MM/yyyy"),
-        GioBatDau = b.GioBatDau.HasValue ? b.GioBatDau.Value.ToString(@"hh\:mm") : "",
-        GioKetThuc = b.GioKetThuc.HasValue ? b.GioKetThuc.Value.ToString(@"hh\:mm") : "",
-        GiangVien = b.GiamThi?.NguoiDung?.HoTen ?? "N/A", // kiểm tra null
-        Loai = b.HinhThuc ?? "offline",
-        TongSinhVien = b.LopHoc?.SinhVienLops?.Count() ?? 0, // kiểm tra null
-        DiaDiem = b.PhongHoc != null
-                  ? $"{b.PhongHoc.DiaChi} - {b.PhongHoc.TenPhong}"
-                  : "Online"
-    })
-    .OrderBy(b => b.NgayThi)
-    .ThenBy(b => b.GioBatDau)
-    .ToList();
+            // Include dữ liệu
+            var data = query
+                .Include(b => b.PhongHoc)
+                .Include(b => b.LopHoc).ThenInclude(l => l.MonHoc)
+                .Include(b => b.GiamThi).ThenInclude(g => g.NguoiDung)
+                .Include(b => b.LopHoc.SinhVienLops)
+                .ToList()
+                .Select(b =>
+                {
+                    // ⭐ LẤY RA SỐ PHÒNG TỪ MA PHÒNG
+                    // Ví dụ: "PH101" → "101"
+                    string soPhong = b.PhongHoc?.MaPhong != null
+                        ? new string(b.PhongHoc.MaPhong.Where(char.IsDigit).ToArray())
+                        : "";
 
+                    // ⭐ Địa điểm từ DB: DiaChi + số phòng
+                    string diaDiem = b.PhongHoc != null
+                        ? $"{b.PhongHoc.DiaChi} - {soPhong}"
+                        : "";
 
-            return Ok(lichThi);
+                    return new LichThiDto
+                    {
+                        BuoiThiId = b.BuoiThiId,
+                        MonHoc = b.LopHoc?.MonHoc?.TenMon ?? "",
+                        Lop = b.LopHoc?.MaLop ?? "",
+                        NgayThi = b.NgayThi.ToString("dddd/dd/MM/yyyy"),
+                        GioBatDau = b.GioBatDau?.ToString(@"hh\:mm") ?? "",
+                        GioKetThuc = b.GioKetThuc?.ToString(@"hh\:mm") ?? "",
+                        GiangVien = b.GiamThi?.NguoiDung?.HoTen ?? "",
+                        Loai = b.HinhThuc ?? "",
+                        TongSinhVien = b.LopHoc?.SinhVienLops?.Count() ?? 0,
+                        DiaDiem = diaDiem
+                    };
+                })
+                .OrderBy(x => x.NgayThi)
+                .ThenBy(x => x.GioBatDau)
+                .ToList();
+
+            return Ok(data);
         }
 
     }
