@@ -98,81 +98,74 @@ namespace LMS_GV.Controllers_GiangVien
 
         // Đăng nhập bằng Google 
         [HttpPost("google-login")]
-    public async Task<ActionResult<GoogleUserResponseDTO>> GoogleLogin([FromBody] GoogleLoginRequestDTO request)
-    {
-        if (string.IsNullOrWhiteSpace(request.IdToken))
-            return BadRequest(new { message = "IdToken của Google là bắt buộc" });
-
-        GoogleJsonWebSignature.Payload payload;
-        try
+        public async Task<ActionResult<GoogleUserResponseDTO>> LoginWithGoogle([FromBody] GoogleLoginRequestDTO request)
         {
-            payload = await GoogleJsonWebSignature.ValidateAsync(request.IdToken);
-            // Có thể kiểm tra Audience để đảm bảo token là cho client của bạn
-        }
-        catch
-        {
-            return BadRequest(new { message = "Token Google không hợp lệ" });
-        }
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-        // 1. Tìm hoặc tạo NguoiDung
-        var user = await _db.NguoiDungs
-            .Include(u => u.VaiTro)
-            .FirstOrDefaultAsync(u => u.DangnhapGoogle == payload.Subject || u.Email == payload.Email);
+            if (string.IsNullOrWhiteSpace(request.GoogleId) || string.IsNullOrWhiteSpace(request.Email))
+                return BadRequest(new { message = "GoogleId và Email là bắt buộc" });
 
-        string roleName = "Giảng viên";
+            // 1. Tìm người dùng theo GoogleId hoặc Email
+            var user = await _db.NguoiDungs
+                .Include(u => u.VaiTro)
+                .FirstOrDefaultAsync(u => u.DangnhapGoogle == request.GoogleId || u.Email == request.Email);
 
-        if (user == null)
-        {
-            // Tạo mới
-            user = new NguoiDung
+            string roleName = "giảng viên";
+
+            // Nếu chưa có → tạo mới
+            if (user == null)
             {
-                TenDangNhap = payload.Email,
-                Email = payload.Email,
-                HoTen = payload.Name ?? payload.Email,
-                Avatar = payload.Picture,
-                DangnhapGoogle = payload.Subject,
-                EmailGoogleVerified = payload.EmailVerified,
-                TrangThai = 1,
-                CreatedAt = DateTime.UtcNow
-            };
+                // Lấy VaiTroId của giảng viên
+                var giangVienRole = await _db.VaiTros.FirstOrDefaultAsync(r => r.TenVaiTro == "giảng viên");
+                int roleId = giangVienRole?.VaiTroId ?? 2;
 
-            // Gán VaiTro mặc định là Giảng viên
-            var instructorRole = await _db.VaiTros.FirstOrDefaultAsync(v => v.TenVaiTro.ToLower() == "giảng viên");
-            user.VaiTroId = instructorRole?.VaiTroId ?? 2;
+                user = new NguoiDung
+                {
+                    TenDangNhap = request.Email,
+                    Email = request.Email,
+                    HoTen = request.Name ?? request.Email,
+                    Avatar = request.PictureUrl,
+                    EmailGoogleVerified = request.EmailVerified ?? true,
+                    DangnhapGoogle = request.GoogleId,
+                    TrangThai = 1,
+                    VaiTroId = roleId,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
+                };
 
-            _db.NguoiDungs.Add(user);
+                _db.NguoiDungs.Add(user);
+            }
+            else
+            {
+                // Nếu đã tồn tại → cập nhật thông tin
+                user.HoTen = request.Name ?? user.HoTen;
+                user.Avatar = request.PictureUrl ?? user.Avatar;
+                user.EmailGoogleVerified = request.EmailVerified ?? user.EmailGoogleVerified;
+                user.DangnhapGoogle = request.GoogleId;
+                user.UpdatedAt = DateTime.UtcNow;
+
+                roleName = user.VaiTro?.TenVaiTro ?? "giảng viên";
+            }
+
+            await _db.SaveChangesAsync();
+
+            // 3. Sinh JWT token
+            var token = GenerateJwtToken(user, roleName);
+
+            // 4. Trả về DTO
+            return Ok(new GoogleUserResponseDTO
+            {
+                NguoiDungId = user.NguoiDungId,
+                Email = user.Email ?? string.Empty,
+                Name = user.HoTen ?? string.Empty,
+                Avatar = user.Avatar,
+                Role = roleName,
+                Token = token
+            });
         }
-        else
-        {
-            // Cập nhật thông tin
-            user.HoTen = payload.Name ?? user.HoTen;
-            user.Avatar = payload.Picture ?? user.Avatar;
-            user.DangnhapGoogle = payload.Subject;
-            user.EmailGoogleVerified = payload.EmailVerified;
-            user.UpdatedAt = DateTime.UtcNow;
 
-            roleName = user.VaiTro?.TenVaiTro ?? "Giảng viên";
-
-            _db.NguoiDungs.Update(user);
-        }
-
-        await _db.SaveChangesAsync();
-
-        // 2. Sinh JWT cho ứng dụng
-        var token = GenerateJwtToken(user, roleName);
-
-        return Ok(new GoogleUserResponseDTO
-        {
-            NguoiDungId = user.NguoiDungId,
-            Email = user.Email ?? string.Empty,
-            Name = user.HoTen ?? string.Empty,
-            Avatar = user.Avatar,
-            Role = roleName,
-            Token = token
-        });
-    }
-
-    private string GenerateJwtToken(NguoiDung user, string role)
+        private string GenerateJwtToken(NguoiDung user, string role)
     {
         var jwtKey = _config["Jwt:Key"] ?? "SuperSecretKey_ChangeMe";
         var jwtIssuer = _config["Jwt:Issuer"] ?? "LMS_API";
