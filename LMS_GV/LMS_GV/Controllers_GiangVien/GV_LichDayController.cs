@@ -9,6 +9,7 @@ using LMS_GV.Models.DTO_GiangVien;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 
 namespace LMS_GV.Controllers_GiangVien
@@ -27,54 +28,100 @@ namespace LMS_GV.Controllers_GiangVien
         }
 
 
-        //lấy lịch dạy theo tuần
+        //lấy lịch dạy theo tuần của 1 tháng 
         /// <summary>
-        /// Lấy lịch dạy theo tuần (calendar tuần)
+        //API 1 – Lấy danh sách tuần của một tháng(theo lịch thực tế)
+
+        //Dùng để FE hiển thị lịch tháng dạng calendar.
+
+        //Chia tháng thành các tuần(Thứ 2 → Chủ nhật).
+
+        //Trả về:
+
+        //Tuần số
+
+        //Ngày bắt đầu
+
+        //Ngày kết thúc
+
+        //FE chọn tuần nào → gọi API 2 để lấy lịch dạy.
         /// </summary>
-        [HttpGet("Get/Lich-day-tuan-cua-giang-vien")]
-        public IActionResult GetLichDayTheoTuan()
+        [HttpGet("lich-thang/{year}/{month}")]
+        public IActionResult GetDanhSachTuan(int year, int month)
         {
-            // Lấy GiangVien_id từ claim
-            string giangVienClaim = User.FindFirst("GiangVien_id")?.Value;
-            if (!int.TryParse(giangVienClaim, out int giangVienId))
+            List<TuanTrongThangDto> weeks = new();
+
+            DateTime firstDay = new(year, month, 1);
+
+            // Tìm thứ 2 đầu tiên của tuần chứa ngày 1
+            int delta = DayOfWeek.Monday - firstDay.DayOfWeek;
+            if (delta > 0) delta -= 7;
+
+            DateTime startOfWeek = firstDay.AddDays(delta);
+
+            int weekNumber = 1;
+
+            while ((startOfWeek.Month == month || startOfWeek.AddDays(6).Month == month)
+       && startOfWeek.Year <= year + 1)
             {
-                return Unauthorized("GiangVien_id không hợp lệ");
+                var endOfWeek = startOfWeek.AddDays(6);
+
+                weeks.Add(new TuanTrongThangDto
+                {
+                    SoTuan = weekNumber++,
+                    StartDate = startOfWeek,
+                    EndDate = endOfWeek
+                });
+
+                startOfWeek = startOfWeek.AddDays(7);
             }
 
-            // Tính ngày bắt đầu và kết thúc tuần hiện tại
-            DateTime today = DateTime.Today;
-            int delta = (int)(1 - today.DayOfWeek);
-            if (delta > 0) delta -= 7;
-            DateTime startDate = today.AddDays(delta);
-            DateTime endDate = startDate.AddDays(6).AddHours(23).AddMinutes(59);
+            return Ok(weeks);
+        }
 
-            // Truy vấn dữ liệu
+
+        //lấy lịch dạy theo tuần
+        /// <summary>
+        //API 2 – Lấy lịch dạy theo tuần dựa trên API 1
+
+        //FE gửi StartDate và EndDate lấy từ API 1.
+
+        //API trả về danh sách buổi dạy đúng tuần đó.
+        /// </summary>
+        [HttpPost("giang-vien/lich-day-tuan")]
+        public IActionResult GetLichDayTheoTuan([FromBody] TuanRequestDto req)
+        {
+            // Lấy GiangVien_id từ token
+            string giangVienClaim = User.FindFirst("GiangVien_id")?.Value;
+            if (!int.TryParse(giangVienClaim, out int giangVienId))
+                return Unauthorized("GiangVien_id không hợp lệ");
+
+            // Chuyển DateOnly sang DateTime
+            DateTime startDate = req.StartDate.ToDateTime(new TimeOnly(0, 0, 0));
+            DateTime endDate = req.EndDate.ToDateTime(new TimeOnly(23, 59, 59));
+
             var lich = _context.BuoiHocs
-                .Include(b => b.LopHoc)
-                    .ThenInclude(l => l.MonHoc)
-                .Include(b => b.LopHoc)
-                    .ThenInclude(l => l.SinhVienLops)
-                .Include(b => b.LopHoc)
-                    .ThenInclude(l => l.GiangVien)
-                        .ThenInclude(g => g.NguoiDung)
+                .Include(b => b.LopHoc).ThenInclude(l => l.MonHoc)
+                .Include(b => b.LopHoc).ThenInclude(l => l.SinhVienLops)
+                .Include(b => b.LopHoc).ThenInclude(l => l.GiangVien).ThenInclude(g => g.NguoiDung)
                 .Include(b => b.PhongHoc)
                 .Where(b => b.LopHoc.GiangVienId == giangVienId
-                            && b.ThoiGianBatDau >= startDate
-                            && b.ThoiGianBatDau <= endDate)
-                .AsEnumerable() // chuyển sang LINQ to Objects để tránh lỗi EF
+                    && b.ThoiGianBatDau >= startDate
+                    && b.ThoiGianBatDau <= endDate)
+                .AsEnumerable()
                 .Select(b => new LichDayTuanDto
                 {
                     BuoiHocId = b.BuoiHocId,
-                    TenMon = b.LopHoc.MonHoc.TenMon,
+                    MonHoc = b.LopHoc.MonHoc.TenMon,
                     Lop = b.LopHoc.MaLop,
                     GiangVien = b.LopHoc.GiangVien.NguoiDung.HoTen,
                     Ngay = b.ThoiGianBatDau.Date,
+                    Thu = b.ThoiGianBatDau.ToString("dddd"),
                     GioBatDau = b.ThoiGianBatDau.ToString("HH:mm"),
                     GioKetThuc = b.ThoiGianKetThuc.ToString("HH:mm"),
-                    Phong = b.PhongHoc != null ? b.PhongHoc.TenPhong : "Online",
-                    DiaDiem = b.PhongHoc != null ? b.PhongHoc.DiaChi : "Online",
-                    LoaiBuoiHoc = b.LoaiBuoiHoc,
-                    SoLuongSinhVien = b.LopHoc.SinhVienLops.Count(),
+                    Phong = b.PhongHoc?.TenPhong ?? "Chưa phân phòng",
+                    DiaDiem = b.PhongHoc?.DiaChi ?? "—",
+                    LoaiBuoiHoc = b.LoaiBuoiHoc ?? "Bình thường",
                     TrangThai = b.TrangThai switch
                     {
                         1 => "Bình thường",
@@ -83,13 +130,13 @@ namespace LMS_GV.Controllers_GiangVien
                         3 => "Đổi phòng",
                         4 => "Online",
                         _ => "Khác"
-                    }
+                    },
+                    SoLuongSinhVien = b.LopHoc.SinhVienLops.Count()
                 })
                 .OrderBy(x => x.Ngay)
                 .ThenBy(x => x.GioBatDau)
                 .ToList();
 
-            // Trả dữ liệu
             return Ok(new
             {
                 TuNgay = startDate.ToString("dd/MM/yyyy"),
@@ -97,7 +144,6 @@ namespace LMS_GV.Controllers_GiangVien
                 LichDay = lich
             });
         }
-
 
 
         /// <summary>

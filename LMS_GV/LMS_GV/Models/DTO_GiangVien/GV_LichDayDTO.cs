@@ -1,43 +1,43 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace LMS_GV.Models.DTO_GiangVien
 {
     // Dùng để trả dữ liệu lịch dạy theo dạng calendar (tuần view)
 
-    public class LichDayTuanRequest
+    public class TuanRequestDto
     {
-        [Required]
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}")]
-        public DateTime StartDate { get; set; }
+        [JsonPropertyName("startDate")]
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateOnly StartDate { get; set; }
 
-        [Required]
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}")]
-        public DateTime EndDate { get; set; }
+        [JsonPropertyName("endDate")]
+        [JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateOnly EndDate { get; set; }
     }
+
 
     public class LichDayTuanDto
     {
         public int BuoiHocId { get; set; }
-
-        public string TenMon { get; set; }      // Tên môn học
-        public string Lop { get; set; }         // Mã lớp
-        public string GiangVien { get; set; }   // Tên giảng viên
-
-        public DateTime Ngay { get; set; }      // Ngày học (dùng để render theo cột Thứ)
-        public string Thu { get; set; }         // Thứ trong tuần (Thứ 2, Thứ 3,...)
-
-        public string GioBatDau { get; set; }    // HH:mm
-        public string GioKetThuc { get; set; }   // HH:mm
-
-        public string Phong { get; set; }        // Tên phòng (nếu offline)
-        public string DiaDiem { get; set; }      // Cơ sở – Tòa – Phòng
-
-        public string TrangThai { get; set; }    // Bình thường | Đã hủy | Đổi giờ | Đổi phòng | Online
-        public string LoaiBuoiHoc { get; set; }  // giang bai / lab / tutorial
-
+        public string MonHoc { get; set; }
+        public string Lop { get; set; }
+        public string GiangVien { get; set; }
+        public DateTime Ngay { get; set; }
+        public string Thu { get; set; }
+        public string GioBatDau { get; set; }
+        public string GioKetThuc { get; set; }
+        public string Phong { get; set; }
+        public string DiaDiem { get; set; }
+        public string TrangThai { get; set; }
+        public string LoaiBuoiHoc { get; set; }
         public int SoLuongSinhVien { get; set; }
+    }
+    public class TuanTrongThangDto
+    {
+        public int SoTuan { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 
 
