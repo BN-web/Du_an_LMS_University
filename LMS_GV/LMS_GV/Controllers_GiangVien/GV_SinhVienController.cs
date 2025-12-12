@@ -365,9 +365,21 @@ namespace LMS_GV.Controllers_GiangVien
         /// </summary>
 
         [Authorize(Roles = "Giảng Viên")]
+        [Authorize(Roles = "Giảng Viên")]
         [HttpPatch("diem-mon/{diemId}")]
         public async Task<IActionResult> UpdateDiemMon(int diemId, [FromBody] PatchStudentScoreDto dto)
         {
+            // --- Validate điểm chuyên cần ---
+            if (dto.DiemChuyenCan.HasValue)
+            {
+                var allowedValues = new decimal[] { 10, 9, 0 };
+
+                if (!allowedValues.Contains(dto.DiemChuyenCan.Value))
+                {
+                    return BadRequest("Điểm chuyên cần chỉ được phép nhập: 10, 9 hoặc 0.");
+                }
+            }
+
             // 1. Lấy điểm tổng môn
             var diem = await _context.Diems
                 .Include(d => d.LopHoc)
@@ -377,27 +389,27 @@ namespace LMS_GV.Controllers_GiangVien
             if (diem == null)
                 return NotFound("Không tìm thấy điểm môn");
 
-            // 2. Cập nhật điểm chuyên cần
+            // 2. Lấy điểm chuyên cần
             var diemCC = await _context.DiemChuyenCans
                 .FirstOrDefaultAsync(d => d.SinhVienId == dto.SinhVienId && d.LopHocId == dto.LopHocId);
 
+            // --- Apply điểm chuyên cần sau khi validate ---
             if (diemCC != null && dto.DiemChuyenCan.HasValue)
                 diemCC.Diem = dto.DiemChuyenCan.Value;
 
-            // 3. Cập nhật điểm thành phần (bài tập, giữa kỳ, cuối kỳ)
+            // 3. Cập nhật điểm thành phần khác
             var diemThanhPhans = await _context.DiemThanhPhans
                 .Where(d => d.SinhVienId == dto.SinhVienId && d.LopHocId == dto.LopHocId)
                 .ToListAsync();
 
             foreach (var dtp in diemThanhPhans)
             {
-                // Giả sử ThanhPhanDiemId 1=bài tập, 2=giữa kỳ, 3=cuối kỳ
                 if (dtp.ThanhPhanDiemId == 1 && dto.DiemBaiTap.HasValue) dtp.Diem = dto.DiemBaiTap.Value;
                 if (dtp.ThanhPhanDiemId == 2 && dto.DiemGiuaKy.HasValue) dtp.Diem = dto.DiemGiuaKy.Value;
                 if (dtp.ThanhPhanDiemId == 3 && dto.DiemCuoiKy.HasValue) dtp.Diem = dto.DiemCuoiKy.Value;
             }
 
-            // 4. Tính điểm trung bình môn
+            // 4. Tính lại điểm trung bình...
             decimal diemCCVal = diemCC?.Diem ?? 0;
             decimal diemBT = diemThanhPhans.FirstOrDefault(d => d.ThanhPhanDiemId == 1)?.Diem ?? 0;
             decimal diemGK = diemThanhPhans.FirstOrDefault(d => d.ThanhPhanDiemId == 2)?.Diem ?? 0;
@@ -405,7 +417,6 @@ namespace LMS_GV.Controllers_GiangVien
 
             diem.DiemTrungBinhMon = (diemCCVal * 0.1m + diemBT * 0.2m + diemGK * 0.3m + diemCK * 0.4m);
 
-            // 5. Chuyển đổi sang điểm chữ và GPA
             diem.DiemChu = ConvertToLetter(diem.DiemTrungBinhMon.Value);
             diem.Gpamon = ConvertToGPA(diem.DiemChu);
 
@@ -420,6 +431,33 @@ namespace LMS_GV.Controllers_GiangVien
 
             return thangDiem?.DiemChu ?? "F";
         }
+
+        //Viết điều kiện 
+        private string? ValidateScores(PatchStudentScoreDto dto)
+        {
+            // Hàm nhỏ kiểm tra 1 trường bất kỳ
+            bool IsValid(decimal? value)
+            {
+                if (!value.HasValue) return true;              // Cho phép null (không cập nhật)
+                if (value.Value < 0 || value.Value > 10) return false;
+                return true;
+            }
+
+            if (!IsValid(dto.DiemBaiTap))
+                return "Điểm bài tập phải nằm trong khoảng 0 - 10";
+
+            if (!IsValid(dto.DiemGiuaKy))
+                return "Điểm giữa kỳ phải nằm trong khoảng 0 - 10";
+
+            if (!IsValid(dto.DiemCuoiKy))
+                return "Điểm cuối kỳ phải nằm trong khoảng 0 - 10";
+
+            if (!IsValid(dto.DiemChuyenCan))
+                return "Điểm chuyên cần phải nằm trong khoảng 0 - 10";
+
+            return null; // Không có lỗi
+        }
+
 
         //// Chuyển điểm chữ sang GPA
         private decimal ConvertToGPA(string diemChu)
