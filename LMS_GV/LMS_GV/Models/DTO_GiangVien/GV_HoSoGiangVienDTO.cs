@@ -1,4 +1,6 @@
-﻿namespace LMS_GV.Models.DTO_GiangVien
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace LMS_GV.Models.DTO_GiangVien
 {
     public class HoSoGiangVienDto
     {
@@ -24,4 +26,9 @@
         public DateTime NgayTaoTaiKhoan { get; set; }
     }
 
+    public class UploadAvatarGiangVienDto
+    {
+        [Required]
+        public IFormFile Avatar { get; set; }
+    }
 }
