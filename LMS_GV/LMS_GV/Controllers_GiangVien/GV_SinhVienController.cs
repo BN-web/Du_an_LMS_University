@@ -342,6 +342,8 @@ namespace LMS_GV.Controllers_GiangVien
             // Mapping DTO
             var dto = new MonHocBangDiemDto
             {
+                DiemId = d.Diem.DiemId,        
+                LopHocId = d.LopHoc.LopHocId,
                 TenMon = d.MonHoc.TenMon,
                 DiemBaiTap = (float?)diemBaiTap,
                 DiemGiuaKy = (float?)diemGiuaKy,
