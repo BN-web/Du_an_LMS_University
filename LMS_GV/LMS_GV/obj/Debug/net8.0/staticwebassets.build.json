@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "R/YhxJYMyPA6NCDn8tlo8Zvn4BGa/8xKwda/9WxUcnQ=",
+  "Hash": "pk9OAEdG+afZyaPs1vUVib/IHtNigazb006leYcTkTM=",
   "Source": "LMS_GV",
   "BasePath": "_content/LMS_GV",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "D:\\Thực tập\\Dự án 3\\Backend\\LMS_GV\\LMS_GV\\obj\\Debug\\net8.0\\scopedcss\\bundle\\LMS_GV.styles.css"
+    },
+    {
+      "Identity": "D:\\Thực tập\\Dự án 3\\Backend\\LMS_GV\\LMS_GV\\wwwroot\\uploads\\avatars\\gv_2_7c409850-7cd3-49a2-a839-c3d20a95aff8.jpg",
+      "SourceId": "LMS_GV",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Thực tập\\Dự án 3\\Backend\\LMS_GV\\LMS_GV\\wwwroot\\",
+      "BasePath": "_content/LMS_GV",
+      "RelativePath": "uploads/avatars/gv_2_7c409850-7cd3-49a2-a839-c3d20a95aff8.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\avatars\\gv_2_7c409850-7cd3-49a2-a839-c3d20a95aff8.jpg"
     },
     {
       "Identity": "D:\\Thực tập\\Dự án 3\\Backend\\LMS_GV\\LMS_GV\\wwwroot\\uploads\\files\\8af6fdf2-d14b-430e-af3b-77fbb84b7135_1quanlikhoahoc.docx",

@@ -174,24 +174,23 @@ namespace LMS_GV.Controllers_GiangVien
         [HttpGet("sinh-vien/{sinhVienId}")]
         public async Task<ActionResult<StudentDetailDto>> GetStudentDetail(int sinhVienId)
         {
-            // 1. Lấy thông tin sinh viên kèm NguoiDung và DangKyTinChi -> MonHoc -> LopHoc -> Nganh -> Khoa
+            // 1. Lấy thông tin sinh viên
             var student = await _context.HoSoSinhViens
-               .Include(sv => sv.NguoiDung)
-               .Include(sv => sv.DangKyTinChis)
-                   .ThenInclude(dk => dk.MonHoc)
-                       .ThenInclude(mh => mh.LopHocs)
-                           .ThenInclude(lh => lh.Nganh)
-                               .ThenInclude(n => n.Khoa)
-               .FirstOrDefaultAsync(sv => sv.SinhVienId == sinhVienId);
-
+                .Include(sv => sv.NguoiDung)
+                .Include(sv => sv.DangKyTinChis)
+                    .ThenInclude(dk => dk.MonHoc)
+                        .ThenInclude(mh => mh.LopHocs)
+                            .ThenInclude(lh => lh.Nganh)
+                                .ThenInclude(n => n.Khoa)
+                .FirstOrDefaultAsync(sv => sv.SinhVienId == sinhVienId);
 
             if (student == null)
                 return NotFound("Không tìm thấy sinh viên");
 
             // 2. Lấy điểm thành phần
             var diemThanhPhans = await _context.DiemThanhPhans
-                .Include(dtp => dtp.ThanhPhanDiem)  // Lấy tên thành phần và hệ số
-                .Include(dtp => dtp.LopHoc)         // Lấy tên lớp -> MonHoc
+                .Include(dtp => dtp.ThanhPhanDiem)
+                .Include(dtp => dtp.LopHoc)
                 .Where(dtp => dtp.SinhVienId == sinhVienId)
                 .ToListAsync();
 
@@ -200,85 +199,83 @@ namespace LMS_GV.Controllers_GiangVien
                 .Where(dcc => dcc.SinhVienId == sinhVienId)
                 .ToListAsync();
 
-            // Hàm tính điểm chuyên cần theo số buổi vắng
-            decimal TinhDiemCC(int soBuoiVang)
-            {
-                if (soBuoiVang == 0) return 10;
-                if (soBuoiVang <= 2) return 9;
-                return 0;
-            }
-
-            // 4. Tạo danh sách BangDiem
+            // 4. Tạo bảng điểm  ✅ ĐÃ SỬA
             var bangDiem = new List<MonHocBangDiemDto>();
 
             foreach (var dtpGroup in diemThanhPhans.GroupBy(d => d.LopHocId))
             {
                 var lopHoc = dtpGroup.First().LopHoc;
 
-                // Lấy điểm chuyên cần tương ứng lớp
-                var diemCC = diemCCList.FirstOrDefault(d => d.LopHocId == lopHoc.LopHocId)?.Diem ?? 10;
+                // ✅ LẤY DiemId (QUAN TRỌNG)
+                var diem = await _context.Diems
+                    .FirstOrDefaultAsync(d =>
+                        d.SinhVienId == sinhVienId &&
+                        d.LopHocId == lopHoc.LopHocId);
+
+                var diemCC = diemCCList
+                    .FirstOrDefault(d => d.LopHocId == lopHoc.LopHocId)?.Diem ?? 10;
 
                 decimal diemBaiTap = 0, diemGiuaKy = 0, diemCuoiKy = 0;
 
                 foreach (var dtp in dtpGroup)
                 {
                     var tpName = dtp.ThanhPhanDiem.Ten.ToLower();
-                    if (tpName.Contains("bài tập") || tpName.Contains("bài kiểm tra")) diemBaiTap = dtp.Diem ?? 0;
-                    else if (tpName.Contains("giữa kỳ")) diemGiuaKy = dtp.Diem ?? 0;
-                    else if (tpName.Contains("cuối kỳ")) diemCuoiKy = dtp.Diem ?? 0;
+                    if (tpName.Contains("bài tập") || tpName.Contains("bài kiểm tra"))
+                        diemBaiTap = dtp.Diem ?? 0;
+                    else if (tpName.Contains("giữa kỳ"))
+                        diemGiuaKy = dtp.Diem ?? 0;
+                    else if (tpName.Contains("cuối kỳ"))
+                        diemCuoiKy = dtp.Diem ?? 0;
                 }
 
-                // Tính điểm trung bình môn theo trọng số
-                decimal dtbMon = (diemCC * 10 + diemBaiTap * 20 + diemGiuaKy * 30 + diemCuoiKy * 40) / 100;
+                decimal dtbMon =
+                    (diemCC * 10 + diemBaiTap * 20 + diemGiuaKy * 30 + diemCuoiKy * 40) / 100;
 
-                // Quy đổi sang GPA
-                float gpaMon;
-                if (dtbMon >= 8.5m) gpaMon = 4.0f;
-                else if (dtbMon >= 7) gpaMon = 3.5f;
-                else if (dtbMon >= 6) gpaMon = 3.0f;
-                else if (dtbMon >= 5) gpaMon = 2.5f;
-                else if (dtbMon >= 4) gpaMon = 2.0f;
-                else gpaMon = 0;
+                float gpaMon =
+                    dtbMon >= 8.5m ? 4.0f :
+                    dtbMon >= 7 ? 3.5f :
+                    dtbMon >= 6 ? 3.0f :
+                    dtbMon >= 5 ? 2.5f :
+                    dtbMon >= 4 ? 2.0f : 0;
 
                 bangDiem.Add(new MonHocBangDiemDto
                 {
                     TenMon = lopHoc.MonHoc?.TenMon ?? lopHoc.TenLop,
+
+                    // ✅ 2 FIELD FRONTEND CẦN
+                    DiemId = diem?.DiemId,
+                    LopHocId = lopHoc.LopHocId,
+
                     DiemBaiTap = (float)diemBaiTap,
                     DiemGiuaKy = (float)diemGiuaKy,
                     DiemCuoiKy = (float)diemCuoiKy,
                     ChuyenCan = (float)diemCC,
                     TrungBinhMon = (float)dtbMon,
                     GPA_Mon = gpaMon,
-                    DiemChu = "", // có thể tra bảng ThangDiem nếu có
+                    DiemChu = "",
                     SoTinChi = lopHoc.SoTinChi ?? 0
                 });
             }
 
-            // 5. Tính tổng tín chỉ và tổng GPA (trọng số) 
+            // 5. Tính GPA tổng
             float tongTC = bangDiem.Sum(b => (float)(b.SoTinChi ?? 0));
-            float tongGPA = 0;
+            float tongGPA = tongTC > 0
+                ? bangDiem.Sum(b => b.GPA_Mon * (b.SoTinChi ?? 0)) / tongTC
+                : 0;
 
-            if (bangDiem.Count > 0)
-            {
-                float numerator = bangDiem.Sum(b => b.GPA_Mon * (b.SoTinChi ?? 0));
-                float denominator = tongTC > 0 ? tongTC : 1;
-                tongGPA = numerator / denominator;
-            }
-            // Lấy DangKyTinChi đầu tiên
             var firstDangKy = student.DangKyTinChis.FirstOrDefault();
             var firstLopHoc = firstDangKy?.MonHoc?.LopHocs.FirstOrDefault();
 
-            // Mapping DTO
             var dto = new StudentDetailDto
             {
-                MSSV = student.Mssv, // lấy trực tiếp từ HoSoSinhVien
+                MSSV = student.Mssv,
                 HoTen = student.NguoiDung.HoTen,
                 Email = student.NguoiDung.Email,
                 SoDienThoai = student.NguoiDung.SoDienThoai,
                 HinhAnh = student.NguoiDung.Avatar,
                 NgaySinh = student.NguoiDung.NgaySinh.HasValue
-         ? student.NguoiDung.NgaySinh.Value.ToDateTime(TimeOnly.MinValue)
-         : default,
+                    ? student.NguoiDung.NgaySinh.Value.ToDateTime(TimeOnly.MinValue)
+                    : default,
                 Khoa = firstLopHoc?.Nganh?.Khoa?.TenKhoa ?? "",
                 Nganh = firstLopHoc?.Nganh?.TenNganh ?? "",
                 TrangThai = firstDangKy?.TrangThai.ToString() ?? "Chưa cập nhật",
@@ -289,6 +286,7 @@ namespace LMS_GV.Controllers_GiangVien
 
             return Ok(dto);
         }
+
 
         /// <summary>
         /// Lấy điểm chi tiết của sinh viên theo môn:
@@ -362,25 +360,27 @@ namespace LMS_GV.Controllers_GiangVien
         /// Cập nhật điểm sinh viên theo từng môn:
         /// - Giảng viên nhập: bài tập, giữa kỳ, cuối kỳ, chuyên cần
         /// - Hệ thống tự tính lại: điểm trung bình, điểm chữ, GPA môn
-        /// </summary>
-
-        [Authorize(Roles = "Giảng Viên")]
+        /// </summary>      
         [Authorize(Roles = "Giảng Viên")]
         [HttpPatch("diem-mon/{diemId}")]
         public async Task<IActionResult> UpdateDiemMon(int diemId, [FromBody] PatchStudentScoreDto dto)
         {
-            // --- Validate điểm chuyên cần ---
+            // 0. Validate input tổng quát
+            var validateError = ValidateScores(dto);
+            if (validateError != null)
+                return BadRequest(validateError);
+
+            // 1. Validate riêng điểm chuyên cần
             if (dto.DiemChuyenCan.HasValue)
             {
-                var allowedValues = new decimal[] { 10, 9, 0 };
-
-                if (!allowedValues.Contains(dto.DiemChuyenCan.Value))
+                var allowed = new decimal[] { 10, 9, 0 };
+                if (!allowed.Contains(dto.DiemChuyenCan.Value))
                 {
                     return BadRequest("Điểm chuyên cần chỉ được phép nhập: 10, 9 hoặc 0.");
                 }
             }
 
-            // 1. Lấy điểm tổng môn
+            // 2. Lấy bảng điểm tổng
             var diem = await _context.Diems
                 .Include(d => d.LopHoc)
                 .Include(d => d.SinhVien)
@@ -389,40 +389,55 @@ namespace LMS_GV.Controllers_GiangVien
             if (diem == null)
                 return NotFound("Không tìm thấy điểm môn");
 
-            // 2. Lấy điểm chuyên cần
+            // 3. Điểm chuyên cần
             var diemCC = await _context.DiemChuyenCans
-                .FirstOrDefaultAsync(d => d.SinhVienId == dto.SinhVienId && d.LopHocId == dto.LopHocId);
+                .FirstOrDefaultAsync(d =>
+                    d.SinhVienId == dto.SinhVienId &&
+                    d.LopHocId == dto.LopHocId);
 
-            // --- Apply điểm chuyên cần sau khi validate ---
             if (diemCC != null && dto.DiemChuyenCan.HasValue)
                 diemCC.Diem = dto.DiemChuyenCan.Value;
 
-            // 3. Cập nhật điểm thành phần khác
+            // 4. Điểm thành phần
             var diemThanhPhans = await _context.DiemThanhPhans
-                .Where(d => d.SinhVienId == dto.SinhVienId && d.LopHocId == dto.LopHocId)
+                .Where(d =>
+                    d.SinhVienId == dto.SinhVienId &&
+                    d.LopHocId == dto.LopHocId)
                 .ToListAsync();
 
             foreach (var dtp in diemThanhPhans)
             {
-                if (dtp.ThanhPhanDiemId == 1 && dto.DiemBaiTap.HasValue) dtp.Diem = dto.DiemBaiTap.Value;
-                if (dtp.ThanhPhanDiemId == 2 && dto.DiemGiuaKy.HasValue) dtp.Diem = dto.DiemGiuaKy.Value;
-                if (dtp.ThanhPhanDiemId == 3 && dto.DiemCuoiKy.HasValue) dtp.Diem = dto.DiemCuoiKy.Value;
+                if (dtp.ThanhPhanDiemId == 1 && dto.DiemBaiTap.HasValue)
+                    dtp.Diem = dto.DiemBaiTap.Value;
+
+                if (dtp.ThanhPhanDiemId == 2 && dto.DiemGiuaKy.HasValue)
+                    dtp.Diem = dto.DiemGiuaKy.Value;
+
+                if (dtp.ThanhPhanDiemId == 3 && dto.DiemCuoiKy.HasValue)
+                    dtp.Diem = dto.DiemCuoiKy.Value;
             }
 
-            // 4. Tính lại điểm trung bình...
+            // 5. Tính điểm trung bình
             decimal diemCCVal = diemCC?.Diem ?? 0;
             decimal diemBT = diemThanhPhans.FirstOrDefault(d => d.ThanhPhanDiemId == 1)?.Diem ?? 0;
             decimal diemGK = diemThanhPhans.FirstOrDefault(d => d.ThanhPhanDiemId == 2)?.Diem ?? 0;
             decimal diemCK = diemThanhPhans.FirstOrDefault(d => d.ThanhPhanDiemId == 3)?.Diem ?? 0;
 
-            diem.DiemTrungBinhMon = (diemCCVal * 0.1m + diemBT * 0.2m + diemGK * 0.3m + diemCK * 0.4m);
+            diem.DiemTrungBinhMon =
+                diemCCVal * 0.1m +
+                diemBT * 0.2m +
+                diemGK * 0.3m +
+                diemCK * 0.4m;
 
+            // 6. Quy đổi điểm
             diem.DiemChu = ConvertToLetter(diem.DiemTrungBinhMon.Value);
             diem.Gpamon = ConvertToGPA(diem.DiemChu);
 
             await _context.SaveChangesAsync();
+
             return Ok("Cập nhật điểm thành công");
         }
+
 
         private string ConvertToLetter(decimal dtbMon)
         {
@@ -435,12 +450,10 @@ namespace LMS_GV.Controllers_GiangVien
         //Viết điều kiện 
         private string? ValidateScores(PatchStudentScoreDto dto)
         {
-            // Hàm nhỏ kiểm tra 1 trường bất kỳ
-            bool IsValid(decimal? value)
+            bool IsValid(decimal? v)
             {
-                if (!value.HasValue) return true;              // Cho phép null (không cập nhật)
-                if (value.Value < 0 || value.Value > 10) return false;
-                return true;
+                if (!v.HasValue) return true;
+                return v.Value >= 0 && v.Value <= 10;
             }
 
             if (!IsValid(dto.DiemBaiTap))
@@ -452,11 +465,9 @@ namespace LMS_GV.Controllers_GiangVien
             if (!IsValid(dto.DiemCuoiKy))
                 return "Điểm cuối kỳ phải nằm trong khoảng 0 - 10";
 
-            if (!IsValid(dto.DiemChuyenCan))
-                return "Điểm chuyên cần phải nằm trong khoảng 0 - 10";
-
-            return null; // Không có lỗi
+            return null;
         }
+
 
 
         //// Chuyển điểm chữ sang GPA

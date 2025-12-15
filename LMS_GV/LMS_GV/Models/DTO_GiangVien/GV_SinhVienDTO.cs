@@ -51,33 +51,38 @@ namespace LMS_GV.Models.DTO_GiangVien
 
     public class MonHocBangDiemDto
     {
+        public int? DiemId { get; set; }     // ✅ dùng PATCH
+        public int LopHocId { get; set; }    // ✅ xác định lớp
+
         public string TenMon { get; set; }
         public float? DiemBaiTap { get; set; }
         public float? DiemGiuaKy { get; set; }
         public float? DiemCuoiKy { get; set; }
         public float? ChuyenCan { get; set; }
         public float TrungBinhMon { get; set; }
-        public string DiemChu { get; set; }
         public float GPA_Mon { get; set; }
+        public string DiemChu { get; set; }
         public int? SoTinChi { get; set; }
-        public int? diemId { get; set; }
-        public int? lophocId { get; set; }
     }
+
 
 
     ///----------///
     public class PatchStudentScoreDto
     {
-        public int SinhVienId { get; set; }           // ID sinh viên
-        public int LopHocId { get; set; }             // ID lớp học
-        [Range(0, 10, ErrorMessage = "Điểm bài tập phải từ 0 đến 10")]
-        public decimal? DiemBaiTap { get; set; }      // Điểm bài tập
-        [Range(0, 10, ErrorMessage = "Điểm giữa kỳ phải từ 0 đến 10")]
-        public decimal? DiemGiuaKy { get; set; }      // Điểm giữa kỳ
-        [Range(0, 10, ErrorMessage = "Điểm cuối kỳ phải từ 0 đến 10")]
-        public decimal? DiemCuoiKy { get; set; }      // Điểm cuối kỳ
-        [Range(0, 10, ErrorMessage = "Điểm chuyên cần phải từ 0 đến 10")]
-        public decimal? DiemChuyenCan { get; set; }   // Điểm chuyên cần
+        [Required]
+        public int SinhVienId { get; set; }
+
+        [Required]
+        public int LopHocId { get; set; }
+
+        public decimal? DiemBaiTap { get; set; }      // 0–10
+        public decimal? DiemGiuaKy { get; set; }      // 0–10
+        public decimal? DiemCuoiKy { get; set; }      // 0–10
+
+        // ⚠️ Rule đặc biệt: chỉ 10 | 9 | 0
+        public decimal? DiemChuyenCan { get; set; }
     }
+
 
 }

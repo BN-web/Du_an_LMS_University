@@ -80,6 +80,8 @@ builder.Services.AddScoped<JwtService>();
 
 var app = builder.Build();
 
+app.UseStaticFiles();
+
 // Middleware pipeline
 // Chỉ bật Swagger trong môi trường Development
 if (app.Environment.IsDevelopment())
@@ -91,6 +93,8 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = string.Empty; // Swagger UI xuất hiện trực tiếp tại /
     });
 }
+
+
 
 app.UseHttpsRedirection();
 

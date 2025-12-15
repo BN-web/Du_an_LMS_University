@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "D:\\Thực tập\\Dự án 3\\Backend\\LMS_GV\\LMS_GV\\wwwroot\\uploads\\avatars\\gv_2_7c409850-7cd3-49a2-a839-c3d20a95aff8.jpg",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\gv_2_7c409850-7cd3-49a2-a839-c3d20a95aff8.jpg"
+    },
+    {
       "Id": "D:\\Thực tập\\Dự án 3\\Backend\\LMS_GV\\LMS_GV\\wwwroot\\uploads\\files\\8af6fdf2-d14b-430e-af3b-77fbb84b7135_1quanlikhoahoc.docx",
       "PackagePath": "staticwebassets\\uploads\\files\\8af6fdf2-d14b-430e-af3b-77fbb84b7135_1quanlikhoahoc.docx"
     },

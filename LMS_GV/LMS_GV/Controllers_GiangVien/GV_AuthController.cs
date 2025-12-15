@@ -111,13 +111,13 @@ namespace LMS_GV.Controllers_GiangVien
                 .Include(u => u.VaiTro)
                 .FirstOrDefaultAsync(u => u.DangnhapGoogle == request.GoogleId || u.Email == request.Email);
 
-            string roleName = "giảng viên";
+            string roleName = "Giảng Viên";
 
             // Nếu chưa có → tạo mới
             if (user == null)
             {
                 // Lấy VaiTroId của giảng viên
-                var giangVienRole = await _db.VaiTros.FirstOrDefaultAsync(r => r.TenVaiTro == "giảng viên");
+                var giangVienRole = await _db.VaiTros.FirstOrDefaultAsync(r => r.TenVaiTro == "Giảng Viên");
                 int roleId = giangVienRole?.VaiTroId ?? 2;
 
                 user = new NguoiDung
@@ -145,7 +145,7 @@ namespace LMS_GV.Controllers_GiangVien
                 user.DangnhapGoogle = request.GoogleId;
                 user.UpdatedAt = DateTime.UtcNow;
 
-                roleName = user.VaiTro?.TenVaiTro ?? "giảng viên";
+                roleName = user.VaiTro?.TenVaiTro ?? "Giảng Viên";
             }
 
             await _db.SaveChangesAsync();
