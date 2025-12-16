@@ -1,43 +1,46 @@
-﻿using LMS_GV.Models;
+﻿using LMS_GV.Models.Data;
+using LMS_GV.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-
+using System.Data.Entity;
 public class JwtService
 {
     private readonly IConfiguration _config;
+    private readonly AppDbContext _db;
 
-    public JwtService(IConfiguration config)
+    public JwtService(IConfiguration config, AppDbContext db)
     {
         _config = config;
+        _db = db;
     }
 
-    public string GenerateToken(NguoiDung user)
+    public string GenerateGiangVienToken(NguoiDung user)
     {
+        // ⚠️ LẤY GiangVienId TỪ DB
+        var giangVienId = _db.GiangViens
+            .Where(gv => gv.NguoiDungId == user.NguoiDungId)
+            .Select(gv => gv.GiangVienId)
+            .FirstOrDefault();
+
+        if (giangVienId == 0)
+            throw new Exception("User không có hồ sơ giảng viên");
+
         var claims = new List<Claim>
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.NguoiDungId.ToString()),
-            new Claim(ClaimTypes.Role, user.VaiTro?.TenVaiTro ?? "Giảng Viên"),
             new Claim(JwtRegisteredClaimNames.Email, user.Email ?? ""),
-            new Claim("GiangVien_id", (user.VaiTroId == 2 ? user.NguoiDungId.ToString() : ""))
+            new Claim(ClaimTypes.Role, "Giảng Viên"),
+
+            // 🔥 CLAIM QUAN TRỌNG
+            new Claim("GiangVien_id", giangVienId.ToString())
         };
 
-        // Dựa vào DangnhapGoogle để biết login Google hay local
-        if (!string.IsNullOrEmpty(user.DangnhapGoogle))
-        {
-            claims.Add(new Claim("login_provider", "google"));
-        }
-        else
-        {
-            claims.Add(new Claim("login_provider", "local"));
-        }
+        var key = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(_config["Jwt:Key"])
+        );
 
-        // Kiểm tra JWT Key
-        var keyString = _config["Jwt:Key"];
-        if (string.IsNullOrEmpty(keyString))
-            throw new Exception("JWT Key is not configured!");
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyString));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(

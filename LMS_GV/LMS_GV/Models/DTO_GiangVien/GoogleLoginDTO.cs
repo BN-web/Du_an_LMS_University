@@ -26,7 +26,7 @@ namespace LMS_GV.Models.DTO_GiangVien
             public string Email { get; set; } = string.Empty;
             public string Name { get; set; } = string.Empty;
             public string? Avatar { get; set; }
-            public string Role { get; set; } = "giảng viên";
+            public string Role { get; set; } = "Giảng Viên";
             public string Token { get; set; } = string.Empty;
         }
     }

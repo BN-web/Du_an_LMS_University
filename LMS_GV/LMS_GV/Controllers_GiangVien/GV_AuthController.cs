@@ -74,7 +74,7 @@ namespace LMS_GV.Controllers_GiangVien
                 return BadRequest(new { message = "Sai mật khẩu" });
 
             // Tạo token JWT với claims sub, email, VaiTroId
-            var token = _jwt.GenerateToken(user);
+            var token = _jwt.GenerateGiangVienToken(user);
 
             // Cập nhật thời gian đăng nhập cuối
             user.LanDangNhapCuoi = DateTime.Now;
@@ -96,102 +96,63 @@ namespace LMS_GV.Controllers_GiangVien
             });
         }
 
-        // Đăng nhập bằng Google 
+
         [HttpPost("google-login")]
-        public async Task<ActionResult<GoogleUserResponseDTO>> LoginWithGoogle([FromBody] GoogleLoginRequestDTO request)
+        public async Task<ActionResult<GoogleUserResponseDTO>> LoginWithGoogle(
+            [FromBody] GoogleLoginRequestDTO request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (string.IsNullOrWhiteSpace(request.GoogleId) || string.IsNullOrWhiteSpace(request.Email))
-                return BadRequest(new { message = "GoogleId và Email là bắt buộc" });
-
-            // 1. Tìm người dùng theo GoogleId hoặc Email
+            // 1. Tìm user ĐÃ TỒN TẠI
             var user = await _db.NguoiDungs
                 .Include(u => u.VaiTro)
-                .FirstOrDefaultAsync(u => u.DangnhapGoogle == request.GoogleId || u.Email == request.Email);
+                .FirstOrDefaultAsync(u =>
+                    u.DangnhapGoogle == request.GoogleId ||
+                    u.Email == request.Email
+                );
 
-            string roleName = "Giảng Viên";
-
-            // Nếu chưa có → tạo mới
+            // ❌ KHÔNG TỒN TẠI → CẤM ĐĂNG NHẬP
             if (user == null)
             {
-                // Lấy VaiTroId của giảng viên
-                var giangVienRole = await _db.VaiTros.FirstOrDefaultAsync(r => r.TenVaiTro == "Giảng Viên");
-                int roleId = giangVienRole?.VaiTroId ?? 2;
-
-                user = new NguoiDung
+                return Unauthorized(new
                 {
-                    TenDangNhap = request.Email,
-                    Email = request.Email,
-                    HoTen = request.Name ?? request.Email,
-                    Avatar = request.PictureUrl,
-                    EmailGoogleVerified = request.EmailVerified ?? true,
-                    DangnhapGoogle = request.GoogleId,
-                    TrangThai = 1,
-                    VaiTroId = roleId,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
-                };
-
-                _db.NguoiDungs.Add(user);
+                    message = "Tài khoản Google chưa được hệ thống cấp quyền"
+                });
             }
-            else
+
+            // ❌ TÀI KHOẢN BỊ KHÓA
+            if (user.TrangThai != 1)
             {
-                // Nếu đã tồn tại → cập nhật thông tin
-                user.HoTen = request.Name ?? user.HoTen;
-                user.Avatar = request.PictureUrl ?? user.Avatar;
-                user.EmailGoogleVerified = request.EmailVerified ?? user.EmailGoogleVerified;
-                user.DangnhapGoogle = request.GoogleId;
-                user.UpdatedAt = DateTime.UtcNow;
-
-                roleName = user.VaiTro?.TenVaiTro ?? "Giảng Viên";
+                return Unauthorized(new
+                {
+                    message = "Tài khoản đã bị khóa hoặc ngừng hoạt động"
+                });
             }
+
+            // 2. Cập nhật thông tin Google (KHÔNG TẠO MỚI)
+            user.DangnhapGoogle = request.GoogleId;
+            user.EmailGoogleVerified = request.EmailVerified ?? user.EmailGoogleVerified;
+            user.Avatar = request.PictureUrl ?? user.Avatar;
+            user.UpdatedAt = DateTime.UtcNow;
+            user.LanDangNhapCuoi = DateTime.UtcNow;
 
             await _db.SaveChangesAsync();
 
-            // 3. Sinh JWT token
-            var token = GenerateJwtToken(user, roleName);
+            // 3. Sinh JWT
+            var token = _jwt.GenerateGiangVienToken(user);
 
-            // 4. Trả về DTO
+            // 4. Trả kết quả
             return Ok(new GoogleUserResponseDTO
             {
                 NguoiDungId = user.NguoiDungId,
-                Email = user.Email ?? string.Empty,
-                Name = user.HoTen ?? string.Empty,
+                Email = user.Email ?? "",
+                Name = user.HoTen ?? "",
                 Avatar = user.Avatar,
-                Role = roleName,
+                Role = "Giảng Viên",
                 Token = token
             });
+
         }
-
-        private string GenerateJwtToken(NguoiDung user, string role)
-    {
-        var jwtKey = _config["Jwt:Key"] ?? "SuperSecretKey_ChangeMe";
-        var jwtIssuer = _config["Jwt:Issuer"] ?? "LMS_API";
-        var jwtAudience = _config["Jwt:Audience"] ?? "LMS_User";
-
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
-        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-        var claims = new List<Claim>
-    {
-        new Claim(JwtRegisteredClaimNames.Sub, user.NguoiDungId.ToString()),
-        new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
-        new Claim("name", user.HoTen ?? string.Empty),
-        new Claim(ClaimTypes.Role, role)
-    };
-
-        var token = new JwtSecurityToken(
-            issuer: jwtIssuer,
-            audience: jwtAudience,
-            claims: claims,
-            expires: DateTime.UtcNow.AddHours(24),
-            signingCredentials: credentials
-        );
-
-        return new JwtSecurityTokenHandler().WriteToken(token);
     }
-
-}
 }
