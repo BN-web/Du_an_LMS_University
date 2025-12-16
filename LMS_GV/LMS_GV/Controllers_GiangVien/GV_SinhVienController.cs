@@ -345,18 +345,15 @@ namespace LMS_GV.Controllers_GiangVien
         /// <summary>
         /// Cập nhật điểm môn học của sinh viên
         /// </summary>
-        [Authorize(Roles = "Giảng Viên")]
         [HttpPatch("diem-mon/{diemId}")]
         public async Task<IActionResult> UpdateDiemMon(
-       int diemId,
-       [FromBody] PatchStudentScoreDto dto)
+         int diemId,
+         [FromBody] PatchStudentScoreDto dto)
         {
-            // 1. Validate chung
+            // 1. Validate điểm
             var error = ValidateScores(dto);
-            if (error != null)
-                return BadRequest(error);
+            if (error != null) return BadRequest(error);
 
-            // 2. Validate riêng điểm chuyên cần
             if (dto.DiemChuyenCan.HasValue)
             {
                 var allowed = new decimal[] { 10, 9, 0 };
@@ -364,60 +361,57 @@ namespace LMS_GV.Controllers_GiangVien
                     return BadRequest("Điểm chuyên cần chỉ được nhập: 10, 9 hoặc 0.");
             }
 
-            // 3. Lấy bảng điểm tổng
+            // 2. Lấy bảng điểm tổng
             var diem = await _context.Diems
+                .Include(d => d.LopHoc)
                 .FirstOrDefaultAsync(d => d.DiemId == diemId);
+            if (diem == null) return NotFound("Không tìm thấy điểm môn");
 
-            if (diem == null)
-                return NotFound("Không tìm thấy điểm môn");
-
-            // 4. Điểm chuyên cần
+            // 3. Cập nhật điểm chuyên cần
             var diemCC = await _context.DiemChuyenCans
-                .FirstOrDefaultAsync(d =>
-                    d.SinhVienId == dto.SinhVienId &&
-                    d.LopHocId == dto.LopHocId);
+                .FirstOrDefaultAsync(d => d.SinhVienId == dto.SinhVienId && d.LopHocId == dto.LopHocId);
 
+            decimal diemCCVal = 10m;
             if (diemCC != null && dto.DiemChuyenCan.HasValue)
+            {
                 diemCC.Diem = dto.DiemChuyenCan.Value;
+                diemCCVal = diemCC.Diem.GetValueOrDefault(10m);
+            }
 
-            decimal diemCCVal = diemCC?.Diem ?? 10m;
-
-            // 5. Điểm thành phần
+            // 4. Lấy điểm thành phần
             var diemThanhPhans = await _context.DiemThanhPhans
-                .Include(dtp => dtp.ThanhPhanDiem)
-                .Where(dtp =>
-                    dtp.SinhVienId == dto.SinhVienId &&
-                    dtp.LopHocId == dto.LopHocId)
+                .Include(tp => tp.ThanhPhanDiem)
+                .Where(tp => tp.SinhVienId == dto.SinhVienId && tp.LopHocId == dto.LopHocId)
                 .ToListAsync();
 
             foreach (var tp in diemThanhPhans)
             {
                 var ten = tp.ThanhPhanDiem.Ten.ToLower();
-
-                if (ten.Contains("bài") && dto.DiemBaiTap.HasValue)
-                    tp.Diem = dto.DiemBaiTap.Value;
-
-                else if (ten.Contains("giữa") && dto.DiemGiuaKy.HasValue)
+                if (ten.Contains("giữa") && dto.DiemGiuaKy.HasValue)
                     tp.Diem = dto.DiemGiuaKy.Value;
-
                 else if (ten.Contains("cuối") && dto.DiemCuoiKy.HasValue)
                     tp.Diem = dto.DiemCuoiKy.Value;
+                else if (ten.Contains("bài") && dto.DiemBaiTap.HasValue)
+                    tp.Diem = dto.DiemBaiTap.Value;
             }
 
-            // 6. TÍNH ĐIỂM TRUNG BÌNH – ĐÚNG DB
-            decimal tongDiem = 0;
+            // 5. Tính điểm trung bình môn dựa vào hệ số DB
+            decimal diemCCHeSo = diemThanhPhans.FirstOrDefault(tp => tp.ThanhPhanDiem.Ten.ToLower().Contains("chuyên cần"))?.ThanhPhanDiem.HeSo ?? 0m;
+            decimal diemBTHeSo = diemThanhPhans.FirstOrDefault(tp => tp.ThanhPhanDiem.Ten.ToLower().Contains("bài"))?.ThanhPhanDiem.HeSo ?? 0m;
+            decimal diemGKHeSo = diemThanhPhans.FirstOrDefault(tp => tp.ThanhPhanDiem.Ten.ToLower().Contains("giữa"))?.ThanhPhanDiem.HeSo ?? 0m;
+            decimal diemCKHeSo = diemThanhPhans.FirstOrDefault(tp => tp.ThanhPhanDiem.Ten.ToLower().Contains("cuối"))?.ThanhPhanDiem.HeSo ?? 0m;
 
-            foreach (var tp in diemThanhPhans)
-            {
-                decimal diemTP = tp.Diem ?? 0;
-                decimal heSo = tp.ThanhPhanDiem.HeSo ?? 0; // 0.2 / 0.3 / 0.4
+            decimal tongHeSo = diemCCHeSo + diemBTHeSo + diemGKHeSo + diemCKHeSo;
 
-                tongDiem += diemTP * heSo;
-            }
+            decimal diemBT = diemThanhPhans.FirstOrDefault(tp => tp.ThanhPhanDiem.Ten.ToLower().Contains("bài"))?.Diem ?? 0m;
+            decimal diemGK = diemThanhPhans.FirstOrDefault(tp => tp.ThanhPhanDiem.Ten.ToLower().Contains("giữa"))?.Diem ?? 0m;
+            decimal diemCK = diemThanhPhans.FirstOrDefault(tp => tp.ThanhPhanDiem.Ten.ToLower().Contains("cuối"))?.Diem ?? 0m;
 
-            // cộng chuyên cần (0.10)
-            tongDiem += diemCCVal * 0.10m;
+            decimal tongDiem = (diemCCVal * diemCCHeSo + diemBT * diemBTHeSo + diemGK * diemGKHeSo + diemCK * diemCKHeSo) / (tongHeSo == 0 ? 1 : tongHeSo);
 
+            if (tongDiem > 10) tongDiem = 10m;
+
+            // 6. Lưu điểm môn
             diem.DiemTrungBinhMon = tongDiem;
             diem.DiemChu = ConvertToLetter(tongDiem);
             diem.Gpamon = ConvertToGPA(diem.DiemChu);
@@ -426,7 +420,6 @@ namespace LMS_GV.Controllers_GiangVien
             await _context.SaveChangesAsync();
             return Ok("Cập nhật điểm thành công");
         }
-
 
         private string ConvertToLetter(decimal dtbMon)
         {
@@ -460,7 +453,7 @@ namespace LMS_GV.Controllers_GiangVien
 
 
         //// Chuyển điểm chữ sang GPA
-        private decimal ConvertToGPA(string diemChu)
+        private decimal ConvertToGPA(string? diemChu)
         {
             return diemChu switch
             {
@@ -472,6 +465,65 @@ namespace LMS_GV.Controllers_GiangVien
                 _ => 0m
             };
         }
+
+        [HttpPost("tao-bang-diem")]
+        public async Task<IActionResult> TaoBangDiem(TaoBangDiemRequestDTO req)
+        {
+            // 1. Lấy thành phần điểm của lớp
+            var thanhPhansDB = await _context.ThanhPhanDiems
+                .Where(tp => tp.LopHocId == req.LopHocId)
+                .ToListAsync();
+
+            if (!thanhPhansDB.Any()) return BadRequest("Lớp học chưa được cấu hình thành phần điểm");
+
+            decimal tongDiem = 0m;
+            foreach (var item in req.DiemThanhPhans)
+            {
+                var tp = thanhPhansDB.FirstOrDefault(x => x.Ten.Trim().ToLower() == item.TenThanhPhan.Trim().ToLower());
+                if (tp == null) return BadRequest($"Thành phần điểm không tồn tại: {item.TenThanhPhan}");
+                if (item.Diem < 0 || item.Diem > 10) return BadRequest($"Điểm {item.TenThanhPhan} phải từ 0 đến 10");
+
+                _context.DiemThanhPhans.Add(new DiemThanhPhan
+                {
+                    SinhVienId = req.SinhVienId,
+                    LopHocId = req.LopHocId,
+                    ThanhPhanDiemId = tp.ThanhPhanDiemId,
+                    Diem = item.Diem,
+                    GhiChu = item.GhiChu,
+                    CreatedAt = DateTime.Now
+                });
+
+                decimal heSo = tp.HeSo ?? 0m;
+                tongDiem += item.Diem * heSo;
+            }
+
+            decimal diemTB = Math.Round(tongDiem, 2);
+            var thangDiem = await _context.ThangDiems.FirstOrDefaultAsync(x => diemTB >= x.DiemMin && diemTB <= x.DiemMax);
+
+            var diem = new Diem
+            {
+                SinhVienId = req.SinhVienId,
+                LopHocId = req.LopHocId,
+                HocKyId = req.HocKyId,
+                DiemTrungBinhMon = diemTB,
+                DiemChu = thangDiem?.DiemChu ?? "F",
+                Gpamon = ConvertToGPA(thangDiem?.DiemChu),
+                TrangThai = diemTB >= 4 ? (byte)1 : (byte)0,
+                CreatedAt = DateTime.Now
+            };
+
+            _context.Diems.Add(diem);
+            await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                message = "Tạo bảng điểm thành công",
+                diemTrungBinh = diemTB,
+                diemChu = diem.DiemChu
+            });
+        }
+
+
 
     }
 }

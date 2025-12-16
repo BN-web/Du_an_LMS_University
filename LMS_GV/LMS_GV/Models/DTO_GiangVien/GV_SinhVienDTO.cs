@@ -83,6 +83,25 @@ namespace LMS_GV.Models.DTO_GiangVien
         // ⚠️ Rule đặc biệt: chỉ 10 | 9 | 0
         public decimal? DiemChuyenCan { get; set; }
     }
+    public class TaoBangDiemRequestDTO
+    {
+        public int SinhVienId { get; set; }
+        public int LopHocId { get; set; }
+        public int HocKyId { get; set; }
+
+        // 🔥 HỆ SỐ MÔN
+        public decimal HeSoMon { get; set; }  // 1 | 1.5 | 2
+
+        public List<DiemThanhPhanNhapDTO> DiemThanhPhans { get; set; } = new();
+    }
+
+    public class DiemThanhPhanNhapDTO
+    {
+        public string TenThanhPhan { get; set; } = string.Empty;
+        public decimal Diem { get; set; }
+        public string? GhiChu { get; set; }
+    }
+
 
 
 }

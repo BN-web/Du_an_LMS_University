@@ -10,6 +10,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Net;
+using System.Net.Mail;
 
 namespace LMS_GV.Controllers_GiangVien
 {
@@ -20,6 +22,15 @@ namespace LMS_GV.Controllers_GiangVien
         private readonly AppDbContext _db;
         private readonly JwtService _jwt;
         private readonly IConfiguration _config;
+
+        private static Dictionary<string, (string otp, DateTime expires)> _otpCache = new();
+
+        private string GenerateOtp()
+        {
+            var random = new Random();
+            return random.Next(100000, 999999).ToString(); // OTP 6 chữ số
+        }
+
 
         public GV_AuthController(AppDbContext db, JwtService jwt, IConfiguration config)
         {
@@ -154,5 +165,57 @@ namespace LMS_GV.Controllers_GiangVien
             });
 
         }
+
+        // 1️⃣ Gửi OTP qua Email
+        [HttpPost("send-otp")]
+        public IActionResult SendOtp([FromBody] string email)
+        {
+            if (string.IsNullOrEmpty(email))
+                return BadRequest("Email không hợp lệ");
+
+            var otp = GenerateOtp();
+            var expiry = DateTime.UtcNow.AddMinutes(5);
+
+            // Lưu OTP tạm thời
+            _otpCache[email] = (otp, expiry);
+
+            // Gửi email
+            var emailService = new EmailService();
+            emailService.SendOtp(email, otp);
+
+            return Ok(new { message = "OTP đã được gửi tới email của bạn" });
+        }
+
+
+        // 2️⃣ Xác nhận OTP và đăng nhập
+        [HttpPost("verify-otp")]
+        public IActionResult VerifyOtp([FromBody] VerifyOtpDTO req)
+        {
+            if (!_otpCache.ContainsKey(req.Email))
+                return BadRequest("Chưa gửi OTP cho email này");
+
+            var (otpStored, expiry) = _otpCache[req.Email];
+
+            if (DateTime.UtcNow > expiry)
+            {
+                _otpCache.Remove(req.Email);
+                return BadRequest("OTP đã hết hạn");
+            }
+
+            if (otpStored != req.Otp)
+                return BadRequest("OTP không đúng");
+
+            // Xác thực thành công, xóa OTP
+            _otpCache.Remove(req.Email);
+
+            return Ok(new { message = "Xác thực OTP thành công" });
+        }
+
+        public class VerifyOtpDTO
+        {
+            public string Email { get; set; }
+            public string Otp { get; set; }
+        }
+
     }
 }
