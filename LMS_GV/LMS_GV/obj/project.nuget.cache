@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cqdJSKH3GxD4HBwsgH1+UI9pSgoweg0uXgouZ4Tr2rqxVoL3nToq9rq32ri+noMep5Hj+BSO2U7nDbtphVGgpg==",
+  "dgSpecHash": "sLwaHgtWWkLjfishXUd1lnJKU2L/m8v3nUbOEgBUQqSHzZmPTpEalDZeY4Ld4yABuh85IWtRjlbIJZZYp31I8g==",
   "success": true,
   "projectFilePath": "D:\\Thực tập\\Dự án 3\\Backend\\LMS_GV\\LMS_GV\\LMS_GV.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,8 @@
     "C:\\Users\\ACER\\.nuget\\packages\\google.apis\\1.73.0\\google.apis.1.73.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\google.apis.auth\\1.73.0\\google.apis.auth.1.73.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\google.apis.core\\1.73.0\\google.apis.core.1.73.0.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\google.apis.gmail.v1\\1.73.0.3987\\google.apis.gmail.v1.1.73.0.3987.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\google.apis.oauth2.v2\\1.68.0.1869\\google.apis.oauth2.v2.1.68.0.1869.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\humanizer.core.af\\2.14.1\\humanizer.core.af.2.14.1.nupkg.sha512",

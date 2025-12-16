@@ -79,7 +79,6 @@ builder.Services.AddSwaggerGen(c =>
 // 6. JWT Service
 builder.Services.AddScoped<JwtService>();
 
-builder.Services.AddScoped<IEmailService, EmailService>();
 
 var app = builder.Build();
 

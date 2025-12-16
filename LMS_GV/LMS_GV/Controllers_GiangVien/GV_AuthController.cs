@@ -10,11 +10,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using OtpNet;
 using System.Collections.Concurrent;
-using MailKit.Net.Smtp;
-using MailKit.Security;
-using MimeKit;
+using System.Net.Sockets;
+
 
 namespace LMS_GV.Controllers_GiangVien
 {
@@ -24,17 +22,15 @@ namespace LMS_GV.Controllers_GiangVien
     {
         private readonly AppDbContext _db;
         private readonly JwtService _jwt;
-        private readonly IEmailService _emailService;
 
-        // Lưu OTP tạm thời
-        private static readonly ConcurrentDictionary<string, (string Otp, DateTime Expire)> _otpStore = new();
 
-        public GV_AuthController(AppDbContext db, JwtService jwt, IEmailService emailService)
+
+        public GV_AuthController(AppDbContext db, JwtService jwt)
         {
             _db = db;
             _jwt = jwt;
-            _emailService = emailService;
         }
+
 
         //Tạo nhanh hash Password
         [HttpPost("create-hash")]
@@ -102,96 +98,87 @@ namespace LMS_GV.Controllers_GiangVien
                 }
             });
         }
-
-
-        // 1️⃣ Google login → gửi OTP
-        [HttpPost("google-login-send-otp")]
-        public async Task<IActionResult> GoogleLoginSendOtp([FromBody] GoogleLoginRequestDTO request)
+        [HttpPost("login-google")]
+        public async Task<ActionResult<GoogleLoginResponseDTO>> LoginWithGoogle([FromBody] GoogleLoginRequestDTO request)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            if (string.IsNullOrWhiteSpace(request.GoogleId) || string.IsNullOrWhiteSpace(request.Email))
+                return BadRequest(new GoogleLoginResponseDTO { Success = false, Message = "GoogleId và Email là bắt buộc" });
 
-            // Tìm user theo GoogleId hoặc Email
+            // Kiểm tra user đã tồn tại
             var user = await _db.NguoiDungs
                 .Include(u => u.VaiTro)
-                .FirstOrDefaultAsync(u =>
-                    u.DangnhapGoogle == request.GoogleId || u.Email == request.Email);
+                .FirstOrDefaultAsync(u => u.Email == request.Email || u.DangnhapGoogle == request.GoogleId);
+
+            int roleId = 2; // Giảng viên
+            string roleName = "Giảng Viên";
 
             if (user == null)
-                return Unauthorized(new { message = "Email chưa được cấp quyền" });
-
-            if (user.TrangThai != 1)
-                return Unauthorized(new { message = "Tài khoản bị khóa" });
-
-            if (user.VaiTroId != 2) // chỉ giảng viên
-                return Unauthorized(new { message = "Chỉ giảng viên mới được phép đăng nhập" });
-
-            // Cập nhật thông tin Google
-            user.DangnhapGoogle = request.GoogleId;
-            user.EmailGoogleVerified = request.EmailVerified ?? user.EmailGoogleVerified;
-            user.Avatar = request.PictureUrl ?? user.Avatar;
-            user.UpdatedAt = DateTime.UtcNow;
-            await _db.SaveChangesAsync();
-
-            // Sinh OTP 6 chữ số
-            var otp = new Random().Next(100000, 999999).ToString();
-            _otpStore[user.Email] = (otp, DateTime.UtcNow.AddMinutes(5));
-
-            // Gửi OTP tới email
-            await _emailService.SendOtpAsync(user.Email, otp);
-
-            return Ok(new SendOtpResponseDTO
             {
-                Message = $"OTP đã được gửi đến {user.Email}",
-                Success = true
-            });
-        }
+                // Tạo user mới
+                var randomPassword = Guid.NewGuid().ToString("N");
+                var passwordHash = BCrypt.Net.BCrypt.HashPassword(randomPassword);
 
-        // 2️⃣ Xác nhận OTP → cấp JWT
-        [HttpPost("verify-google-otp")]
-        public async Task<IActionResult> VerifyGoogleOtp([FromBody] VerifyOtpRequestDTO request)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            if (_otpStore.TryGetValue(request.Email, out var data))
-            {
-                if (DateTime.UtcNow > data.Expire)
-                    return Unauthorized(new { message = "OTP đã hết hạn" });
-
-                if (data.Otp != request.Otp)
-                    return Unauthorized(new { message = "OTP không đúng" });
-
-                // OTP hợp lệ → xóa OTP
-                _otpStore.TryRemove(request.Email, out _);
-
-                // Lấy user để cấp token
-                var user = await _db.NguoiDungs
-                    .Include(u => u.VaiTro)
-                    .FirstOrDefaultAsync(u => u.Email == request.Email);
-
-                if (user == null)
-                    return Unauthorized(new { message = "Email không tồn tại" });
-
-                // Sinh JWT
-                var token = _jwt.GenerateGiangVienToken(user);
-
-                return Ok(new
+                user = new NguoiDung
                 {
-                    token,
-                    user = new
-                    {
-                        user.NguoiDungId,
-                        user.Email,
-                        user.HoTen,
-                        user.VaiTroId,
-                        isInstructor = true,
-                        loginProvider = "google"
-                    }
-                });
+                    TenDangNhap = request.Email.Split('@')[0],
+                    HashMatKhau = passwordHash,
+                    Email = request.Email,
+                    HoTen = request.Name,
+                    DangnhapGoogle = request.GoogleId,
+                    Avatar = request.PictureUrl,
+                    TrangThai = 1,
+                    VaiTroId = roleId,
+                    EmailGoogleVerified = request.EmailVerified ?? true,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    LanDangNhapCuoi = DateTime.Now
+                };
+
+                _db.NguoiDungs.Add(user);
+                await _db.SaveChangesAsync();
+
+                // Tạo hồ sơ Giảng Viên
+                var giangVien = new GiangVien
+                {
+                    NguoiDungId = user.NguoiDungId,
+                    ChucVu = "Giảng Viên",
+                    CreatedAt = DateTime.Now
+                };
+                _db.GiangViens.Add(giangVien);
+                await _db.SaveChangesAsync();
+            }
+            else
+            {
+                // Cập nhật Google info
+                user.DangnhapGoogle = request.GoogleId;
+                user.EmailGoogleVerified = request.EmailVerified ?? true;
+                user.HoTen = request.Name ?? user.HoTen;
+                user.Avatar = request.PictureUrl ?? user.Avatar;
+                user.LanDangNhapCuoi = DateTime.Now;
+                _db.NguoiDungs.Update(user);
+                await _db.SaveChangesAsync();
             }
 
-            return NotFound(new { message = "OTP không tồn tại hoặc đã hết hạn" });
+            // Tạo token JWT
+            var token = _jwt.GenerateGiangVienToken(user);
+
+            var response = new GoogleLoginResponseDTO
+            {
+                Success = true,
+                Message = "Đăng nhập thành công",
+                Token = token,
+                User = new GoogleUserInfoDTO
+                {
+                    NguoiDungId = user.NguoiDungId,
+                    Email = user.Email,
+                    HoTen = user.HoTen,
+                    Avatar = user.Avatar,
+                    VaiTroId = user.VaiTroId,
+                    TenVaiTro = roleName
+                }
+            };
+
+            return Ok(response);
         }
 
     }

@@ -76,13 +76,13 @@ namespace LMS_GV.Models.DTO_GiangVien
         [Required]
         public int LopHocId { get; set; }
 
-        public decimal? DiemBaiTap { get; set; }      // 0–10
         public decimal? DiemGiuaKy { get; set; }      // 0–10
         public decimal? DiemCuoiKy { get; set; }      // 0–10
 
-        // ⚠️ Rule đặc biệt: chỉ 10 | 9 | 0
+        // ⚠️ Chỉ cho phép 10 | 9 | 0
         public decimal? DiemChuyenCan { get; set; }
     }
+
     public class TaoBangDiemRequestDTO
     {
         public int SinhVienId { get; set; }

@@ -346,20 +346,11 @@ namespace LMS_GV.Controllers_GiangVien
         /// Cập nhật điểm môn học của sinh viên
         /// </summary>
         [HttpPatch("diem-mon/{diemId}")]
-        public async Task<IActionResult> UpdateDiemMon(
-         int diemId,
-         [FromBody] PatchStudentScoreDto dto)
+        public async Task<IActionResult> UpdateDiemMon(int diemId, [FromBody] PatchStudentScoreDto dto)
         {
             // 1. Validate điểm
             var error = ValidateScores(dto);
             if (error != null) return BadRequest(error);
-
-            if (dto.DiemChuyenCan.HasValue)
-            {
-                var allowed = new decimal[] { 10, 9, 0 };
-                if (!allowed.Contains(dto.DiemChuyenCan.Value))
-                    return BadRequest("Điểm chuyên cần chỉ được nhập: 10, 9 hoặc 0.");
-            }
 
             // 2. Lấy bảng điểm tổng
             var diem = await _context.Diems
@@ -367,7 +358,7 @@ namespace LMS_GV.Controllers_GiangVien
                 .FirstOrDefaultAsync(d => d.DiemId == diemId);
             if (diem == null) return NotFound("Không tìm thấy điểm môn");
 
-            // 3. Cập nhật điểm chuyên cần
+            // 3. Lấy hoặc tạo điểm chuyên cần
             var diemCC = await _context.DiemChuyenCans
                 .FirstOrDefaultAsync(d => d.SinhVienId == dto.SinhVienId && d.LopHocId == dto.LopHocId);
 
@@ -378,7 +369,7 @@ namespace LMS_GV.Controllers_GiangVien
                 diemCCVal = diemCC.Diem.GetValueOrDefault(10m);
             }
 
-            // 4. Lấy điểm thành phần
+            // 4. Cập nhật các điểm thành phần được phép
             var diemThanhPhans = await _context.DiemThanhPhans
                 .Include(tp => tp.ThanhPhanDiem)
                 .Where(tp => tp.SinhVienId == dto.SinhVienId && tp.LopHocId == dto.LopHocId)
@@ -391,27 +382,18 @@ namespace LMS_GV.Controllers_GiangVien
                     tp.Diem = dto.DiemGiuaKy.Value;
                 else if (ten.Contains("cuối") && dto.DiemCuoiKy.HasValue)
                     tp.Diem = dto.DiemCuoiKy.Value;
-                else if (ten.Contains("bài") && dto.DiemBaiTap.HasValue)
-                    tp.Diem = dto.DiemBaiTap.Value;
+                else if (ten.Contains("chuyên cần"))
+                    tp.Diem = diemCCVal;  // Điểm chuyên cần đã validate
             }
 
-            // 5. Tính điểm trung bình môn dựa vào hệ số DB
-            decimal diemCCHeSo = diemThanhPhans.FirstOrDefault(tp => tp.ThanhPhanDiem.Ten.ToLower().Contains("chuyên cần"))?.ThanhPhanDiem.HeSo ?? 0m;
-            decimal diemBTHeSo = diemThanhPhans.FirstOrDefault(tp => tp.ThanhPhanDiem.Ten.ToLower().Contains("bài"))?.ThanhPhanDiem.HeSo ?? 0m;
-            decimal diemGKHeSo = diemThanhPhans.FirstOrDefault(tp => tp.ThanhPhanDiem.Ten.ToLower().Contains("giữa"))?.ThanhPhanDiem.HeSo ?? 0m;
-            decimal diemCKHeSo = diemThanhPhans.FirstOrDefault(tp => tp.ThanhPhanDiem.Ten.ToLower().Contains("cuối"))?.ThanhPhanDiem.HeSo ?? 0m;
-
-            decimal tongHeSo = diemCCHeSo + diemBTHeSo + diemGKHeSo + diemCKHeSo;
-
-            decimal diemBT = diemThanhPhans.FirstOrDefault(tp => tp.ThanhPhanDiem.Ten.ToLower().Contains("bài"))?.Diem ?? 0m;
-            decimal diemGK = diemThanhPhans.FirstOrDefault(tp => tp.ThanhPhanDiem.Ten.ToLower().Contains("giữa"))?.Diem ?? 0m;
-            decimal diemCK = diemThanhPhans.FirstOrDefault(tp => tp.ThanhPhanDiem.Ten.ToLower().Contains("cuối"))?.Diem ?? 0m;
-
-            decimal tongDiem = (diemCCVal * diemCCHeSo + diemBT * diemBTHeSo + diemGK * diemGKHeSo + diemCK * diemCKHeSo) / (tongHeSo == 0 ? 1 : tongHeSo);
+            // 5. Tính điểm trung bình môn
+            decimal tongHeSo = diemThanhPhans.Sum(tp => (decimal)(tp.ThanhPhanDiem.HeSo ?? 0m));
+            decimal tongDiem = diemThanhPhans.Sum(tp => ((tp.Diem ?? 0m) * (decimal)(tp.ThanhPhanDiem.HeSo ?? 0m)))
+                               / (tongHeSo == 0 ? 1 : tongHeSo);
 
             if (tongDiem > 10) tongDiem = 10m;
 
-            // 6. Lưu điểm môn
+            // 6. Cập nhật điểm trung bình và GPA
             diem.DiemTrungBinhMon = tongDiem;
             diem.DiemChu = ConvertToLetter(tongDiem);
             diem.Gpamon = ConvertToGPA(diem.DiemChu);
@@ -421,15 +403,7 @@ namespace LMS_GV.Controllers_GiangVien
             return Ok("Cập nhật điểm thành công");
         }
 
-        private string ConvertToLetter(decimal dtbMon)
-        {
-            var thangDiem = _context.ThangDiems
-                .FirstOrDefault(td => dtbMon >= td.DiemMin && dtbMon <= td.DiemMax);
-
-            return thangDiem?.DiemChu ?? "F";
-        }
-
-        //Viết điều kiện 
+        // Validate điểm chỉ cho các điểm được phép
         private string? ValidateScores(PatchStudentScoreDto dto)
         {
             bool IsValid(decimal? v)
@@ -438,21 +412,28 @@ namespace LMS_GV.Controllers_GiangVien
                 return v.Value >= 0 && v.Value <= 10;
             }
 
-            if (!IsValid(dto.DiemBaiTap))
-                return "Điểm bài tập phải nằm trong khoảng 0 - 10";
-
             if (!IsValid(dto.DiemGiuaKy))
                 return "Điểm giữa kỳ phải nằm trong khoảng 0 - 10";
 
             if (!IsValid(dto.DiemCuoiKy))
                 return "Điểm cuối kỳ phải nằm trong khoảng 0 - 10";
 
+            if (dto.DiemChuyenCan.HasValue && !new decimal[] { 10, 9, 0 }.Contains(dto.DiemChuyenCan.Value))
+                return "Điểm chuyên cần chỉ được nhập: 10, 9 hoặc 0.";
+
             return null;
         }
 
+        // Chuyển điểm trung bình môn sang chữ
+        private string ConvertToLetter(decimal dtbMon)
+        {
+            var thangDiem = _context.ThangDiems
+                .FirstOrDefault(td => dtbMon >= td.DiemMin && dtbMon <= td.DiemMax);
 
+            return thangDiem?.DiemChu ?? "F";
+        }
 
-        //// Chuyển điểm chữ sang GPA
+        // Chuyển điểm chữ sang GPA
         private decimal ConvertToGPA(string? diemChu)
         {
             return diemChu switch
@@ -465,6 +446,7 @@ namespace LMS_GV.Controllers_GiangVien
                 _ => 0m
             };
         }
+
 
         [HttpPost("tao-bang-diem")]
         public async Task<IActionResult> TaoBangDiem(TaoBangDiemRequestDTO req)

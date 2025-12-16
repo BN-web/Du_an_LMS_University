@@ -316,3 +316,5 @@ D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\bin\Debug\net8.0\BouncyCastle.C
 D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\bin\Debug\net8.0\MailKit.dll
 D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\bin\Debug\net8.0\MimeKit.dll
 D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\bin\Debug\net8.0\Otp.NET.dll
+D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\bin\Debug\net8.0\Google.Apis.Gmail.v1.dll
+D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\bin\Debug\net8.0\Google.Apis.Oauth2.v2.dll
