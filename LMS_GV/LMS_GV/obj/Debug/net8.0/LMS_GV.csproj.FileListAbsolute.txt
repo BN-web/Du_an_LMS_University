@@ -315,3 +315,4 @@ D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\obj\Debug\net8.0\LMS_GV.RazorAs
 D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
 D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\bin\Debug\net8.0\MailKit.dll
 D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\bin\Debug\net8.0\MimeKit.dll
+D:\Thực tập\Dự án 3\Backend\LMS_GV\LMS_GV\bin\Debug\net8.0\Otp.NET.dll

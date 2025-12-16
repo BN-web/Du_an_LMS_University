@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FuBwU3AcdeS+HV0HToqAcLcHCo4m0XCthbfYZ0cxmqJMPXmPTR96NCaAkBspigcFYmLliVSNSSUoS/jG5PAQaQ==",
+  "dgSpecHash": "cqdJSKH3GxD4HBwsgH1+UI9pSgoweg0uXgouZ4Tr2rqxVoL3nToq9rq32ri+noMep5Hj+BSO2U7nDbtphVGgpg==",
   "success": true,
   "projectFilePath": "D:\\Thực tập\\Dự án 3\\Backend\\LMS_GV\\LMS_GV\\LMS_GV.csproj",
   "expectedPackageFiles": [
@@ -172,6 +172,7 @@
     "C:\\Users\\ACER\\.nuget\\packages\\nuget.projectmodel\\6.11.0\\nuget.projectmodel.6.11.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\nuget.protocol\\6.11.0\\nuget.protocol.6.11.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\nuget.versioning\\6.11.0\\nuget.versioning.6.11.0.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\otp.net\\1.4.1\\otp.net.1.4.1.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",

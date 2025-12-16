@@ -10,8 +10,11 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Net;
-using System.Net.Mail;
+using OtpNet;
+using System.Collections.Concurrent;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
 
 namespace LMS_GV.Controllers_GiangVien
 {
@@ -21,24 +24,17 @@ namespace LMS_GV.Controllers_GiangVien
     {
         private readonly AppDbContext _db;
         private readonly JwtService _jwt;
-        private readonly IConfiguration _config;
+        private readonly IEmailService _emailService;
 
-        private static Dictionary<string, (string otp, DateTime expires)> _otpCache = new();
+        // Lưu OTP tạm thời
+        private static readonly ConcurrentDictionary<string, (string Otp, DateTime Expire)> _otpStore = new();
 
-        private string GenerateOtp()
-        {
-            var random = new Random();
-            return random.Next(100000, 999999).ToString(); // OTP 6 chữ số
-        }
-
-
-        public GV_AuthController(AppDbContext db, JwtService jwt, IConfiguration config)
+        public GV_AuthController(AppDbContext db, JwtService jwt, IEmailService emailService)
         {
             _db = db;
             _jwt = jwt;
-            _config = config;
+            _emailService = emailService;
         }
-
 
         //Tạo nhanh hash Password
         [HttpPost("create-hash")]
@@ -108,113 +104,94 @@ namespace LMS_GV.Controllers_GiangVien
         }
 
 
-        [HttpPost("google-login")]
-        public async Task<ActionResult<GoogleUserResponseDTO>> LoginWithGoogle(
-            [FromBody] GoogleLoginRequestDTO request)
+        // 1️⃣ Google login → gửi OTP
+        [HttpPost("google-login-send-otp")]
+        public async Task<IActionResult> GoogleLoginSendOtp([FromBody] GoogleLoginRequestDTO request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            // 1. Tìm user ĐÃ TỒN TẠI
+            // Tìm user theo GoogleId hoặc Email
             var user = await _db.NguoiDungs
                 .Include(u => u.VaiTro)
                 .FirstOrDefaultAsync(u =>
-                    u.DangnhapGoogle == request.GoogleId ||
-                    u.Email == request.Email
-                );
+                    u.DangnhapGoogle == request.GoogleId || u.Email == request.Email);
 
-            // ❌ KHÔNG TỒN TẠI → CẤM ĐĂNG NHẬP
             if (user == null)
-            {
-                return Unauthorized(new
-                {
-                    message = "Tài khoản Google chưa được hệ thống cấp quyền"
-                });
-            }
+                return Unauthorized(new { message = "Email chưa được cấp quyền" });
 
-            // ❌ TÀI KHOẢN BỊ KHÓA
             if (user.TrangThai != 1)
-            {
-                return Unauthorized(new
-                {
-                    message = "Tài khoản đã bị khóa hoặc ngừng hoạt động"
-                });
-            }
+                return Unauthorized(new { message = "Tài khoản bị khóa" });
 
-            // 2. Cập nhật thông tin Google (KHÔNG TẠO MỚI)
+            if (user.VaiTroId != 2) // chỉ giảng viên
+                return Unauthorized(new { message = "Chỉ giảng viên mới được phép đăng nhập" });
+
+            // Cập nhật thông tin Google
             user.DangnhapGoogle = request.GoogleId;
             user.EmailGoogleVerified = request.EmailVerified ?? user.EmailGoogleVerified;
             user.Avatar = request.PictureUrl ?? user.Avatar;
             user.UpdatedAt = DateTime.UtcNow;
-            user.LanDangNhapCuoi = DateTime.UtcNow;
-
             await _db.SaveChangesAsync();
 
-            // 3. Sinh JWT
-            var token = _jwt.GenerateGiangVienToken(user);
+            // Sinh OTP 6 chữ số
+            var otp = new Random().Next(100000, 999999).ToString();
+            _otpStore[user.Email] = (otp, DateTime.UtcNow.AddMinutes(5));
 
-            // 4. Trả kết quả
-            return Ok(new GoogleUserResponseDTO
+            // Gửi OTP tới email
+            await _emailService.SendOtpAsync(user.Email, otp);
+
+            return Ok(new SendOtpResponseDTO
             {
-                NguoiDungId = user.NguoiDungId,
-                Email = user.Email ?? "",
-                Name = user.HoTen ?? "",
-                Avatar = user.Avatar,
-                Role = "Giảng Viên",
-                Token = token
+                Message = $"OTP đã được gửi đến {user.Email}",
+                Success = true
             });
-
         }
 
-        // 1️⃣ Gửi OTP qua Email
-        [HttpPost("send-otp")]
-        public IActionResult SendOtp([FromBody] string email)
+        // 2️⃣ Xác nhận OTP → cấp JWT
+        [HttpPost("verify-google-otp")]
+        public async Task<IActionResult> VerifyGoogleOtp([FromBody] VerifyOtpRequestDTO request)
         {
-            if (string.IsNullOrEmpty(email))
-                return BadRequest("Email không hợp lệ");
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            var otp = GenerateOtp();
-            var expiry = DateTime.UtcNow.AddMinutes(5);
-
-            // Lưu OTP tạm thời
-            _otpCache[email] = (otp, expiry);
-
-            // Gửi email
-            var emailService = new EmailService();
-            emailService.SendOtp(email, otp);
-
-            return Ok(new { message = "OTP đã được gửi tới email của bạn" });
-        }
-
-
-        // 2️⃣ Xác nhận OTP và đăng nhập
-        [HttpPost("verify-otp")]
-        public IActionResult VerifyOtp([FromBody] VerifyOtpDTO req)
-        {
-            if (!_otpCache.ContainsKey(req.Email))
-                return BadRequest("Chưa gửi OTP cho email này");
-
-            var (otpStored, expiry) = _otpCache[req.Email];
-
-            if (DateTime.UtcNow > expiry)
+            if (_otpStore.TryGetValue(request.Email, out var data))
             {
-                _otpCache.Remove(req.Email);
-                return BadRequest("OTP đã hết hạn");
+                if (DateTime.UtcNow > data.Expire)
+                    return Unauthorized(new { message = "OTP đã hết hạn" });
+
+                if (data.Otp != request.Otp)
+                    return Unauthorized(new { message = "OTP không đúng" });
+
+                // OTP hợp lệ → xóa OTP
+                _otpStore.TryRemove(request.Email, out _);
+
+                // Lấy user để cấp token
+                var user = await _db.NguoiDungs
+                    .Include(u => u.VaiTro)
+                    .FirstOrDefaultAsync(u => u.Email == request.Email);
+
+                if (user == null)
+                    return Unauthorized(new { message = "Email không tồn tại" });
+
+                // Sinh JWT
+                var token = _jwt.GenerateGiangVienToken(user);
+
+                return Ok(new
+                {
+                    token,
+                    user = new
+                    {
+                        user.NguoiDungId,
+                        user.Email,
+                        user.HoTen,
+                        user.VaiTroId,
+                        isInstructor = true,
+                        loginProvider = "google"
+                    }
+                });
             }
 
-            if (otpStored != req.Otp)
-                return BadRequest("OTP không đúng");
-
-            // Xác thực thành công, xóa OTP
-            _otpCache.Remove(req.Email);
-
-            return Ok(new { message = "Xác thực OTP thành công" });
-        }
-
-        public class VerifyOtpDTO
-        {
-            public string Email { get; set; }
-            public string Otp { get; set; }
+            return NotFound(new { message = "OTP không tồn tại hoặc đã hết hạn" });
         }
 
     }

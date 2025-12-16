@@ -3,6 +3,7 @@ using System.Text;
 using LMS_GV.Models.Data;
 using Microsoft.EntityFrameworkCore;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 var keyString = builder.Configuration["Jwt:Key"];
@@ -77,6 +78,8 @@ builder.Services.AddSwaggerGen(c =>
 
 // 6. JWT Service
 builder.Services.AddScoped<JwtService>();
+
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 var app = builder.Build();
 
