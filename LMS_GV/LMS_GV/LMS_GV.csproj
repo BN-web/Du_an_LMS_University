@@ -39,4 +39,9 @@
     <Folder Include="wwwroot\uploads\avatars\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SinhVien\Services\" />
+    <Folder Include="uploads\avatars\" />
+  </ItemGroup>
+
 </Project>

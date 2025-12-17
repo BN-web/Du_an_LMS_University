@@ -1,28 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LMS_GV.Models;
 
 public partial class HoSoSinhVien
 {
     public int SinhVienId { get; set; }
-
-    public string? Mssv { get; set; }
-
+    public string Mssv { get; set; } = null!;
     public int NguoiDungId { get; set; }
-
     public string? ThoiGianDaoTao { get; set; }
-
     public int? TongTinChi { get; set; }
-
+    [Column(TypeName = "decimal(4, 2)")]
     public decimal? Gpa { get; set; }
-
     public int? NganhId { get; set; }
-
     public int? KhoaTuyenSinhId { get; set; }
-
     public DateTime? CreatedAt { get; set; }
-
     public DateTime? UpdatedAt { get; set; }
 
     public virtual ICollection<BaiNop> BaiNops { get; set; } = new List<BaiNop>();
@@ -40,6 +33,9 @@ public partial class HoSoSinhVien
     public virtual ICollection<KetQuaKiemTra> KetQuaKiemTras { get; set; } = new List<KetQuaKiemTra>();
 
     public virtual NguoiDung NguoiDung { get; set; } = null!;
+
+    public virtual Nganh? Nganh { get; set; }
+    public virtual KhoaTuyenSinh? KhoaTuyenSinh { get; set; }
 
     public virtual ICollection<SinhVienLop> SinhVienLops { get; set; } = new List<SinhVienLop>();
 

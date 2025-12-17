@@ -29,7 +29,11 @@
         },
         {
           "Name": "Last-Modified",
+<<<<<<< HEAD:LMS_GV/bin2/LMS_GV.staticwebassets.endpoints.json
           "Value": "Wed, 10 Dec 2025 02:18:19 GMT"
+=======
+          "Value": "Thu, 11 Dec 2025 08:14:37 GMT"
+>>>>>>> origin/Hocvien-Backend:LMS_GV/LMS_GV/bin/Debug/net8.0/LMS_GV.staticwebassets.endpoints.json
         },
         {
           "Name": "Link",
@@ -78,7 +82,11 @@
         },
         {
           "Name": "Last-Modified",
+<<<<<<< HEAD:LMS_GV/bin2/LMS_GV.staticwebassets.endpoints.json
           "Value": "Wed, 10 Dec 2025 02:18:19 GMT"
+=======
+          "Value": "Thu, 11 Dec 2025 08:14:37 GMT"
+>>>>>>> origin/Hocvien-Backend:LMS_GV/LMS_GV/bin/Debug/net8.0/LMS_GV.staticwebassets.endpoints.json
         },
         {
           "Name": "Link",

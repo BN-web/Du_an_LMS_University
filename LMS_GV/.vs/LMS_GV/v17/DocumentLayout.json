@@ -1,0 +1,789 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\truongkhoa\\controllers\\truongkhoahocviencontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\truongkhoa\\controllers\\truongkhoahocviencontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\truongkhoa\\dtos\\quanlylophocdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\truongkhoa\\dtos\\quanlylophocdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\sinhvien\\dtos\\quanlylophocdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\sinhvien\\dtos\\quanlylophocdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\truongkhoa\\controllers\\truongkhoalophoccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\truongkhoa\\controllers\\truongkhoalophoccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\lophoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\lophoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\sinhvien\\dtos\\thoikhoabieudtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\sinhvien\\dtos\\thoikhoabieudtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\sinhvien\\dtos\\dangkymonhocdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\sinhvien\\dtos\\dangkymonhocdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\sinhvien\\dtos\\commondtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\sinhvien\\dtos\\commondtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\sinhvien\\controllers\\sinhvienthongbaocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\sinhvien\\controllers\\sinhvienthongbaocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\sinhvien\\helpers\\swaggerfileoperationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\sinhvien\\helpers\\swaggerfileoperationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\sinhvien\\controllers\\hososinhviencontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\sinhvien\\controllers\\hososinhviencontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\sinhvien\\dtos\\hososinhviendtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\sinhvien\\dtos\\hososinhviendtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\lms_gv.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\lms_gv.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\sinhvien\\controllers\\dangkymonhoccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\sinhvien\\controllers\\dangkymonhoccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\sinhvien\\dtos\\sinhvienthongbaodtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\sinhvien\\dtos\\sinhvienthongbaodtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\lichsusuadiem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\lichsusuadiem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\loaibaocao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\loaibaocao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\nguoidung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\nguoidung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\nganh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\nganh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\monhoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\monhoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\lichsusaoluu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\lichsusaoluu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\lichsukien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\lichsukien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\khoatuyensinh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\khoatuyensinh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\ketquakiemtra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\ketquakiemtra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\hososinhvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\hososinhvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\giangvienlop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\giangvienlop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\giangvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\giangvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\dangkytinchi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\dangkytinchi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\chuongtrinhmonhoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\chuongtrinhmonhoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\tiendo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\tiendo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\chitietcautraloi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\chitietcautraloi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\sinhvien\\controllers\\thoikhoabieucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\sinhvien\\controllers\\thoikhoabieucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\sinhvien\\controllers\\quanlylophoccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\sinhvien\\controllers\\quanlylophoccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\thongbao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\thongbao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\bainop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\bainop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\chuongtrinhdaotao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\chuongtrinhdaotao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\thongbaonguoidung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\thongbaonguoidung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\buoihoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\buoihoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\baihoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\baihoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\sinhvienlop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\sinhvienlop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\baihoclop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\baihoclop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|a:\\backend\\du_an_lms_university\\lms_gv\\lms_gv\\models\\baikiemtra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\models\\baikiemtra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TruongKhoaHocVienController.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\TruongKhoa\\Controllers\\TruongKhoaHocVienController.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\TruongKhoa\\Controllers\\TruongKhoaHocVienController.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\TruongKhoa\\Controllers\\TruongKhoaHocVienController.cs",
+              "RelativeToolTip": "LMS_GV\\TruongKhoa\\Controllers\\TruongKhoaHocVienController.cs",
+              "ViewState": "AgIAAHkCAAAAAAAAAAAAAHkCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T16:33:02.127Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TruongKhoaLopHocController.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\TruongKhoa\\Controllers\\TruongKhoaLopHocController.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\TruongKhoa\\Controllers\\TruongKhoaLopHocController.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\TruongKhoa\\Controllers\\TruongKhoaLopHocController.cs",
+              "RelativeToolTip": "LMS_GV\\TruongKhoa\\Controllers\\TruongKhoaLopHocController.cs",
+              "ViewState": "AgIAACcFAAAAAAAAAAAgwDEFAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T13:49:32.035Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "QuanLyLopHocDTOs.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\TruongKhoa\\DTOs\\QuanLyLopHocDTOs.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\TruongKhoa\\DTOs\\QuanLyLopHocDTOs.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\TruongKhoa\\DTOs\\QuanLyLopHocDTOs.cs",
+              "RelativeToolTip": "LMS_GV\\TruongKhoa\\DTOs\\QuanLyLopHocDTOs.cs",
+              "ViewState": "AgIAAMUAAAAAAAAAAAA2wM0AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-15T13:48:34.769Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "SwaggerFileOperationFilter.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\Helpers\\SwaggerFileOperationFilter.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\SinhVien\\Helpers\\SwaggerFileOperationFilter.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\Helpers\\SwaggerFileOperationFilter.cs",
+              "RelativeToolTip": "LMS_GV\\SinhVien\\Helpers\\SwaggerFileOperationFilter.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwBYAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T07:43:35.353Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "LMS_GV\\Properties\\launchSettings.json",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Properties\\launchSettings.json",
+              "RelativeToolTip": "LMS_GV\\Properties\\launchSettings.json",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAAwAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-11T06:15:21.821Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "TienDo.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\TienDo.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\TienDo.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\TienDo.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\TienDo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T05:47:56.82Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "LMS_GV\\appsettings.Development.json",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\appsettings.Development.json",
+              "RelativeToolTip": "LMS_GV\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-11T03:54:46.615Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CommonDTOs.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\DTOs\\CommonDTOs.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\SinhVien\\DTOs\\CommonDTOs.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\DTOs\\CommonDTOs.cs",
+              "RelativeToolTip": "LMS_GV\\SinhVien\\DTOs\\CommonDTOs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T08:14:49.934Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "NguoiDung.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\NguoiDung.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\NguoiDung.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\NguoiDung.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\NguoiDung.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T19:49:41.328Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Nganh.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\Nganh.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\Nganh.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\Nganh.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\Nganh.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T19:49:37.436Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "ThongBaoNguoiDung.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\ThongBaoNguoiDung.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\ThongBaoNguoiDung.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\ThongBaoNguoiDung.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\ThongBaoNguoiDung.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T18:26:54.626Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "ThongBao.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\ThongBao.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\ThongBao.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\ThongBao.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\ThongBao.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAuwBoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T18:22:58.714Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "SinhVienThongBaoController.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\Controllers\\SinhVienThongBaoController.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\SinhVien\\Controllers\\SinhVienThongBaoController.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\Controllers\\SinhVienThongBaoController.cs",
+              "RelativeToolTip": "LMS_GV\\SinhVien\\Controllers\\SinhVienThongBaoController.cs",
+              "ViewState": "AgIAAJ0AAAAAAAAAAAAuwK0AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T18:20:03.966Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "SinhVienThongBaoDTOs.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\DTOs\\SinhVienThongBaoDTOs.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\SinhVien\\DTOs\\SinhVienThongBaoDTOs.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\DTOs\\SinhVienThongBaoDTOs.cs",
+              "RelativeToolTip": "LMS_GV\\SinhVien\\DTOs\\SinhVienThongBaoDTOs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T18:19:37.43Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "GiangVien.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\GiangVien.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\GiangVien.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\GiangVien.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\GiangVien.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAADwvxwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T17:49:33.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "GiangVienLop.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\GiangVienLop.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\GiangVienLop.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\GiangVienLop.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\GiangVienLop.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T17:49:32.107Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "QuanLyLopHocController.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\Controllers\\QuanLyLopHocController.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\SinhVien\\Controllers\\QuanLyLopHocController.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\Controllers\\QuanLyLopHocController.cs",
+              "RelativeToolTip": "LMS_GV\\SinhVien\\Controllers\\QuanLyLopHocController.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAtwD8AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:50:55.102Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "QuanLyLopHocDTOs.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\DTOs\\QuanLyLopHocDTOs.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\SinhVien\\DTOs\\QuanLyLopHocDTOs.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\DTOs\\QuanLyLopHocDTOs.cs",
+              "RelativeToolTip": "LMS_GV\\SinhVien\\DTOs\\QuanLyLopHocDTOs.cs",
+              "ViewState": "AgIAAJ8AAAAAAAAAAAAowKUAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:50:32.158Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "ThoiKhoaBieuController.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\Controllers\\ThoiKhoaBieuController.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\SinhVien\\Controllers\\ThoiKhoaBieuController.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\Controllers\\ThoiKhoaBieuController.cs",
+              "RelativeToolTip": "LMS_GV\\SinhVien\\Controllers\\ThoiKhoaBieuController.cs",
+              "ViewState": "AgIAAAMDAAAAAAAAAAAswBoDAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:29:00.683Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ThoiKhoaBieuDTOs.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\DTOs\\ThoiKhoaBieuDTOs.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\SinhVien\\DTOs\\ThoiKhoaBieuDTOs.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\DTOs\\ThoiKhoaBieuDTOs.cs",
+              "RelativeToolTip": "LMS_GV\\SinhVien\\DTOs\\ThoiKhoaBieuDTOs.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAuwAoAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:28:32.279Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "BaiHoc.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\BaiHoc.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\BaiHoc.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\BaiHoc.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\BaiHoc.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:25:37.783Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "LopHoc.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\LopHoc.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\LopHoc.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\LopHoc.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\LopHoc.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAA/wFMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:25:19.735Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "KetQuaKiemTra.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\KetQuaKiemTra.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\KetQuaKiemTra.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\KetQuaKiemTra.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\KetQuaKiemTra.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:25:13.953Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "ChuongTrinhMonHoc.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\ChuongTrinhMonHoc.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\ChuongTrinhMonHoc.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\ChuongTrinhMonHoc.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\ChuongTrinhMonHoc.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:24:46.153Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "ChuongTrinhDaoTao.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\ChuongTrinhDaoTao.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\ChuongTrinhDaoTao.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\ChuongTrinhDaoTao.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\ChuongTrinhDaoTao.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:37:29.27Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "ChiTietCauTraLoi.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\ChiTietCauTraLoi.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\ChiTietCauTraLoi.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\ChiTietCauTraLoi.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\ChiTietCauTraLoi.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:24:44.793Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "BaiHocLop.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\BaiHocLop.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\BaiHocLop.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\BaiHocLop.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\BaiHocLop.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:24:38.612Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "BaiKiemTra.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\BaiKiemTra.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\BaiKiemTra.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\BaiKiemTra.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\BaiKiemTra.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:24:38.131Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "BaiNop.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\BaiNop.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\BaiNop.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\BaiNop.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\BaiNop.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:24:37.548Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "LichSuSuaDiem.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\LichSuSuaDiem.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\LichSuSuaDiem.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\LichSuSuaDiem.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\LichSuSuaDiem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:24:32.682Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "LoaiBaoCao.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\LoaiBaoCao.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\LoaiBaoCao.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\LoaiBaoCao.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\LoaiBaoCao.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:24:32.109Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "KhoaTuyenSinh.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\KhoaTuyenSinh.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\KhoaTuyenSinh.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\KhoaTuyenSinh.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\KhoaTuyenSinh.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:24:30.656Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "LichSuKien.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\LichSuKien.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\LichSuKien.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\LichSuKien.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\LichSuKien.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:24:29.784Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "LichSuSaoLuu.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\LichSuSaoLuu.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\LichSuSaoLuu.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\LichSuSaoLuu.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\LichSuSaoLuu.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T09:24:28.393Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "BuoiHoc.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\BuoiHoc.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\BuoiHoc.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\BuoiHoc.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\BuoiHoc.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:37:30.02Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "HoSoSinhVien.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\HoSoSinhVien.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\HoSoSinhVien.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\HoSoSinhVien.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\HoSoSinhVien.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAuwA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:37:02.621Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "SinhVienLop.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\SinhVienLop.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\SinhVienLop.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\SinhVienLop.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\SinhVienLop.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAA0wBcAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:36:28.84Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Controllers\\AuthController.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "LMS_GV\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAKAAAAAAAAAAAAAEwK8AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:34:41.307Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "LMS_GV.http",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\LMS_GV.http",
+              "RelativeDocumentMoniker": "LMS_GV\\LMS_GV.http",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\LMS_GV.http",
+              "RelativeToolTip": "LMS_GV\\LMS_GV.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-12-09T08:32:09.211Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "DangKyMonHocController.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\Controllers\\DangKyMonHocController.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\SinhVien\\Controllers\\DangKyMonHocController.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\Controllers\\DangKyMonHocController.cs",
+              "RelativeToolTip": "LMS_GV\\SinhVien\\Controllers\\DangKyMonHocController.cs",
+              "ViewState": "AgIAALUCAAAAAAAAAAAwwMUCAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:27:26.87Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DangKyMonHocDTOs.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\DTOs\\DangKyMonHocDTOs.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\SinhVien\\DTOs\\DangKyMonHocDTOs.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\DTOs\\DangKyMonHocDTOs.cs",
+              "RelativeToolTip": "LMS_GV\\SinhVien\\DTOs\\DangKyMonHocDTOs.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAwwFcAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:27:00.543Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "MonHoc.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\MonHoc.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\MonHoc.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\MonHoc.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\MonHoc.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:17:54.284Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "DangKyTinChi.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\DangKyTinChi.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\DangKyTinChi.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\DangKyTinChi.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\DangKyTinChi.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwAUAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:15:39.511Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "HoSoSinhVienController.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\Controllers\\HoSoSinhVienController.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\SinhVien\\Controllers\\HoSoSinhVienController.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\Controllers\\HoSoSinhVienController.cs",
+              "RelativeToolTip": "LMS_GV\\SinhVien\\Controllers\\HoSoSinhVienController.cs",
+              "ViewState": "AgIAAKMBAAAAAAAAAAAgwKkBAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:11:19.61Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "HoSoSinhVienDTOs.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\DTOs\\HoSoSinhVienDTOs.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\SinhVien\\DTOs\\HoSoSinhVienDTOs.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\SinhVien\\DTOs\\HoSoSinhVienDTOs.cs",
+              "RelativeToolTip": "LMS_GV\\SinhVien\\DTOs\\HoSoSinhVienDTOs.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAuwF8AAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:10:55.81Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Models\\Data\\AppDbContext.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Models\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "LMS_GV\\Models\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAEMFAAAAAAAAAAAIwFYFAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T08:00:29.239Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\appsettings.json",
+              "RelativeDocumentMoniker": "LMS_GV\\appsettings.json",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\appsettings.json",
+              "RelativeToolTip": "LMS_GV\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-09T07:59:56.244Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Program.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Program.cs",
+              "ToolTip": "A:\\backend\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Program.cs",
+              "RelativeToolTip": "LMS_GV\\Program.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAgwDgAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T07:59:43.699Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -21,7 +21,7 @@ public partial class BuoiHoc
 
     public byte? TrangThai { get; set; }
 
-    public int SoBuoi { get; set; }
+    public int? SoBuoi { get; set; } // Đổi từ int thành int?
 
     public string? GhiChu { get; set; }
 
