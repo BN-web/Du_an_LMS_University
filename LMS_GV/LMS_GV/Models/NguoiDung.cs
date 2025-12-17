@@ -62,4 +62,6 @@ public partial class NguoiDung
     public virtual ICollection<ThongBao> ThongBaos { get; set; } = new List<ThongBao>();
 
     public virtual VaiTro? VaiTro { get; set; }
+
+
 }
