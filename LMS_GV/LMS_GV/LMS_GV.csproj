@@ -29,4 +29,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SinhVien\Services\" />
+    <Folder Include="uploads\avatars\" />
+  </ItemGroup>
+
 </Project>

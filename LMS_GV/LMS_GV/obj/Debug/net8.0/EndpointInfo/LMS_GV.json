@@ -1,0 +1,4794 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "LMS_GV",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.Controllers.LoginRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.Controllers.LoginRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.Controllers.LoginRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.Controllers.RegisterRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.Controllers.RegisterRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.Controllers.RegisterRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/GoogleAuth/login": {
+      "post": {
+        "tags": [
+          "GoogleAuth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.GoogleLoginRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.GoogleLoginRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.GoogleLoginRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.GoogleLoginResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.GoogleLoginResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.GoogleLoginResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/GoogleAuth/login/truong-khoa": {
+      "post": {
+        "tags": [
+          "GoogleAuth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.GoogleLoginRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.GoogleLoginRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.GoogleLoginRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.GoogleLoginResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.GoogleLoginResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.GoogleLoginResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sinhvien/hoso": {
+      "get": {
+        "tags": [
+          "HoSoSinhVien"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/avatar": {
+      "put": {
+        "tags": [
+          "HoSoSinhVien"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.CapNhatAvatarRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.CapNhatAvatarRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.CapNhatAvatarRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "HoSoSinhVien"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "HoSoSinhVien"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/avatar/upload": {
+      "post": {
+        "tags": [
+          "HoSoSinhVien"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "File": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "File": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/cap-nhat-thong-tin": {
+      "put": {
+        "tags": [
+          "HoSoSinhVien"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.ThongTinCaNhanDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.ThongTinCaNhanDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.ThongTinCaNhanDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/avatar/list": {
+      "get": {
+        "tags": [
+          "HoSoSinhVien"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/avatar/download": {
+      "post": {
+        "tags": [
+          "HoSoSinhVien"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.TaiAnhTuUrlRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.TaiAnhTuUrlRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.TaiAnhTuUrlRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/lop-hoc": {
+      "get": {
+        "tags": [
+          "QuanLyLopHoc"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/lop-hoc/{id}": {
+      "get": {
+        "tags": [
+          "QuanLyLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/lop-hoc/{id}/bai-tap": {
+      "get": {
+        "tags": [
+          "QuanLyLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/lop-hoc/{id}/bai-tap/{baiTapId}": {
+      "get": {
+        "tags": [
+          "QuanLyLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "baiTapId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/lop-hoc/{id}/bai-tap/{baiTapId}/bat-dau": {
+      "post": {
+        "tags": [
+          "QuanLyLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "baiTapId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/lop-hoc/{id}/bai-tap/{baiTapId}/tien-do": {
+      "put": {
+        "tags": [
+          "QuanLyLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "baiTapId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.TienDoRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.TienDoRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.TienDoRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/lop-hoc/{id}/bai-tap/{baiTapId}/nop-bai": {
+      "post": {
+        "tags": [
+          "QuanLyLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "baiTapId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.NopBaiRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.NopBaiRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.NopBaiRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/lop-hoc/{id}/bai-tap/{baiTapId}/ket-qua": {
+      "get": {
+        "tags": [
+          "QuanLyLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "baiTapId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/lop-hoc/{id}/bai-tap/{baiTapId}/bao-cao-gian-lan": {
+      "post": {
+        "tags": [
+          "QuanLyLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "baiTapId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.BaoCaoGianLanRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.BaoCaoGianLanRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.BaoCaoGianLanRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/lop-hoc/{id}/bang-diem": {
+      "get": {
+        "tags": [
+          "QuanLyLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/lop-hoc/{id}/bang-diem/chi-tiet": {
+      "get": {
+        "tags": [
+          "QuanLyLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/lop-hoc/{id}/tai-lieu": {
+      "get": {
+        "tags": [
+          "QuanLyLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/lop-hoc/{id}/tai-lieu/{fileId}/download": {
+      "get": {
+        "tags": [
+          "QuanLyLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/lop-hoc/bai-tap": {
+      "get": {
+        "tags": [
+          "QuanLyLopHoc"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/lop-hoc/bang-diem": {
+      "get": {
+        "tags": [
+          "QuanLyLopHoc"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/dang-ky-mon-hoc/danh-sach": {
+      "get": {
+        "tags": [
+          "SinhVienDangKyMonHoc"
+        ],
+        "parameters": [
+          {
+            "name": "hocKyId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sinhvien/dang-ky-mon-hoc/{maMon}/chi-tiet": {
+      "get": {
+        "tags": [
+          "SinhVienDangKyMonHoc"
+        ],
+        "parameters": [
+          {
+            "name": "maMon",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ApiResponse`1[[LMS_GV.DTOs.SinhVien.ChiTietMonHocDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ApiResponse`1[[LMS_GV.DTOs.SinhVien.ChiTietMonHocDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ApiResponse`1[[LMS_GV.DTOs.SinhVien.ChiTietMonHocDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sinhvien/dang-ky-mon-hoc/{maMon}/dang-ky": {
+      "post": {
+        "tags": [
+          "SinhVienDangKyMonHoc"
+        ],
+        "parameters": [
+          {
+            "name": "maMon",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.DangKyMonHocRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.DangKyMonHocRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.DangKyMonHocRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ApiResponse`1[[LMS_GV.DTOs.SinhVien.DangKyMonHocResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ApiResponse`1[[LMS_GV.DTOs.SinhVien.DangKyMonHocResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ApiResponse`1[[LMS_GV.DTOs.SinhVien.DangKyMonHocResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sinhvien/dang-ky-mon-hoc/kiem-tra-trung-lich": {
+      "get": {
+        "tags": [
+          "SinhVienDangKyMonHoc"
+        ],
+        "parameters": [
+          {
+            "name": "maMon",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "hocKyId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ApiResponse`1[[LMS_GV.DTOs.SinhVien.KiemTraTrungLichDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ApiResponse`1[[LMS_GV.DTOs.SinhVien.KiemTraTrungLichDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ApiResponse`1[[LMS_GV.DTOs.SinhVien.KiemTraTrungLichDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sinhvien/dang-ky-mon-hoc/da-dang-ky": {
+      "get": {
+        "tags": [
+          "SinhVienDangKyMonHoc"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sinhvien/thong-bao": {
+      "get": {
+        "tags": [
+          "SinhVienThongBao"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "daDoc",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/thong-bao/{id}": {
+      "get": {
+        "tags": [
+          "SinhVienThongBao"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/thong-bao/{id}/da-doc": {
+      "put": {
+        "tags": [
+          "SinhVienThongBao"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/thong-bao/chua-doc": {
+      "get": {
+        "tags": [
+          "SinhVienThongBao"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/thong-bao/danh-dau-tat-ca-da-doc": {
+      "put": {
+        "tags": [
+          "SinhVienThongBao"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/thoi-khoa-bieu/lich-thang/{year}/{month}": {
+      "get": {
+        "tags": [
+          "ThoiKhoaBieu"
+        ],
+        "parameters": [
+          {
+            "name": "year",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "month",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/thoi-khoa-bieu/tuan": {
+      "post": {
+        "tags": [
+          "ThoiKhoaBieu"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.TuanRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.TuanRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.TuanRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/thoi-khoa-bieu/hien-tai": {
+      "get": {
+        "tags": [
+          "ThoiKhoaBieu"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/thoi-khoa-bieu/ngay/{date}": {
+      "get": {
+        "tags": [
+          "ThoiKhoaBieu"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/thoi-khoa-bieu/buoi-hoc/{id}": {
+      "get": {
+        "tags": [
+          "ThoiKhoaBieu"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/thoi-khoa-bieu/lich-thi": {
+      "get": {
+        "tags": [
+          "ThoiKhoaBieu"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/thoi-khoa-bieu/lich-thi/{id}": {
+      "get": {
+        "tags": [
+          "ThoiKhoaBieu"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/thoi-khoa-bieu/tuan/danh-sach": {
+      "post": {
+        "tags": [
+          "ThoiKhoaBieu"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.TuanRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.TuanRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.TuanRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/sinhvien/thoi-khoa-bieu/hom-nay": {
+      "get": {
+        "tags": [
+          "ThoiKhoaBieu"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/truong-bo-mon/hoc-vien/thong-ke": {
+      "get": {
+        "tags": [
+          "TruongKhoaHocVien"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.ThongKeHocVienResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.ThongKeHocVienResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.ThongKeHocVienResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-bo-mon/hoc-vien": {
+      "get": {
+        "tags": [
+          "TruongKhoaHocVien"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "khoaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nganhId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "khoaTuyenSinhId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "trangThai",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.HocVienListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.HocVienListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.HocVienListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-bo-mon/hoc-vien/{id}": {
+      "get": {
+        "tags": [
+          "TruongKhoaHocVien"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.HocVienDetailResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.HocVienDetailResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.HocVienDetailResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-bo-mon/hoc-vien/{id}/bang-diem": {
+      "get": {
+        "tags": [
+          "TruongKhoaHocVien"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Collections.Generic.List`1[[LMS_GV.DTOs.TruongKhoa.BangDiemMonHocDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Collections.Generic.List`1[[LMS_GV.DTOs.TruongKhoa.BangDiemMonHocDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Collections.Generic.List`1[[LMS_GV.DTOs.TruongKhoa.BangDiemMonHocDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-bo-mon/hoc-vien/{id}/lich-su-diem": {
+      "get": {
+        "tags": [
+          "TruongKhoaHocVien"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "monHocId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "tuNgay",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "denNgay",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.LichSuDiemDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.LichSuDiemDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.LichSuDiemDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-bo-mon/hoc-vien/tim-kiem": {
+      "get": {
+        "tags": [
+          "TruongKhoaHocVien"
+        ],
+        "parameters": [
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "KhoaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NganhId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "KhoaTuyenSinhId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TrangThai",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "LopHocId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.HocVienListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.HocVienListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.HocVienListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-bo-mon/hoc-vien/filter": {
+      "get": {
+        "tags": [
+          "TruongKhoaHocVien"
+        ],
+        "parameters": [
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "KhoaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NganhId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "KhoaTuyenSinhId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TrangThai",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "LopHocId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.HocVienListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.HocVienListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.HocVienListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-bo-mon/hoc-vien/xuat-bao-cao": {
+      "get": {
+        "tags": [
+          "TruongKhoaHocVien"
+        ],
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "pdf"
+            }
+          },
+          {
+            "name": "loaiBaoCao",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "danh-sach"
+            }
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "khoaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nganhId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "khoaTuyenSinhId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/truong-bo-mon/hoc-vien/xuat-bao-cao/tao": {
+      "post": {
+        "tags": [
+          "TruongKhoaHocVien"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.XuatBaoCaoRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.XuatBaoCaoRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.XuatBaoCaoRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-khoa/ho-so": {
+      "get": {
+        "tags": [
+          "TruongKhoaHoSo"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.HoSoTruongKhoaDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.HoSoTruongKhoaDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.HoSoTruongKhoaDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-khoa/lop-hoc": {
+      "get": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "monHocId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "khoaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nganhId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "giangVienId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "trangThai",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.LopHocListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.LopHocListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.LopHocListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TaoLopHocRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TaoLopHocRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TaoLopHocRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-khoa/lop-hoc/{id}": {
+      "get": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.LopHocDetailDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.LopHocDetailDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.LopHocDetailDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.CapNhatLopHocRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.CapNhatLopHocRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.CapNhatLopHocRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-khoa/lop-hoc/{id}/giang-vien": {
+      "get": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.ThongTinGiangVienDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.ThongTinGiangVienDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.ThongTinGiangVienDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-khoa/lop-hoc/{id}/phan-cong-giang-vien": {
+      "post": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.PhanCongGiangVienRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.PhanCongGiangVienRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.PhanCongGiangVienRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-khoa/lop-hoc/{id}/kiem-tra-trung-lich": {
+      "get": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "giangVienId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.KiemTraTrungLichResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.KiemTraTrungLichResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.KiemTraTrungLichResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-khoa/lop-hoc/{id}/sinh-vien": {
+      "get": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nganhId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.ThongTinSinhVienDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.ThongTinSinhVienDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.ThongTinSinhVienDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.ThemSinhVienVaoLopRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.ThemSinhVienVaoLopRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.ThemSinhVienVaoLopRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-khoa/lop-hoc/{id}/sinh-vien/{svId}": {
+      "delete": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "svId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-khoa/lop-hoc/{id}/lich-day": {
+      "get": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Collections.Generic.List`1[[LMS_GV.DTOs.TruongKhoa.LichDayDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Collections.Generic.List`1[[LMS_GV.DTOs.TruongKhoa.LichDayDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Collections.Generic.List`1[[LMS_GV.DTOs.TruongKhoa.LichDayDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TaoLichDayRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TaoLichDayRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TaoLichDayRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-khoa/lop-hoc/{id}/lich-day/{lichId}": {
+      "put": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "lichId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.CapNhatLichDayRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.CapNhatLichDayRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.CapNhatLichDayRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "lichId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-khoa/lop-hoc/tim-kiem": {
+      "get": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MonHocId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "KhoaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NganhId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "GiangVienId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TrangThai",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.LopHocListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.LopHocListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.LopHocListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/truong-khoa/lop-hoc/filter": {
+      "get": {
+        "tags": [
+          "TruongKhoaLopHoc"
+        ],
+        "parameters": [
+          {
+            "name": "Search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "MonHocId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "KhoaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NganhId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "GiangVienId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TrangThai",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.LopHocListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.LopHocListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.LopHocListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LMS_GV.Controllers.LoginRequestDTO": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.Controllers.RegisterRequestDTO": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "gender": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "majorId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "courseId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.GoogleLoginRequestDTO": {
+        "type": "object",
+        "properties": {
+          "googleId": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "pictureUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.GoogleLoginResponseDTO": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "user": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.GoogleUserInfoDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.GoogleUserInfoDTO": {
+        "type": "object",
+        "properties": {
+          "nguoiDungId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "hoTen": {
+            "type": "string",
+            "nullable": true
+          },
+          "avatar": {
+            "type": "string",
+            "nullable": true
+          },
+          "vaiTroId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tenVaiTro": {
+            "type": "string",
+            "nullable": true
+          },
+          "sinhVienId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "giangVienId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "mssv": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.SinhVien.ApiResponse`1[[LMS_GV.DTOs.SinhVien.ChiTietMonHocDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ChiTietMonHocDTO"
+          },
+          "errorCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.SinhVien.ApiResponse`1[[LMS_GV.DTOs.SinhVien.DangKyMonHocResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.DangKyMonHocResponseDTO"
+          },
+          "errorCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.SinhVien.ApiResponse`1[[LMS_GV.DTOs.SinhVien.KiemTraTrungLichDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.KiemTraTrungLichDTO"
+          },
+          "errorCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.SinhVien.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "nullable": true
+          },
+          "errorCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.SinhVien.ChiTietMonHocDTO": {
+        "type": "object",
+        "properties": {
+          "maMon": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenMon": {
+            "type": "string",
+            "nullable": true
+          },
+          "giangVien": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailGiangVien": {
+            "type": "string",
+            "nullable": true
+          },
+          "thoiGianHoc": {
+            "type": "string",
+            "nullable": true
+          },
+          "diaDiem": {
+            "type": "string",
+            "nullable": true
+          },
+          "tinChi": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tongBuoi": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "soBuoiDuocVang": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "thoiGianBatDau": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "thoiGianKetThuc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "hocKy": {
+            "type": "string",
+            "nullable": true
+          },
+          "namHoc": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.SinhVien.ChiTietTrungLichDTO": {
+        "type": "object",
+        "properties": {
+          "maMon": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenMon": {
+            "type": "string",
+            "nullable": true
+          },
+          "thu": {
+            "type": "string",
+            "nullable": true
+          },
+          "gioBatDau": {
+            "type": "string",
+            "description": "TimeSpan format: HH:mm:ss (e.g., 08:00:00, 14:30:00)",
+            "nullable": true,
+            "example": "08:00:00"
+          },
+          "gioKetThuc": {
+            "type": "string",
+            "description": "TimeSpan format: HH:mm:ss (e.g., 08:00:00, 14:30:00)",
+            "nullable": true,
+            "example": "08:00:00"
+          },
+          "ngayTrung": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.SinhVien.DangKyMonHocRequestDTO": {
+        "type": "object",
+        "properties": {
+          "hocKyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "namHoc": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.SinhVien.DangKyMonHocResponseDTO": {
+        "type": "object",
+        "properties": {
+          "maMon": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenMon": {
+            "type": "string",
+            "nullable": true
+          },
+          "lopHoc": {
+            "type": "string",
+            "nullable": true
+          },
+          "giangVien": {
+            "type": "string",
+            "nullable": true
+          },
+          "hocKy": {
+            "type": "string",
+            "nullable": true
+          },
+          "thoiGianBatDau": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "thoiGianKetThuc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.SinhVien.KiemTraTrungLichDTO": {
+        "type": "object",
+        "properties": {
+          "coTrungLich": {
+            "type": "boolean"
+          },
+          "chiTietTrungLich": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LMS_GV.DTOs.SinhVien.ChiTietTrungLichDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.BangDiemMonHocDTO": {
+        "type": "object",
+        "properties": {
+          "monHoc": {
+            "type": "string",
+            "nullable": true
+          },
+          "diemBaiTap": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "diemGiuaKy": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "diemCuoiKy": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "diemChuyenCan": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "diemTrungBinhMon": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "diemChu": {
+            "type": "string",
+            "nullable": true
+          },
+          "gpaMon": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.BieuDoHoanThanhBaiTapDTO": {
+        "type": "object",
+        "properties": {
+          "monHoc": {
+            "type": "string",
+            "nullable": true
+          },
+          "daNop": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "chuaNop": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.CapNhatLichDayRequestDTO": {
+        "type": "object",
+        "properties": {
+          "thu": {
+            "type": "string",
+            "nullable": true
+          },
+          "gioBatDau": {
+            "type": "string",
+            "description": "TimeSpan format: HH:mm:ss (e.g., 08:00:00, 14:30:00)",
+            "nullable": true,
+            "example": "08:00:00"
+          },
+          "gioKetThuc": {
+            "type": "string",
+            "description": "TimeSpan format: HH:mm:ss (e.g., 08:00:00, 14:30:00)",
+            "nullable": true,
+            "example": "08:00:00"
+          },
+          "phongHocId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "loaiBuoiHoc": {
+            "type": "string",
+            "nullable": true
+          },
+          "soBuoi": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ghiChu": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.CapNhatLopHocRequestDTO": {
+        "type": "object",
+        "properties": {
+          "maLop": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenLop": {
+            "type": "string",
+            "nullable": true
+          },
+          "siSoToiDa": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "soTinChi": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "soTiet": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "soBuoiVangChoPhep": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ngayBatDau": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ngayKetThuc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.ChiTietTrungLichDTO": {
+        "type": "object",
+        "properties": {
+          "thu": {
+            "type": "string",
+            "nullable": true
+          },
+          "gioBatDau": {
+            "type": "string",
+            "description": "TimeSpan format: HH:mm:ss (e.g., 08:00:00, 14:30:00)",
+            "example": "08:00:00"
+          },
+          "gioKetThuc": {
+            "type": "string",
+            "description": "TimeSpan format: HH:mm:ss (e.g., 08:00:00, 14:30:00)",
+            "example": "08:00:00"
+          },
+          "phong": {
+            "type": "string",
+            "nullable": true
+          },
+          "coSo": {
+            "type": "string",
+            "nullable": true
+          },
+          "lopHocTrung": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.HoSoTruongKhoaDTO": {
+        "type": "object",
+        "properties": {
+          "maGiangVien": {
+            "type": "string",
+            "nullable": true
+          },
+          "hoTen": {
+            "type": "string",
+            "nullable": true
+          },
+          "gioiTinh": {
+            "type": "string",
+            "nullable": true
+          },
+          "ngaySinh": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "soDienThoai": {
+            "type": "string",
+            "nullable": true
+          },
+          "hocVi": {
+            "type": "string",
+            "nullable": true
+          },
+          "chucVu": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenKhoa": {
+            "type": "string",
+            "nullable": true
+          },
+          "chuyenMon": {
+            "type": "string",
+            "nullable": true
+          },
+          "diaChi": {
+            "type": "string",
+            "nullable": true
+          },
+          "tongSoLopGiangDay": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ngayGiaNhap": {
+            "type": "string",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "string",
+            "nullable": true
+          },
+          "avatar": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.HocVienDetailResponseDTO": {
+        "type": "object",
+        "properties": {
+          "thongTinCaNhan": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.ThongTinCaNhanDTO"
+          },
+          "bangDiemMonHoc": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.BangDiemMonHocDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.HocVienListDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mssv": {
+            "type": "string",
+            "nullable": true
+          },
+          "hoTen": {
+            "type": "string",
+            "nullable": true
+          },
+          "khoa": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenKhoa": {
+            "type": "string",
+            "nullable": true
+          },
+          "nganh": {
+            "type": "string",
+            "nullable": true
+          },
+          "monLop": {
+            "type": "string",
+            "nullable": true
+          },
+          "giangVien": {
+            "type": "string",
+            "nullable": true
+          },
+          "tongTinChi": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "gpa": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "string",
+            "nullable": true
+          },
+          "danhGia": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.KiemTraTrungLichResponseDTO": {
+        "type": "object",
+        "properties": {
+          "coTrungLich": {
+            "type": "boolean"
+          },
+          "chiTietTrungLich": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.ChiTietTrungLichDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.LichDayDTO": {
+        "type": "object",
+        "properties": {
+          "buoiHocId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "thu": {
+            "type": "string",
+            "nullable": true
+          },
+          "gioBatDau": {
+            "type": "string",
+            "description": "TimeSpan format: HH:mm:ss (e.g., 08:00:00, 14:30:00)",
+            "example": "08:00:00"
+          },
+          "gioKetThuc": {
+            "type": "string",
+            "description": "TimeSpan format: HH:mm:ss (e.g., 08:00:00, 14:30:00)",
+            "example": "08:00:00"
+          },
+          "tenPhong": {
+            "type": "string",
+            "nullable": true
+          },
+          "maPhong": {
+            "type": "string",
+            "nullable": true
+          },
+          "diaChi": {
+            "type": "string",
+            "nullable": true
+          },
+          "loaiBuoiHoc": {
+            "type": "string",
+            "nullable": true
+          },
+          "soBuoi": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ghiChu": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.LichSuDiemDTO": {
+        "type": "object",
+        "properties": {
+          "thoiGian": {
+            "type": "string",
+            "nullable": true
+          },
+          "nguoiThucHien": {
+            "type": "string",
+            "nullable": true
+          },
+          "monHoc": {
+            "type": "string",
+            "nullable": true
+          },
+          "thanhPhanDiem": {
+            "type": "string",
+            "nullable": true
+          },
+          "diemCu": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "diemMoi": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "lyDo": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.LopHocDetailDTO": {
+        "type": "object",
+        "properties": {
+          "lopHocId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maLop": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenLop": {
+            "type": "string",
+            "nullable": true
+          },
+          "monHoc": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.ThongTinMonHocDTO"
+          },
+          "hocKy": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.ThongTinHocKyDTO"
+          },
+          "giangVien": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.ThongTinGiangVienDTO"
+          },
+          "siSoHienTai": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "siSoToiDa": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "soTinChi": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "soTiet": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "soBuoiVangChoPhep": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ngayBatDau": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ngayKetThuc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "string",
+            "nullable": true
+          },
+          "danhSachSinhVien": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.ThongTinSinhVienDTO"
+            },
+            "nullable": true
+          },
+          "lichDay": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.LichDayDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.LopHocListDTO": {
+        "type": "object",
+        "properties": {
+          "lopHocId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maLop": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenLop": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenMonHoc": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenGiangVien": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenKhoa": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenNganh": {
+            "type": "string",
+            "nullable": true
+          },
+          "siSoHienTai": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "siSoToiDa": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "string",
+            "nullable": true
+          },
+          "ngayBatDau": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ngayKetThuc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.PhanCongGiangVienRequestDTO": {
+        "type": "object",
+        "properties": {
+          "giangVienId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ngayBatDauPhanCong": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ghiChu": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TaoLichDayRequestDTO": {
+        "type": "object",
+        "properties": {
+          "thu": {
+            "type": "string",
+            "nullable": true
+          },
+          "gioBatDau": {
+            "type": "string",
+            "description": "TimeSpan format: HH:mm:ss (e.g., 08:00:00, 14:30:00)",
+            "example": "08:00:00"
+          },
+          "gioKetThuc": {
+            "type": "string",
+            "description": "TimeSpan format: HH:mm:ss (e.g., 08:00:00, 14:30:00)",
+            "example": "08:00:00"
+          },
+          "phongHocId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "loaiBuoiHoc": {
+            "type": "string",
+            "nullable": true
+          },
+          "soBuoi": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ghiChu": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TaoLopHocRequestDTO": {
+        "type": "object",
+        "properties": {
+          "maLop": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenLop": {
+            "type": "string",
+            "nullable": true
+          },
+          "monHocId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hocKyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "khoaTuyenSinhId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "khoaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nganhId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "siSoToiDa": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "soTinChi": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "soTiet": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "soBuoiVangChoPhep": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "giangVienId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ngayBatDau": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ngayKetThuc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.ThemSinhVienVaoLopRequestDTO": {
+        "type": "object",
+        "properties": {
+          "sinhVienId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tinhTrang": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.ThongBaoGanDayDTO": {
+        "type": "object",
+        "properties": {
+          "noiDung": {
+            "type": "string",
+            "nullable": true
+          },
+          "thoiGian": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.ThongKeHocVienResponseDTO": {
+        "type": "object",
+        "properties": {
+          "tongSoHocVien": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hocVienHoatDong": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hocVienDaNghi": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tongSoLop": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tongGiangVien": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "thongBaoGanDay": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.ThongBaoGanDayDTO"
+            },
+            "nullable": true
+          },
+          "bieuDoHoanThanhBaiTap": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.BieuDoHoanThanhBaiTapDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.ThongTinCaNhanDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mssv": {
+            "type": "string",
+            "nullable": true
+          },
+          "hoTen": {
+            "type": "string",
+            "nullable": true
+          },
+          "gioiTinh": {
+            "type": "string",
+            "nullable": true
+          },
+          "ngaySinh": {
+            "type": "string",
+            "nullable": true
+          },
+          "dienThoai": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "avatar": {
+            "type": "string",
+            "nullable": true
+          },
+          "chuyenNganh": {
+            "type": "string",
+            "nullable": true
+          },
+          "khoa": {
+            "type": "string",
+            "nullable": true
+          },
+          "tongTinChi": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ngayTaoHoSo": {
+            "type": "string",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "string",
+            "nullable": true
+          },
+          "gpaTichLuy": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.ThongTinGiangVienDTO": {
+        "type": "object",
+        "properties": {
+          "giangVienId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hoTen": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "hocVi": {
+            "type": "string",
+            "nullable": true
+          },
+          "chuyenMon": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.ThongTinHocKyDTO": {
+        "type": "object",
+        "properties": {
+          "hocKyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "namHoc": {
+            "type": "string",
+            "nullable": true
+          },
+          "kiHoc": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.ThongTinMonHocDTO": {
+        "type": "object",
+        "properties": {
+          "monHocId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maMon": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenMon": {
+            "type": "string",
+            "nullable": true
+          },
+          "soTinChi": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.ThongTinSinhVienDTO": {
+        "type": "object",
+        "properties": {
+          "sinhVienId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mssv": {
+            "type": "string",
+            "nullable": true
+          },
+          "hoTen": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenNganh": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenKhoaTuyenSinh": {
+            "type": "string",
+            "nullable": true
+          },
+          "gpa": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "string",
+            "nullable": true
+          },
+          "ngayVaoLop": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.HoSoTruongKhoaDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.HoSoTruongKhoaDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.HocVienDetailResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.HocVienDetailResponseDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.KiemTraTrungLichResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.KiemTraTrungLichResponseDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.LopHocDetailDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.LopHocDetailDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.ThongKeHocVienResponseDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.ThongKeHocVienResponseDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[LMS_GV.DTOs.TruongKhoa.ThongTinGiangVienDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.ThongTinGiangVienDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Collections.Generic.List`1[[LMS_GV.DTOs.TruongKhoa.BangDiemMonHocDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.BangDiemMonHocDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Collections.Generic.List`1[[LMS_GV.DTOs.TruongKhoa.LichDayDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.LichDayDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedData`1[[LMS_GV.DTOs.TruongKhoa.HocVienListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.HocVienListDTO"
+            },
+            "nullable": true
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedData`1[[LMS_GV.DTOs.TruongKhoa.LichSuDiemDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.LichSuDiemDTO"
+            },
+            "nullable": true
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedData`1[[LMS_GV.DTOs.TruongKhoa.LopHocListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.LopHocListDTO"
+            },
+            "nullable": true
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedData`1[[LMS_GV.DTOs.TruongKhoa.ThongTinSinhVienDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.ThongTinSinhVienDTO"
+            },
+            "nullable": true
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.HocVienListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedData`1[[LMS_GV.DTOs.TruongKhoa.HocVienListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.LichSuDiemDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedData`1[[LMS_GV.DTOs.TruongKhoa.LichSuDiemDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.LopHocListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedData`1[[LMS_GV.DTOs.TruongKhoa.LopHocListDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedResponse`1[[LMS_GV.DTOs.TruongKhoa.ThongTinSinhVienDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LMS_GV.DTOs.TruongKhoa.TruongKhoaPagedData`1[[LMS_GV.DTOs.TruongKhoa.ThongTinSinhVienDTO, LMS_GV, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.DTOs.TruongKhoa.XuatBaoCaoRequestDTO": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "nullable": true
+          },
+          "loaiBaoCao": {
+            "type": "string",
+            "nullable": true
+          },
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "khoaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nganhId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "khoaTuyenSinhId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.SinhVien.DTOs.BaoCaoGianLanRequestDTO": {
+        "type": "object",
+        "properties": {
+          "baiNopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lyDo": {
+            "type": "string",
+            "nullable": true
+          },
+          "chiTiet": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.SinhVien.DTOs.CapNhatAvatarRequestDTO": {
+        "required": [
+          "avatarUrl"
+        ],
+        "type": "object",
+        "properties": {
+          "avatarUrl": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.SinhVien.DTOs.CauTraLoiRequestDTO": {
+        "type": "object",
+        "properties": {
+          "cauHoiId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "luaChonSinhVien": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.SinhVien.DTOs.NopBaiRequestDTO": {
+        "type": "object",
+        "properties": {
+          "baiNopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cauTraLoi": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.CauTraLoiRequestDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.SinhVien.DTOs.TaiAnhTuUrlRequestDTO": {
+        "required": [
+          "imageUrl"
+        ],
+        "type": "object",
+        "properties": {
+          "imageUrl": {
+            "minLength": 1,
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.SinhVien.DTOs.ThongTinCaNhanDTO": {
+        "required": [
+          "hoTen"
+        ],
+        "type": "object",
+        "properties": {
+          "anhDaiDien": {
+            "type": "string",
+            "nullable": true
+          },
+          "hoTen": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string"
+          },
+          "maSv": {
+            "type": "string",
+            "nullable": true
+          },
+          "ngaySinh": {
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$",
+            "type": "string",
+            "nullable": true
+          },
+          "gioiTinh": {
+            "maxLength": 10,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "maxLength": 255,
+            "minLength": 0,
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "diaChi": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "diemGPA": {
+            "maximum": 4,
+            "minimum": 0,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "tongTinChi": {
+            "maximum": 200,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "khoa": {
+            "type": "string",
+            "nullable": true
+          },
+          "nganh": {
+            "type": "string",
+            "nullable": true
+          },
+          "thoiGianDaoTao": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.SinhVien.DTOs.TienDoRequestDTO": {
+        "type": "object",
+        "properties": {
+          "baiNopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "soCauDaLam": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cauTraLoi": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LMS_GV.SinhVien.DTOs.CauTraLoiRequestDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LMS_GV.SinhVien.DTOs.TuanRequestDto": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Nhập Bearer token (không cần thêm 'Bearer ' phía trước)",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

@@ -19,6 +19,7 @@ public partial class ThongBao
 
     public DateTime? UpdatedAt { get; set; }
 
+
     public virtual NguoiDung? NguoiDang { get; set; }
 
     public virtual ICollection<ThongBaoNguoiDung> ThongBaoNguoiDungs { get; set; } = new List<ThongBaoNguoiDung>();

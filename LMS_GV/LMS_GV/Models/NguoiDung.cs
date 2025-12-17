@@ -6,37 +6,21 @@ namespace LMS_GV.Models;
 public partial class NguoiDung
 {
     public int NguoiDungId { get; set; }
-
     public string TenDangNhap { get; set; } = null!;
-
     public string? HashMatKhau { get; set; }
-
     public string? Email { get; set; }
-
     public string? HoTen { get; set; }
-
     public string? DangnhapGoogle { get; set; }
-
     public bool? EmailGoogleVerified { get; set; }
-
     public string? Avatar { get; set; }
-
-    public DateOnly? NgaySinh { get; set; }
-
+    public DateTime? NgaySinh { get; set; }
     public string? GioiTinh { get; set; }
-
     public string? DiaChi { get; set; }
-
     public string? SoDienThoai { get; set; }
-
     public byte? TrangThai { get; set; }
-
     public int? VaiTroId { get; set; }
-
     public DateTime? LanDangNhapCuoi { get; set; }
-
     public DateTime? CreatedAt { get; set; }
-
     public DateTime? UpdatedAt { get; set; }
 
     public virtual ICollection<BaiHoc> BaiHocs { get; set; } = new List<BaiHoc>();
