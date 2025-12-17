@@ -248,6 +248,16 @@ namespace LMS_GV.Controllers.Admin
             if (khoa == null)
                 return NotFound(new { message = "Không tìm thấy khoa" });
 
+            var hasRunningClasses = await _db.LopHocs
+                .AnyAsync(l => l.KhoaId == id && l.TrangThai == 1);
+            if (hasRunningClasses)
+            {
+                return BadRequest(new
+                {
+                    message = "Khoa này đang có lớp học đang hoạt động"
+                });
+            }
+
             var hasMajors = await _db.Nganhs
                 .AnyAsync(n => n.KhoaId == id);
             if (hasMajors)

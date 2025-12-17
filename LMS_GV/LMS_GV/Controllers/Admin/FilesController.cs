@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
@@ -70,6 +70,13 @@ namespace LMS_GV.Controllers.Admin
                     tieuDe = b != null ? b.TieuDe : null,
                     loaiBaiHoc = b != null ? b.LoaiBaiHoc : null,
                     nguoiUpload = nd != null ? nd.HoTen : null,
+                    monHoc = (
+                        (from bl in _db.BaiHocLops
+                         join l in _db.LopHocs on bl.LopHocId equals l.LopHocId
+                         join m in _db.MonHocs on l.MonHocId equals m.MonHocId
+                         where bl.BaiHocId == f.BaiHocId
+                         select m.TenMon).Distinct().FirstOrDefault()
+                    ),
                     createdAt = f.CreatedAt
                 }
             ).ToListAsync();
@@ -138,7 +145,7 @@ namespace LMS_GV.Controllers.Admin
                 return NotFound(new { message = "Không tìm thấy file" });
 
             var path = Path.Combine(_env.WebRootPath ?? "wwwroot",
-                file.DuongDan.TrimStart('/').Replace("/", Path.DirectorySeparatorChar.ToString()));
+                (file.DuongDan ?? "").TrimStart('/').Replace("/", Path.DirectorySeparatorChar.ToString()));
 
             if (!System.IO.File.Exists(path))
                 return NotFound(new { message = "File vật lý không tồn tại trên server" });

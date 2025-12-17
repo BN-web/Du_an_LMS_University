@@ -4740,6 +4740,11 @@
           "password": {
             "type": "string",
             "nullable": true
+          },
+          "vaiTroId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -4903,6 +4908,16 @@
           "status": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
             "nullable": true
           }
         },

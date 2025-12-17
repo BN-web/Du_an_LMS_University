@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\LMS_GV.csproj": {}
+    "C:\\Users\\QTHANH\\Desktop\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\LMS_GV.csproj": {}
   },
   "projects": {
-    "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\LMS_GV.csproj": {
+    "C:\\Users\\QTHANH\\Desktop\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\LMS_GV.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\LMS_GV.csproj",
+        "projectUniqueName": "C:\\Users\\QTHANH\\Desktop\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\LMS_GV.csproj",
         "projectName": "LMS_GV",
-        "projectPath": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\LMS_GV.csproj",
+        "projectPath": "C:\\Users\\QTHANH\\Desktop\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\LMS_GV.csproj",
         "packagesPath": "C:\\Users\\QTHANH\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\obj\\",
+        "outputPath": "C:\\Users\\QTHANH\\Desktop\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

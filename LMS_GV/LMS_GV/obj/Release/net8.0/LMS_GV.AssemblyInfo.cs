@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LMS_GV")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fc5878815b1d8c3432be47df71f698db9e7f5450")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48998a59356ff1d110a30547cdea6173e3336e78")]
 [assembly: System.Reflection.AssemblyProductAttribute("LMS_GV")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LMS_GV")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

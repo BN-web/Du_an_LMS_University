@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
@@ -208,6 +208,7 @@ namespace LMS_GV.Controllers.Admin
             {
                 id = d.DiemId,
                 sinhVienId = d.SinhVienId,
+                lopHocId = d.LopHocId,
                 mssv = sv?.Mssv,
                 fullName = nd?.HoTen,
                 nganh = ng?.TenNganh,

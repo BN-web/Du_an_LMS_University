@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|c:\\users\\qthanh\\desktop\\login-sinhvien\\lms\\du_an_lms_university\\lms_gv\\lms_gv\\controllers\\admin\\hockycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\controllers\\admin\\hockycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|c:\\users\\qthanh\\desktop\\login-sinhvien\\lms\\du_an_lms_university\\lms_gv\\lms_gv\\controllers\\truongkhoa\\truongkhoacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\controllers\\truongkhoa\\truongkhoacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -91,10 +95,6 @@
       "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\controllers\\admin\\tuychoncauhoicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|c:\\users\\qthanh\\desktop\\login-sinhvien\\lms\\du_an_lms_university\\lms_gv\\lms_gv\\controllers\\admin\\hockycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\controllers\\admin\\hockycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|c:\\users\\qthanh\\desktop\\login-sinhvien\\lms\\du_an_lms_university\\lms_gv\\lms_gv\\controllers\\admin\\diemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F25CC5A5-68D1-48C4-B79D-A33AE60570BB}|LMS_GV\\LMS_GV.csproj|solutionrelative:lms_gv\\controllers\\admin\\diemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -142,50 +142,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TruongKhoaController.cs",
-              "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\TruongKhoa\\TruongKhoaController.cs",
-              "RelativeDocumentMoniker": "LMS_GV\\Controllers\\TruongKhoa\\TruongKhoaController.cs",
-              "ToolTip": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\TruongKhoa\\TruongKhoaController.cs",
-              "RelativeToolTip": "LMS_GV\\Controllers\\TruongKhoa\\TruongKhoaController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T04:47:19.832Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\TruongKhoa\\AuthController.cs",
-              "RelativeDocumentMoniker": "LMS_GV\\Controllers\\TruongKhoa\\AuthController.cs",
-              "ToolTip": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\TruongKhoa\\AuthController.cs",
-              "RelativeToolTip": "LMS_GV\\Controllers\\TruongKhoa\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T04:47:15.24Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ThangDiemController.cs",
-              "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\ThangDiemController.cs",
-              "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\ThangDiemController.cs",
-              "ToolTip": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\ThangDiemController.cs",
-              "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\ThangDiemController.cs",
-              "ViewState": "AgIAAD8AAAAAAAAAAAAlwEMAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-07T06:54:45.043Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "NganhController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\NganhController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\NganhController.cs",
@@ -193,12 +154,11 @@
               "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\NganhController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T02:55:50.733Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T02:55:50.733Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "SinhVienController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\SinhVienController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\SinhVienController.cs",
@@ -206,12 +166,11 @@
               "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\SinhVienController.cs",
               "ViewState": "AgIAAIABAAAAAAAAAAAlwIgBAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-06T16:11:26.397Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-06T16:11:26.397Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "LopHocController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\LopHocController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\LopHocController.cs",
@@ -219,12 +178,60 @@
               "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\LopHocController.cs",
               "ViewState": "AgIAAMEBAAAAAAAAAAAMwMkBAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-07T06:56:11.286Z",
+              "WhenOpened": "2025-12-07T06:56:11.286Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HocKyController.cs",
+              "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\HocKyController.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\HocKyController.cs",
+              "ToolTip": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\HocKyController.cs",
+              "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\HocKyController.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAArwEUAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T07:07:18.771Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
+              "Title": "TruongKhoaController.cs",
+              "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\TruongKhoa\\TruongKhoaController.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Controllers\\TruongKhoa\\TruongKhoaController.cs",
+              "ToolTip": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\TruongKhoa\\TruongKhoaController.cs",
+              "RelativeToolTip": "LMS_GV\\Controllers\\TruongKhoa\\TruongKhoaController.cs",
+              "ViewState": "AgIAALMAAAAAAAAAAAAYwLgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T04:47:19.832Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ThangDiemController.cs",
+              "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\ThangDiemController.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\ThangDiemController.cs",
+              "ToolTip": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\ThangDiemController.cs",
+              "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\ThangDiemController.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAlwEMAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T06:54:45.043Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\TruongKhoa\\AuthController.cs",
+              "RelativeDocumentMoniker": "LMS_GV\\Controllers\\TruongKhoa\\AuthController.cs",
+              "ToolTip": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\TruongKhoa\\AuthController.cs",
+              "RelativeToolTip": "LMS_GV\\Controllers\\TruongKhoa\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-09T04:47:15.24Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "KhoaController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\KhoaController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\KhoaController.cs",
@@ -232,12 +239,11 @@
               "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\KhoaController.cs",
               "ViewState": "AgIAADsAAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T02:55:44.674Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T02:55:44.674Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "GiangVienLopController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\GiangVienLopController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\GiangVienLopController.cs",
@@ -245,12 +251,11 @@
               "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\GiangVienLopController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T02:55:48.12Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T02:55:48.12Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "GiangVienController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\GiangVienController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\GiangVienController.cs",
@@ -258,12 +263,11 @@
               "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\GiangVienController.cs",
               "ViewState": "AgIAADUBAAAAAAAAAAAlwEUBAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-06T16:16:41.746Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-06T16:16:41.746Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "KetQuaKiemTraController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\KetQuaKiemTraController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\KetQuaKiemTraController.cs",
@@ -271,12 +275,11 @@
               "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\KetQuaKiemTraController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T02:55:50.243Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T02:55:50.243Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "KhoaTuyenSinhController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\KhoaTuyenSinhController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\KhoaTuyenSinhController.cs",
@@ -284,12 +287,11 @@
               "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\KhoaTuyenSinhController.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAAAwAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-09T02:55:36.289Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-09T02:55:36.289Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "MonHocController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\MonHocController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\MonHocController.cs",
@@ -297,12 +299,11 @@
               "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\MonHocController.cs",
               "ViewState": "AgIAAIMAAAAAAAAAAAAMwIsAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-07T07:07:23.99Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-07T07:07:23.99Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "SinhVienLopController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\SinhVienLopController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\SinhVienLopController.cs",
@@ -310,12 +311,11 @@
               "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\SinhVienLopController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-07T06:51:41.38Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-07T06:51:41.38Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "FilesController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\FilesController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\FilesController.cs",
@@ -323,12 +323,11 @@
               "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\FilesController.cs",
               "ViewState": "AgIAAHwAAAAAAAAAAAAswIwAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-07T06:55:20.763Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-07T06:55:20.763Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "DiemChuyenCanController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\DiemChuyenCanController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\DiemChuyenCanController.cs",
@@ -336,12 +335,11 @@
               "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\DiemChuyenCanController.cs",
               "ViewState": "AgIAAGkAAAAAAAAAAAApwG4AAABeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-07T06:55:24.48Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-07T06:55:24.48Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\appsettings.json",
               "RelativeDocumentMoniker": "LMS_GV\\appsettings.json",
@@ -353,7 +351,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "PhongHocController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\PhongHocController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\PhongHocController.cs",
@@ -365,7 +363,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "BuoiHocController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\BuoiHocController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\BuoiHocController.cs",
@@ -377,7 +375,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "BaiNopController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\BaiNopController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\BaiNopController.cs",
@@ -389,7 +387,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\AuthController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\AuthController.cs",
@@ -401,7 +399,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "TuyChonCauHoiController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\TuyChonCauHoiController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\TuyChonCauHoiController.cs",
@@ -413,7 +411,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "BaiHocLopController.cs",
               "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\BaiHocLopController.cs",
               "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\BaiHocLopController.cs",
@@ -422,18 +420,6 @@
               "ViewState": "AgIAADIAAAAAAAAAAAApwDcAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-07T06:57:00.293Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "HocKyController.cs",
-              "DocumentMoniker": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\HocKyController.cs",
-              "RelativeDocumentMoniker": "LMS_GV\\Controllers\\Admin\\HocKyController.cs",
-              "ToolTip": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\Controllers\\Admin\\HocKyController.cs",
-              "RelativeToolTip": "LMS_GV\\Controllers\\Admin\\HocKyController.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAIAywC8AAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-07T07:07:18.771Z"
             },
             {
               "$type": "Document",

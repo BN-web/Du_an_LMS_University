@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -424,13 +424,11 @@ namespace LMS_GV.Controllers.Admin
                 var hasBuoiThi = await _db.BuoiThis
                     .AnyAsync(bt => bt.LopHocId == id);
 
-                if (usedByStudents || hasBuoiHoc || hasBuoiThi)
-                {
-                    return BadRequest(new
-                    {
-                        message = "Không thể xóa lớp vì đang có sinh viên/buổi học/buổi thi liên quan"
-                    });
-                }
+                if (usedByStudents)
+                    return BadRequest(new { message = "Lớp học này đang có sinh viên học" });
+
+                if (hasBuoiHoc || hasBuoiThi)
+                    return BadRequest(new { message = "Không thể xóa lớp vì đang có buổi học/buổi thi liên quan" });
 
                 _db.LopHocs.Remove(lop);
                 await _db.SaveChangesAsync();

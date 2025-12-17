@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using LMS_GV.Models.Data;
 using Microsoft.AspNetCore.Authorization;
@@ -44,15 +44,17 @@ namespace LMS_GV.Controllers.Admin
 
             // Giảng viên theo "ngành" – ở schema hiện tại chỉ có Khoa + ChuyenMon,
             // nên mình group theo ChuyenMon như ngành/chuyên ngành.
-            var teacherByMajor = await _db.GiangViens
-                .AsNoTracking()
-                .GroupBy(g => g.ChuyenMon ?? "Khác")
-                .Select(g => new
+            var teacherByMajor = await (
+                from gl in _db.GiangVienLops
+                join l in _db.LopHocs on gl.LopHocId equals l.LopHocId
+                join ng in _db.Nganhs on l.NganhId equals ng.NganhId
+                group gl by new { ng.NganhId, ng.TenNganh } into g
+                select new
                 {
-                    label = g.Key,
-                    total = g.Count()
-                })
-                .ToListAsync();
+                    label = g.Key.TenNganh,
+                    total = g.Select(x => x.GiangVienId).Distinct().Count()
+                }
+            ).ToListAsync();
 
             return Ok(new
             {

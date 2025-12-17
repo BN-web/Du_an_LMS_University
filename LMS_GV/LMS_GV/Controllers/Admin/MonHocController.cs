@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -48,6 +48,8 @@ namespace LMS_GV.Controllers.Admin
             public int? HocKyId { get; set; }   // không lưu trực tiếp
 
             public byte? Status { get; set; }   // 1/2
+            public DateOnly? StartDate { get; set; }
+            public DateOnly? EndDate { get; set; }
         }
 
         public class UpdateMonHocRequest
@@ -120,29 +122,37 @@ namespace LMS_GV.Controllers.Admin
                         l.HocKyId == hkId));
             }
 
-            var list = await query
-                .OrderBy(m => m.TenMon)
-                .Select(m => new
-                {
-                    id = m.MonHocId,
-                    code = m.MaMon,
-                    name = m.TenMon,
-                    soTinChi = m.SoTinChi,
-                    status = m.TrangThai,
-                    khoaName = (
-                        from l in _db.LopHocs
-                        join k in _db.Khoas on l.KhoaId equals k.KhoaId
-                        where l.MonHocId == m.MonHocId
-                        select k.TenKhoa
-                    ).FirstOrDefault(),
-                    hocKy = (
-                        from l in _db.LopHocs
-                        join hk in _db.HocKys on l.HocKyId equals hk.HocKyId
-                        where l.MonHocId == m.MonHocId
-                        select hk.KiHoc
-                    ).FirstOrDefault()
-                })
-                .ToListAsync();
+                var list = await query
+                    .OrderBy(m => m.TenMon)
+                    .Select(m => new
+                    {
+                        id = m.MonHocId,
+                        code = m.MaMon,
+                        name = m.TenMon,
+                        soTinChi = m.SoTinChi,
+                        status = m.TrangThai,
+                        createdAt = m.CreatedAt,
+                        khoaName = (
+                            (from l in _db.LopHocs
+                             join k in _db.Khoas on l.KhoaId equals k.KhoaId
+                             where l.MonHocId == m.MonHocId
+                             select k.TenKhoa).Distinct().FirstOrDefault()
+                        ) ?? (
+                            (from ct in _db.ChuongTrinhDaoTaos
+                             join ctmh in _db.ChuongTrinhMonHocs on ct.ChuongTrinhDaoTaoId equals ctmh.ChuongTrinhDaoTaoId
+                             join ng in _db.Nganhs on ct.NganhId equals ng.NganhId
+                             join k in _db.Khoas on ng.KhoaId equals k.KhoaId
+                             where ctmh.MonHocId == m.MonHocId
+                             select k.TenKhoa).Distinct().FirstOrDefault()
+                        ),
+                        hocKy = (
+                            (from l in _db.LopHocs
+                             join hk in _db.HocKys on l.HocKyId equals hk.HocKyId
+                             where l.MonHocId == m.MonHocId
+                             select hk.KiHoc).Distinct().FirstOrDefault()
+                        )
+                    })
+                    .ToListAsync();
 
             return Ok(list);
         }
@@ -171,9 +181,20 @@ namespace LMS_GV.Controllers.Admin
                 {
                     khoaName = k != null ? k.TenKhoa : null,
                     hocKy = hk != null ? hk.KiHoc : null,
-                    namHoc = hk != null ? hk.NamHoc : null
+                    namHoc = hk != null ? hk.NamHoc : null,
+                    startDate = l.NgayBatDau,
+                    endDate = l.NgayKetThuc
                 }
             ).FirstOrDefaultAsync();
+
+            var fallbackKhoaName = await (
+                from ct in _db.ChuongTrinhDaoTaos
+                join ctmh in _db.ChuongTrinhMonHocs on ct.ChuongTrinhDaoTaoId equals ctmh.ChuongTrinhDaoTaoId
+                join ng in _db.Nganhs on ct.NganhId equals ng.NganhId
+                join k in _db.Khoas on ng.KhoaId equals k.KhoaId
+                where ctmh.MonHocId == id
+                select k.TenKhoa
+            ).Distinct().FirstOrDefaultAsync();
 
             // Giảng viên: lấy distinct theo LopHoc.GiangVienId
             var giangVien = await (
@@ -236,9 +257,11 @@ namespace LMS_GV.Controllers.Admin
                 name = mon.TenMon,
                 soTinChi = mon.SoTinChi,
                 status = mon.TrangThai,
-                khoaName = firstClassInfo?.khoaName,
+                khoaName = firstClassInfo?.khoaName ?? fallbackKhoaName,
                 hocKy = firstClassInfo?.hocKy,
                 namHoc = firstClassInfo?.namHoc,
+                startDate = firstClassInfo?.startDate,
+                endDate = firstClassInfo?.endDate,
                 lecturers = giangVien,
                 lopHoc = lopList,
                 documents,
@@ -283,6 +306,38 @@ namespace LMS_GV.Controllers.Admin
 
             _db.MonHocs.Add(mon);
             await _db.SaveChangesAsync();
+
+            if (req.KhoaId.HasValue && req.NganhId.HasValue && req.HocKyId.HasValue)
+            {
+                var existsKhoa = await _db.Khoas.AnyAsync(k => k.KhoaId == req.KhoaId.Value);
+                var existsNganh = await _db.Nganhs.AnyAsync(n => n.NganhId == req.NganhId.Value);
+                var existsHocKy = await _db.HocKys.AnyAsync(h => h.HocKyId == req.HocKyId.Value);
+
+                if (existsKhoa && existsNganh && existsHocKy)
+                {
+                    var maLopGen = "LP" + mon.MonHocId;
+                    var maLop = maLopGen.Length <= 10 ? maLopGen : maLopGen.Substring(0, 10);
+
+                    var lop = new LopHoc
+                    {
+                        MaLop = maLop,
+                        TenLop = mon.TenMon,
+                        MonHocId = mon.MonHocId,
+                        HocKyId = req.HocKyId.Value,
+                        KhoaId = req.KhoaId.Value,
+                        NganhId = req.NganhId.Value,
+                        SoTinChi = req.SoTinChi,
+                        NgayBatDau = req.StartDate,
+                        NgayKetThuc = req.EndDate,
+                        SiSo = 0,
+                        TrangThai = 1,
+                        CreatedAt = DateTime.UtcNow
+                    };
+
+                    _db.LopHocs.Add(lop);
+                    await _db.SaveChangesAsync();
+                }
+            }
 
             return CreatedAtAction(nameof(GetDetail), new { id = mon.MonHocId }, new
             {

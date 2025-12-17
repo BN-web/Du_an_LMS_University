@@ -18,7 +18,7 @@ namespace LMS_GV.Controllers.TruongKhoa
 {
     [ApiController]
     [Route("api/truong-khoa")]
-    [Authorize(Roles = "TruongMon")]
+    [Authorize(Roles = "TruongMon,TruongKhoa")]
     public class TruongKhoaQuanLyController : ControllerBase
     {
         private readonly AppDbContext _db;
@@ -424,10 +424,14 @@ namespace LMS_GV.Controllers.TruongKhoa
                 lopHocId = b.LopHocId,
                 tenLop = b.LopHoc.TenLop,
                 mon = b.LopHoc.MonHoc.TenMon,
+                monHocId = b.LopHoc.MonHocId,
+                monHocTen = b.LopHoc.MonHoc.TenMon,
                 ngay = b.ThoiGianBatDau,
                 gioBatDau = b.ThoiGianBatDau,
                 gioKetThuc = b.ThoiGianKetThuc,
                 phong = b.PhongHoc.TenPhong,
+                phongHocId = b.PhongHocId,
+                phongHocTen = b.PhongHoc != null ? b.PhongHoc.TenPhong : null,
                 diaDiem = b.PhongHoc.DiaChi,
                 trangThai = b.TrangThai
             }).OrderBy(x => x.ngay).ToListAsync();
@@ -665,7 +669,12 @@ namespace LMS_GV.Controllers.TruongKhoa
             }
             await _db.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetDashboardSummary), new { id = tb.ThongBaoId }, new { id = tb.ThongBaoId });
+            var nguoiDangTen = await _db.NguoiDungs
+                .Where(nd => nd.NguoiDungId == tb.NguoiDangId)
+                .Select(nd => nd.HoTen)
+                .FirstOrDefaultAsync();
+
+            return CreatedAtAction(nameof(GetDashboardSummary), new { id = tb.ThongBaoId }, new { id = tb.ThongBaoId, tieuDe = tb.TieuDe, nguoiDangTen });
         }
 
         private async Task<List<int>> ResolveReceiversForDean(string target, int? groupId)

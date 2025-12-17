@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+0vXZwMAweE=",
+  "dgSpecHash": "o5NrW7NhE7I=",
   "success": true,
-  "projectFilePath": "C:\\Users\\QTHANH\\Desktop\\login-sinhvien\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\LMS_GV.csproj",
+  "projectFilePath": "C:\\Users\\QTHANH\\Desktop\\LMS\\Du_an_LMS_University\\LMS_GV\\LMS_GV\\LMS_GV.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\QTHANH\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\QTHANH\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

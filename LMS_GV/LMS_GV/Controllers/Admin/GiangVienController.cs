@@ -80,6 +80,8 @@ namespace LMS_GV.Controllers.Admin
             public byte? Status { get; set; } // default 1
 
             public string? Password { get; set; }
+            
+            public int? VaiTroId { get; set; }
         }
 
         public class UpdateGiangVienRequest
@@ -271,6 +273,7 @@ namespace LMS_GV.Controllers.Admin
 
             // Tạo tài khoản người dùng (VaiTro_id = 2: Giảng viên)
             var initialPassword = GenerateRandomPassword(10);
+            var roleId = req.VaiTroId ?? (string.Equals(req.ChucVu ?? "", "Trưởng khoa", StringComparison.OrdinalIgnoreCase) ? 3 : 2);
             var user = new NguoiDung
             {
                 TenDangNhap = (req.Email ?? string.Empty).Trim(),
@@ -282,7 +285,7 @@ namespace LMS_GV.Controllers.Admin
                 Avatar = req.Avatar,
                 DiaChi = req.Address,
                 TrangThai = req.Status ?? 1,
-                VaiTroId = 2,
+                VaiTroId = roleId,
                 CreatedAt = DateTime.UtcNow,
                 HashMatKhau = BCrypt.Net.BCrypt.HashPassword(initialPassword)
             };
@@ -381,6 +384,14 @@ namespace LMS_GV.Controllers.Admin
             gv.ChucVu = req.ChucVu;
             gv.KhoaId = req.KhoaId;
             gv.UpdatedAt = DateTime.UtcNow;
+            if (user != null && !string.IsNullOrWhiteSpace(req.ChucVu))
+            {
+                var newRoleId = string.Equals(req.ChucVu ?? "", "Trưởng khoa", StringComparison.OrdinalIgnoreCase) ? 3 : 2;
+                if ((user.VaiTroId ?? 0) != newRoleId)
+                {
+                    user.VaiTroId = newRoleId;
+                }
+            }
 
             await _db.SaveChangesAsync();
             return NoContent();
