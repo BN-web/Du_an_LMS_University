@@ -1,4 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using LMS_GV.Models.Data;
 using Microsoft.EntityFrameworkCore;

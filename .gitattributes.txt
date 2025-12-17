@@ -1,0 +1,29 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build
+bin/
+obj/
+Debug/
+Release/
+
+# Publish
+publish/
+
+# Logs
+*.log
+
+# Temp
+*.tmp
+
+# DotNet artifacts
+project.lock.json
+project.fragment.lock.json
+
+# Rider
+.idea/
+
+# User secrets
+secrets.json

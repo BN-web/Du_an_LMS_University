@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace LMS_GV.Models.DTO_GiangVien
 {
