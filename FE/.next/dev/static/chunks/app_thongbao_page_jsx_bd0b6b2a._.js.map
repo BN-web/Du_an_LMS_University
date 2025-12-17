@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///D:/FE/app/thongbao/page.jsx"],"sourcesContent":["\"use client\"\n\nexport default function ThongBaoPage() {\n  return (\n    <main className=\"flex-1 p-6\">\n      <h1 className=\"text-[#4A90D9] text-2xl font-bold mb-6\">Thông báo</h1>\n      <p className=\"text-gray-500\">Trang này sẽ được phát triển sau.</p>\n    </main>\n  )\n}\n"],"names":[],"mappings":";;;;;AAAA;;AAEe,SAAS;IACtB,qBACE,6LAAC;QAAK,WAAU;;0BACd,6LAAC;gBAAG,WAAU;0BAAyC;;;;;;0BACvD,6LAAC;gBAAE,WAAU;0BAAgB;;;;;;;;;;;;AAGnC;KAPwB"}}]
+}

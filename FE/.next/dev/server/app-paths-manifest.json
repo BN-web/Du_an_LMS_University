@@ -1,0 +1,11 @@
+{
+  "/giangvien/[id]/page": "app/giangvien/[id]/page.js",
+  "/giangvien/page": "app/giangvien/page.js",
+  "/hocvien/page": "app/hocvien/page.js",
+  "/lichday/page": "app/lichday/page.js",
+  "/login/page": "app/login/page.js",
+  "/lophoc/page": "app/lophoc/page.js",
+  "/page": "app/page.js",
+  "/thongbao/page": "app/thongbao/page.js",
+  "/tongquan/page": "app/tongquan/page.js"
+}

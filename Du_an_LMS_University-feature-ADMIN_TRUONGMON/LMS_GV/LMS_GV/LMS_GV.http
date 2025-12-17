@@ -1,0 +1,6 @@
+@LMS_GV_HostAddress = http://localhost:5185
+
+GET {{LMS_GV_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
