@@ -1,0 +1,25 @@
+# Environment variables
+.env
+.env.local
+.env*.local
+
+# Build outputs
+**/bin/
+**/obj/
+**/node_modules/
+**/.next/
+**/dist/
+**/build/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
